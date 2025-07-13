@@ -1,0 +1,351 @@
+---
+export interface Props {
+  result?: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content: string;
+    icon: string;
+    data?: any;
+  };
+}
+
+const { result } = Astro.props;
+
+// If no result is provided, this component won't render anything
+if (!result) {
+  return null;
+}
+---
+
+<div class="min-h-full flex flex-col">
+  <!-- Result Header -->
+  <div class="mb-6 pb-4 border-b border-white/10">
+    <div class="flex items-center gap-4 mb-3">
+      <div class="text-4xl">{result.icon}</div>
+      <div>
+        <h1 class="text-2xl font-bold text-white">{result.title}</h1>
+        {result.subtitle && (
+          <p class="text-white/70 text-lg">{result.subtitle}</p>
+        )}
+      </div>
+    </div>
+    <div class="inline-block bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm font-medium">
+      {result.type.charAt(0).toUpperCase() + result.type.slice(1)} Result
+    </div>
+  </div>
+
+  <!-- Result Content based on type -->
+  <div class="flex-1">
+    {result.type === 'contact' && result.subtitle?.includes('@') && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">📧 Email Contact</h3>
+          <div class="space-y-3">
+            <div class="flex items-center gap-3">
+              <span class="text-white/60 text-sm w-20">Email:</span>
+              <a href={`mailto:${result.subtitle}`} 
+                 class="text-blue-400 hover:text-blue-300 transition-colors font-mono">
+                {result.subtitle}
+              </a>
+            </div>
+            <div class="flex items-center gap-3">
+              <span class="text-white/60 text-sm w-20">Type:</span>
+              <span class="text-white">Primary Contact</span>
+            </div>
+          </div>
+          <div class="mt-4 pt-4 border-t border-white/10">
+            <button 
+              onclick={`window.open('mailto:${result.subtitle}', '_blank')`}
+              class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
+              Send Email
+            </button>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">💡 Quick Actions</h3>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <button 
+              onclick={`navigator.clipboard.writeText('${result.subtitle}'); alert('Email copied to clipboard!')`}
+              class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-left">
+              📋 Copy Email
+            </button>
+            <a href="/contact" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-center block">
+              📞 More Contact Info
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'experience' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">🏢 Work Experience</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <span class="text-white/60 text-sm block">Position</span>
+                <span class="text-white font-medium">{result.title}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Company</span>
+                <span class="text-white font-medium">{result.subtitle}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Duration</span>
+                <span class="text-white font-medium">{result.content}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Type</span>
+                <span class="text-white font-medium">Professional Experience</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">🔗 Related</h3>
+          <div class="space-y-2">
+            <a href="/about" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+              📄 View Full Resume
+            </a>
+            <a href="/projects" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+              🚀 See Related Projects
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'skill' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">🛠️ Technical Skill</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <span class="text-white/60 text-sm block">Technology</span>
+                <span class="text-white font-medium text-lg">{result.title}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Category</span>
+                <span class="text-white font-medium">{result.subtitle}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Proficiency</span>
+                <div class="flex items-center gap-2 mt-1">
+                  <div class="flex gap-1">
+                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
+                    <div class="w-3 h-3 bg-white/30 rounded-full"></div>
+                  </div>
+                  <span class="text-white/70 text-sm">Advanced</span>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">💼 Experience with {result.title}</h3>
+          <p class="text-white/80 text-sm leading-relaxed">
+            I have extensive experience working with {result.title} in various projects. 
+            This technology is part of my {result.subtitle?.replace(' skill', '')} toolkit and I use it regularly 
+            in professional development work.
+          </p>
+          <div class="mt-4">
+            <a href="/projects" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors inline-block">
+              View Projects Using {result.title}
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'education' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">🎓 Educational Background</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <span class="text-white/60 text-sm block">Degree</span>
+                <span class="text-white font-medium text-lg">{result.title}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Institution</span>
+                <span class="text-white font-medium">{result.subtitle}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Status</span>
+                <span class="text-white font-medium">Currently Pursuing</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">📚 Academic Focus</h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-4">
+            My studies in Computer Engineering cover a comprehensive curriculum including software development, 
+            system design, algorithms, and modern web technologies.
+          </p>
+          <div class="space-y-2">
+            <a href="/about" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+              📖 More About My Education
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'certification' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">🏆 Certification</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 gap-4">
+              <div>
+                <span class="text-white/60 text-sm block">Achievement</span>
+                <span class="text-white font-medium text-lg">{result.title}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Type</span>
+                <span class="text-white font-medium">Professional Certification</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Recognition</span>
+                <span class="text-white font-medium">Competition Achievement</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">🌟 Achievement Details</h3>
+          <p class="text-white/80 text-sm leading-relaxed">
+            This certification represents my participation and achievement in competitive programming 
+            and innovation challenges, demonstrating problem-solving skills and technical expertise.
+          </p>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'fact' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">🎯 Personal Interest</h3>
+          <div class="space-y-4">
+            <div>
+              <span class="text-white/60 text-sm block mb-2">Fun Fact</span>
+              <p class="text-white font-medium text-lg leading-relaxed">{result.subtitle}</p>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">💭 What This Means</h3>
+          <p class="text-white/80 text-sm leading-relaxed">
+            This personal interest reflects my passion for technology and innovation. It shows how I approach 
+            problems creatively and stay curious about emerging technologies and possibilities.
+          </p>
+          <div class="mt-4">
+            <a href="/about" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors inline-block">
+              Learn More About Me
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'role' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">💼 Professional Role</h3>
+          <div class="space-y-4">
+            <div>
+              <span class="text-white/60 text-sm block">Current Position</span>
+              <span class="text-white font-medium text-lg">{result.subtitle}</span>
+            </div>
+            <div>
+              <span class="text-white/60 text-sm block">Specialization</span>
+              <span class="text-white font-medium">Full-Stack Development</span>
+            </div>
+            <div>
+              <span class="text-white/60 text-sm block">Focus Areas</span>
+              <span class="text-white font-medium">Web Development, System Design, Innovation</span>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">🚀 What I Do</h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-4">
+            As a full-stack developer, I work with both frontend and backend technologies to create 
+            complete web solutions. I'm passionate about building innovative applications that solve real problems.
+          </p>
+          <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+            <a href="/projects" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors text-center block">
+              View My Work
+            </a>
+            <a href="/contact" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-center block">
+              Let's Collaborate
+            </a>
+          </div>
+        </div>
+      </div>
+    )}
+
+    {result.type === 'location' && (
+      <div class="space-y-6">
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-4">📍 Location Information</h3>
+          <div class="space-y-4">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <span class="text-white/60 text-sm block">Current Location</span>
+                <span class="text-white font-medium text-lg">{result.subtitle}</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Country</span>
+                <span class="text-white font-medium">Nepal</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Time Zone</span>
+                <span class="text-white font-medium">NPT (UTC+5:45)</span>
+              </div>
+              <div>
+                <span class="text-white/60 text-sm block">Availability</span>
+                <span class="text-green-400 font-medium">Available for Remote Work</span>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+        <div class="bg-white/5 rounded-xl p-6 border border-white/10">
+          <h3 class="text-lg font-semibold text-white mb-3">🌐 Work Preferences</h3>
+          <p class="text-white/80 text-sm leading-relaxed mb-4">
+            I'm based in Nepal and available for both local and remote work opportunities. 
+            I'm comfortable working with international teams across different time zones.
+          </p>
+          <a href="/contact" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors inline-block">
+            Discuss Opportunities
+          </a>
+        </div>
+      </div>
+    )}
+  </div>
+
+  <!-- Back to Search -->
+  <div class="mt-8 pt-4 border-t border-white/10">
+    <button 
+      onclick="window.dispatchEvent(new CustomEvent('openSearch'))"
+      class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
+      🔍 Search Again
+    </button>
+  </div>
+</div>

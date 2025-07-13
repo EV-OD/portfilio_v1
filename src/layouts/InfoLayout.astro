@@ -3,6 +3,7 @@ import RootLayout from "./RootLayout.astro";
 import Footer from "../components/footer.astro";
 import WarpBackground from "../components/warp-background";
 import AvailableForWork from "../components/available.astro";
+import Search from "../components/search";
 
 const { title, description } = Astro.props;
 
@@ -40,12 +41,29 @@ const pathname = Astro.url.pathname;
 								<svg class="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15l-3-3m0 0l3-3m-3 3h12a9 9 0 11-9-9m-9 9a9 9 0 019-9"/>
 								</svg>
-								<span class="text-white/80 text-sm font-mono">
+								<span class="text-white/80 text-sm font-mono flex-1">
+									{pathname === "/" && "portfolio://rabin-lamichhane/home"}
 									{pathname === "/projects" && "portfolio://rabin-lamichhane/projects"}
 									{pathname === "/about" && "portfolio://rabin-lamichhane/about"}
 									{pathname === "/contact" && "portfolio://rabin-lamichhane/contact"}
+									{pathname === "/search-result" && "portfolio://rabin-lamichhane/search-results"}
 									{pathname.startsWith("/blog") && "portfolio://rabin-lamichhane/blog"}
 								</span>
+								
+								<!-- Search Button -->
+								<button 
+									id="search-btn"
+									class="flex items-center gap-2 px-3 py-1.5 rounded-md transition-all group text-white/70 hover:text-white hover:bg-white/20"
+									title="Search (Cmd+K or Ctrl+K)"
+								>
+									<svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+									</svg>
+									<div class="hidden sm:flex items-center gap-1 text-xs text-white/50">
+										<span class="bg-white/20 px-1.5 py-0.5 rounded text-xs">⌘</span>
+										<span class="bg-white/20 px-1.5 py-0.5 rounded text-xs">K</span>
+									</div>
+								</button>
 							</div>
 						</div>
 						
@@ -132,4 +150,33 @@ const pathname = Astro.url.pathname;
 			</div>
 		</div>
 	</main>
+
+	<!-- Search Component -->
+	<Search client:load />
 </RootLayout>
+
+<script>
+	// Global search functionality for InfoLayout
+	let searchComponent;
+	
+	// Global keyboard shortcut for Cmd+K / Ctrl+K
+	document.addEventListener('keydown', (e) => {
+		if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+			e.preventDefault();
+			openSearch();
+		}
+	});
+
+	// Handle search button click
+	document.addEventListener('DOMContentLoaded', () => {
+		const searchBtn = document.getElementById('search-btn');
+		if (searchBtn) {
+			searchBtn.addEventListener('click', openSearch);
+		}
+	});
+
+	function openSearch() {
+		// Dispatch a custom event that the Search component can listen to
+		window.dispatchEvent(new CustomEvent('openSearch'));
+	}
+</script>

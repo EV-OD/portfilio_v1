@@ -1,0 +1,43 @@
+---
+// No server-side props needed for this component
+---
+
+<div id="search-container"></div>
+
+<script>
+  import Search from '../components/search.tsx';
+  import { createRoot } from 'react-dom/client';
+  import { createElement, useState } from 'react';
+
+  function SearchWrapper() {
+    const [isSearchOpen, setIsSearchOpen] = useState(false);
+
+    // Global keyboard shortcut for Cmd+K / Ctrl+K
+    useEffect(() => {
+      const handleKeyDown = (e) => {
+        if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+          e.preventDefault();
+          setIsSearchOpen(true);
+        }
+      };
+
+      document.addEventListener('keydown', handleKeyDown);
+      return () => document.removeEventListener('keydown', handleKeyDown);
+    }, []);
+
+    // Expose global search function
+    window.openSearch = () => setIsSearchOpen(true);
+
+    return createElement(Search, {
+      isOpen: isSearchOpen,
+      onClose: () => setIsSearchOpen(false)
+    });
+  }
+
+  // Mount the React component
+  const container = document.getElementById('search-container');
+  if (container) {
+    const root = createRoot(container);
+    root.render(createElement(SearchWrapper));
+  }
+</script>
