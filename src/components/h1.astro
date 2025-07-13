@@ -12,6 +12,10 @@ const { size = "default", className } = Astro.props;
 <h1
     class={clsx(
         "text-white font-bold text-balance",
+        "drop-shadow-2xl",
+        "[text-shadow:_0_0_30px_rgba(255,255,255,0.3),_0_0_60px_rgba(255,255,255,0.2),_0_0_90px_rgba(255,255,255,0.1)]",
+        "hover:[text-shadow:_0_0_40px_rgba(255,255,255,0.4),_0_0_80px_rgba(255,255,255,0.3),_0_0_120px_rgba(255,255,255,0.2)]",
+        "transition-all duration-500 ease-in-out",
         size === "default" && "text-4xl md:text-6xl xl:text-8xl tracking-tight",
         size === "large" && "text-8xl md:text-[120px] lg:text-[160px] tracking-tighter",
         className,

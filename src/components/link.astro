@@ -11,9 +11,9 @@ const { href, variant = "primary", className } = Astro.props;
 ---
 
 <a href={href} class={clsx(
-    "w-fit text-base sm:text-2xl px-5 py-2 rounded-full transition-all duration-300 ease-in-out whitespace-nowrap",
-    variant === "primary" && "text-zinc-900 bg-zinc-100 hover:outline-2 outline-offset-2 outline-zinc-100",
-    variant === "secondary" && "text-zinc-100 hover:text-white bg-transparent hover:bg-zinc-100/20 hover:outline-2 outline-offset-2 outline-zinc-100/20",
+    "w-fit text-base sm:text-2xl px-5 py-2 rounded-full transition-all duration-300 ease-in-out whitespace-nowrap transform shadow-lg backdrop-blur-sm",
+    variant === "primary" && "text-zinc-900 bg-zinc-50 outline-2 outline-offset-2 outline-zinc-100 shadow-zinc-200/50 hover:scale-105 hover:bg-zinc-100 hover:shadow-xl hover:shadow-zinc-200/70",
+    variant === "secondary" && "text-white bg-zinc-100/20 outline-2 outline-offset-2 outline-zinc-100/20 backdrop-blur-md hover:scale-105 hover:bg-zinc-100/30 hover:shadow-xl hover:shadow-zinc-100/30",
     className
 )}>
     <slot />
