@@ -1,0 +1,178 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <!-- Skill Proficiency Card -->
+  <div class="bg-zinc-800 rounded-2xl p-8 border border-zinc-700">
+    <div class="flex items-center gap-6 mb-8">
+      <div class="w-20 h-20 bg-zinc-700 rounded-2xl flex items-center justify-center text-3xl border border-zinc-600">
+        🎯
+      </div>
+      <div>
+        <h3 class="text-3xl font-bold text-zinc-100 mb-2">{result.title}</h3>
+        <p class="text-zinc-400 font-medium text-lg">{result.subtitle}</p>
+      </div>
+    </div>
+    
+    <!-- Skill Level -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-zinc-300 font-medium">Proficiency Level</span>
+        <span class="text-zinc-100 font-bold">Expert</span>
+      </div>
+      <div class="relative">
+        <div class="w-full bg-zinc-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-zinc-400 h-full rounded-full animate-pulse" style="width: 95%"></div>
+        </div>
+        <div class="absolute right-0 top-0 h-full w-8 bg-zinc-400 rounded-full"></div>
+      </div>
+    </div>
+    
+    <!-- Skill Metrics -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-zinc-200 mb-1">5+</div>
+          <div class="text-zinc-400 text-sm">Years Experience</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-zinc-200 mb-1">25+</div>
+          <div class="text-zinc-400 text-sm">Projects Completed</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-zinc-200 mb-1">A+</div>
+          <div class="text-zinc-400 text-sm">Skill Grade</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Skill Categories -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">🔧</span>
+        Related Technologies
+      </h4>
+      <div class="flex flex-wrap gap-2">
+        <span class="bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full text-sm border border-zinc-600">React</span>
+        <span class="bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full text-sm border border-zinc-600">TypeScript</span>
+        <span class="bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full text-sm border border-zinc-600">Node.js</span>
+        <span class="bg-zinc-700 text-zinc-200 px-3 py-1 rounded-full text-sm border border-zinc-600">Next.js</span>
+      </div>
+    </div>
+    
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">📊</span>
+        Applications
+      </h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Frontend Development</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Backend Development</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">API Development</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Progress Timeline -->
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h4 class="text-lg font-semibold text-zinc-100 mb-6 flex items-center gap-2">
+      <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">📈</span>
+      Learning Journey
+    </h4>
+    
+    <div class="relative">
+      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-zinc-600"></div>
+      
+      <div class="space-y-6">
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">✓</div>
+          <div>
+            <div class="text-zinc-100 font-medium">Advanced Concepts</div>
+            <div class="text-zinc-400 text-sm">Mastered complex implementations</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">✓</div>
+          <div>
+            <div class="text-zinc-100 font-medium">Intermediate Level</div>
+            <div class="text-zinc-400 text-sm">Built production applications</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">✓</div>
+          <div>
+            <div class="text-zinc-100 font-medium">Fundamentals</div>
+            <div class="text-zinc-400 text-sm">Learned core concepts</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Action Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+    <a href="/projects" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">🚀</div>
+      <h4 class="text-zinc-100 font-medium mb-2">View Projects</h4>
+      <p class="text-zinc-400 text-sm">See this skill in action</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>Explore</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+    
+    <a href="/about" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">📄</div>
+      <h4 class="text-zinc-100 font-medium mb-2">Full Skills</h4>
+      <p class="text-zinc-400 text-sm">See all technical skills</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>View All</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+    
+    <a href="/blog" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">✍️</div>
+      <h4 class="text-zinc-100 font-medium mb-2">Read Articles</h4>
+      <p class="text-zinc-400 text-sm">Technical insights & tips</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>Read More</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>

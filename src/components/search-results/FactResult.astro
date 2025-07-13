@@ -1,0 +1,155 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <!-- Fun Fact Spotlight Card -->
+  <div class="bg-zinc-800 rounded-2xl p-8 border border-zinc-700">
+    <div class="flex items-center gap-6 mb-8">
+      <div class="w-20 h-20 bg-zinc-700 rounded-2xl flex items-center justify-center text-3xl border border-zinc-600 relative overflow-hidden">
+        <span class="relative z-10">✨</span>
+      </div>
+      <div>
+        <h3 class="text-3xl font-bold text-zinc-100 mb-2">Fun Fact</h3>
+        <p class="text-zinc-400 font-medium text-lg">Personal Interest & Passion</p>
+      </div>
+    </div>
+    
+    <!-- Fact Content -->
+    <div class="bg-zinc-900 rounded-xl p-6 border border-zinc-700 mb-8">
+      <div class="text-center">
+        <div class="text-6xl mb-4">🎯</div>
+        <p class="text-zinc-100 font-medium text-xl leading-relaxed mb-4">"{result.subtitle}"</p>
+        <div class="inline-block bg-zinc-700 text-zinc-300 px-4 py-2 rounded-full text-sm border border-zinc-600">
+          Personal Insight
+        </div>
+      </div>
+    </div>
+    
+    <!-- Personality Traits -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl mb-2">🚀</div>
+          <div class="text-zinc-100 font-medium">Innovation</div>
+          <div class="text-zinc-400 text-sm">Always exploring</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl mb-2">🎨</div>
+          <div class="text-zinc-100 font-medium">Creativity</div>
+          <div class="text-zinc-400 text-sm">Thinking outside the box</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl mb-2">⚡</div>
+          <div class="text-zinc-100 font-medium">Passion</div>
+          <div class="text-zinc-400 text-sm">Driven by curiosity</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Interest Areas -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">🔬</span>
+        Tech Interests
+      </h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Sci-fi & Cyberpunk</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Hardware Tinkering</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Low-level Systems</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Wild Tech Ideas</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">💭</span>
+        Philosophy
+      </h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Build whatever I want</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Not tied to single stack</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Embrace the crazy ideas</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">In love with technology</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Inspiration Quote -->
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <div class="text-center">
+      <div class="text-4xl mb-4">💭</div>
+      <blockquote class="text-zinc-100 text-lg italic mb-4">
+        "This personal interest reflects my passion for technology and innovation. It shows how I approach problems creatively and stay curious about emerging technologies and possibilities."
+      </blockquote>
+      <div class="text-zinc-400 text-sm">— Personal Reflection</div>
+    </div>
+  </div>
+  
+  <!-- Action Cards -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <a href="/about" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">🌟</div>
+      <h4 class="text-zinc-100 font-medium mb-2">Learn More</h4>
+      <p class="text-zinc-400 text-sm">Discover more about me</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>About Me</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+    
+    <a href="/projects" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">🚀</div>
+      <h4 class="text-zinc-100 font-medium mb-2">See My Work</h4>
+      <p class="text-zinc-400 text-sm">Projects & innovations</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>Portfolio</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>

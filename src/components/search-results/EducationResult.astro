@@ -1,0 +1,184 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <!-- Academic Achievement Card -->
+  <div class="bg-zinc-800 rounded-2xl p-8 border border-zinc-700">
+    <div class="flex items-center gap-6 mb-8">
+      <div class="w-20 h-20 bg-zinc-700 rounded-2xl flex items-center justify-center text-3xl border border-zinc-600">
+        🎓
+      </div>
+      <div>
+        <h3 class="text-3xl font-bold text-zinc-100 mb-2">{result.title}</h3>
+        <p class="text-zinc-400 font-medium text-lg">{result.subtitle}</p>
+      </div>
+    </div>
+    
+    <!-- Academic Status -->
+    <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-zinc-200 mb-1">4.0</div>
+          <div class="text-zinc-400 text-sm">GPA</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="text-2xl font-bold text-zinc-200 mb-1">2024</div>
+          <div class="text-zinc-400 text-sm">Expected Graduation</div>
+        </div>
+      </div>
+      <div class="bg-zinc-900 rounded-xl p-4 border border-zinc-700">
+        <div class="text-center">
+          <div class="flex items-center justify-center gap-2 mb-1">
+            <div class="w-3 h-3 bg-zinc-400 rounded-full animate-pulse"></div>
+            <span class="text-zinc-300 font-bold">Active</span>
+          </div>
+          <div class="text-zinc-400 text-sm">Status</div>
+        </div>
+      </div>
+    </div>
+    
+    <!-- Progress Bar -->
+    <div class="mb-8">
+      <div class="flex items-center justify-between mb-3">
+        <span class="text-zinc-300 font-medium">Academic Progress</span>
+        <span class="text-zinc-100 font-bold">85%</span>
+      </div>
+      <div class="relative">
+        <div class="w-full bg-zinc-700 rounded-full h-3 overflow-hidden">
+          <div class="bg-zinc-400 h-full rounded-full" style="width: 85%"></div>
+        </div>
+        <div class="absolute right-0 top-0 h-full w-8 bg-zinc-400 rounded-full"></div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Academic Focus Areas -->
+  <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">📚</span>
+        Core Subjects
+      </h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Data Structures & Algorithms</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Software Engineering</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Computer Networks</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Database Systems</span>
+        </div>
+      </div>
+    </div>
+    
+    <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+      <h4 class="text-lg font-semibold text-zinc-100 mb-4 flex items-center gap-2">
+        <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">🎯</span>
+        Specializations
+      </h4>
+      <div class="space-y-3">
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Web Development</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Machine Learning</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Mobile Development</span>
+        </div>
+        <div class="flex items-center gap-3">
+          <div class="w-2 h-2 bg-zinc-400 rounded-full"></div>
+          <span class="text-zinc-300 text-sm">Cloud Computing</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Academic Timeline -->
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h4 class="text-lg font-semibold text-zinc-100 mb-6 flex items-center gap-2">
+      <span class="w-6 h-6 bg-zinc-600 rounded-lg flex items-center justify-center text-sm border border-zinc-500">📅</span>
+      Academic Journey
+    </h4>
+    
+    <div class="relative">
+      <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-zinc-600"></div>
+      
+      <div class="space-y-6">
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">🎯</div>
+          <div>
+            <div class="text-zinc-400 text-sm">Capstone project development</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">✓</div>
+          <div>
+            <div class="text-zinc-100 font-medium">Advanced Courses</div>
+            <div class="text-zinc-400 text-sm">Specialized engineering subjects</div>
+          </div>
+        </div>
+        
+        <div class="flex items-center gap-4">
+          <div class="w-8 h-8 bg-zinc-600 rounded-full flex items-center justify-center text-sm text-zinc-100 relative z-10 border border-zinc-500">✓</div>
+          <div>
+            <div class="text-zinc-100 font-medium">Core Foundation</div>
+            <div class="text-zinc-400 text-sm">Mathematical & programming foundations</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <!-- Academic Resources -->
+  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+    <a href="/projects" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">🚀</div>
+      <h4 class="text-zinc-100 font-medium mb-2">Academic Projects</h4>
+      <p class="text-zinc-400 text-sm">University assignments & research</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>View Portfolio</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+    
+    <a href="/about" class="group bg-zinc-800 hover:bg-zinc-700 border border-zinc-700 rounded-xl p-6 transition-all">
+      <div class="text-2xl mb-3">📄</div>
+      <h4 class="text-zinc-100 font-medium mb-2">Full Education</h4>
+      <p class="text-zinc-400 text-sm">Complete academic background</p>
+      <div class="mt-3 flex items-center gap-2 text-zinc-300 text-sm">
+        <span>Read More</span>
+        <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+        </svg>
+      </div>
+    </a>
+  </div>
+</div>

@@ -1,0 +1,49 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-4">💼 Professional Role</h3>
+    <div class="space-y-4">
+      <div>
+        <span class="text-zinc-400 text-sm block">Current Position</span>
+        <span class="text-zinc-100 font-medium text-lg">{result.subtitle}</span>
+      </div>
+      <div>
+        <span class="text-zinc-400 text-sm block">Specialization</span>
+        <span class="text-zinc-100 font-medium">Full-Stack Development</span>
+      </div>
+      <div>
+        <span class="text-zinc-400 text-sm block">Focus Areas</span>
+        <span class="text-zinc-100 font-medium">Web Development, System Design, Innovation</span>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-3">🚀 What I Do</h3>
+    <p class="text-zinc-300 text-sm leading-relaxed mb-4">
+      As a full-stack developer, I work with both frontend and backend technologies to create 
+      complete web solutions. I'm passionate about building innovative applications that solve real problems.
+    </p>
+    <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+      <a href="/projects" class="bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors text-center block border border-zinc-600">
+        View My Work
+      </a>
+      <a href="/contact" class="bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors text-center block border border-zinc-600">
+        Let's Collaborate
+      </a>
+    </div>
+  </div>
+</div>

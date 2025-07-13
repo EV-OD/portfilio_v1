@@ -1,0 +1,50 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-4">📍 Location Information</h3>
+    <div class="space-y-4">
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div>
+          <span class="text-zinc-400 text-sm block">Current Location</span>
+          <span class="text-zinc-100 font-medium text-lg">{result.subtitle}</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 text-sm block">Country</span>
+          <span class="text-zinc-100 font-medium">Nepal</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 text-sm block">Time Zone</span>
+          <span class="text-zinc-100 font-medium">NPT (UTC+5:45)</span>
+        </div>
+        <div>
+          <span class="text-zinc-400 text-sm block">Availability</span>
+          <span class="text-zinc-300 font-medium">Available for Remote Work</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-3">🌐 Work Preferences</h3>
+    <p class="text-zinc-300 text-sm leading-relaxed mb-4">
+      I'm based in Nepal and available for both local and remote work opportunities. 
+      I'm comfortable working with international teams across different time zones.
+    </p>
+    <a href="/contact" class="bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors inline-block border border-zinc-600">
+      Discuss Opportunities
+    </a>
+  </div>
+</div>

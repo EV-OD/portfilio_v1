@@ -1,0 +1,94 @@
+---
+import LanguageResult from './search-results/LanguageResult.astro';
+import ProjectResult from './search-results/ProjectResult.astro';
+import ContactResult from './search-results/ContactResult.astro';
+import ExperienceResult from './search-results/ExperienceResult.astro';
+import SkillResult from './search-results/SkillResult.astro';
+import EducationResult from './search-results/EducationResult.astro';
+import CertificationResult from './search-results/CertificationResult.astro';
+import FactResult from './search-results/FactResult.astro';
+import RoleResult from './search-results/RoleResult.astro';
+import LocationResult from './search-results/LocationResult.astro';
+import AboutResult from './search-results/AboutResult.astro';
+import AvailabilityResult from './search-results/AvailabilityResult.astro';
+import DefaultResult from './search-results/DefaultResult.astro';
+
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+
+// Function to get the appropriate component based on result type
+function getResultComponent(type: string) {
+  switch (type) {
+    case 'programming_language':
+    case 'language':
+      return LanguageResult;
+    case 'project':
+      return ProjectResult;
+    case 'contact':
+      return ContactResult;
+    case 'experience':
+      return ExperienceResult;
+    case 'skill':
+      return SkillResult;
+    case 'education':
+      return EducationResult;
+    case 'certification':
+      return CertificationResult;
+    case 'fact':
+      return FactResult;
+    case 'role':
+      return RoleResult;
+    case 'location':
+      return LocationResult;
+    case 'about':
+      return AboutResult;
+    case 'availability':
+      return AvailabilityResult;
+    default:
+      return DefaultResult;
+  }
+}
+
+const ResultComponent = getResultComponent(result.type);
+---
+
+<div class="min-h-full flex flex-col bg-zinc-900">
+  <!-- Result Header -->
+  <div class="mb-6 pb-4 border-b border-zinc-700">
+    <div class="flex items-center gap-4 mb-3">
+      <div class="text-4xl text-zinc-100">{result.icon}</div>
+      <div>
+        <h1 class="text-2xl font-bold text-zinc-100">{result.title}</h1>
+        {result.subtitle && (
+          <p class="text-zinc-400 text-lg">{result.subtitle}</p>
+        )}
+      </div>
+    </div>
+    <div class="inline-block bg-zinc-800 text-zinc-300 px-3 py-1 rounded-full text-sm font-medium border border-zinc-700">
+      {result.type.charAt(0).toUpperCase() + result.type.slice(1)} Result
+    </div>
+  </div>
+
+  <!-- Result Content -->
+  <div class="flex-1">
+    <ResultComponent result={result} />
+  </div>
+
+  <!-- Back to Search -->
+  <div class="mt-8 pt-4 border-t border-zinc-700">
+    <button 
+      onclick="window.dispatchEvent(new CustomEvent('openSearch'))"
+      class="bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors border border-zinc-600">
+      🔍 Search Again
+    </button>
+  </div>
+</div>

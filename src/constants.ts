@@ -7,6 +7,9 @@ export const PERSONAL_INFO = {
   contact: {
     email: "evod599@gmail.com",
     linkedin: "https://www.linkedin.com/in/rabinlc01",
+    phone: "+977-9800000000", // You can update with real number
+    website: "https://rabinlc.dev",
+    github: "https://github.com/rabinlc",
   },
   
   summary: "As a full-stack web developer with proficiency in Python, JavaScript, Node.js, TypeScript, and frameworks like Next.js and React.js, I have extensive experience building responsive websites that meet client needs. Currently pursuing my Bachelor's in Computer Engineering at Pulchowk Campus, I am driven by a passion to leverage my skills for innovation and quality solutions.",

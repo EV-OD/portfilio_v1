@@ -1,0 +1,46 @@
+---
+export interface Props {
+  result: {
+    type: string;
+    title: string;
+    subtitle?: string;
+    content?: string;
+    icon: string;
+  };
+}
+
+const { result } = Astro.props;
+---
+
+<div class="space-y-6">
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-4">👨‍💻 About Me</h3>
+    <div class="space-y-4">
+      <div class="bg-zinc-900 rounded-lg p-4 border border-zinc-700">
+        <p class="text-zinc-300 leading-relaxed">{result.subtitle}</p>
+      </div>
+      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+        <div class="bg-zinc-900 rounded-lg p-3 border border-zinc-700">
+          <span class="text-zinc-400 text-sm block">Passion</span>
+          <span class="text-zinc-100 font-medium">Technology & Innovation</span>
+        </div>
+        <div class="bg-zinc-900 rounded-lg p-3 border border-zinc-700">
+          <span class="text-zinc-400 text-sm block">Approach</span>
+          <span class="text-zinc-100 font-medium">Full-Stack Solutions</span>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  <div class="bg-zinc-800 rounded-xl p-6 border border-zinc-700">
+    <h3 class="text-lg font-semibold text-zinc-100 mb-3">🔗 Learn More</h3>
+    <div class="space-y-2">
+      <a href="/about" class="block bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors border border-zinc-600">
+        📄 Full Biography
+      </a>
+      <a href="/projects" class="block bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-4 py-2 rounded-lg transition-colors border border-zinc-600">
+        🚀 See My Work
+      </a>
+    </div>
+  </div>
+</div>

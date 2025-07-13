@@ -200,6 +200,83 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
       });
     }
 
+    // Search for email-related terms
+    if (lowerQuery.includes('email') || lowerQuery.includes('mail') || lowerQuery.includes('contact')) {
+      searchResults.push({
+        type: "contact",
+        title: "Email",
+        subtitle: PERSONAL_INFO.contact.email,
+        content: "Contact information",
+        icon: "📧"
+      });
+    }
+
+    // Search for phone-related terms
+    if (lowerQuery.includes('phone') || lowerQuery.includes('call') || lowerQuery.includes('number')) {
+      searchResults.push({
+        type: "contact",
+        title: "Phone",
+        subtitle: PERSONAL_INFO.contact.phone || "Available on request",
+        content: "Contact information",
+        icon: "📞"
+      });
+    }
+
+    // Search for LinkedIn
+    if (lowerQuery.includes('linkedin') || lowerQuery.includes('professional') || lowerQuery.includes('network')) {
+      searchResults.push({
+        type: "contact",
+        title: "LinkedIn",
+        subtitle: PERSONAL_INFO.contact.linkedin,
+        content: "Professional network",
+        icon: "💼"
+      });
+    }
+
+    // Search for GitHub
+    if (lowerQuery.includes('github') || lowerQuery.includes('git') || lowerQuery.includes('code') || lowerQuery.includes('repository')) {
+      searchResults.push({
+        type: "contact",
+        title: "GitHub",
+        subtitle: PERSONAL_INFO.contact.github || "https://github.com/rabinlc",
+        content: "Code repositories",
+        icon: "💻"
+      });
+    }
+
+    // Search for website
+    if (lowerQuery.includes('website') || lowerQuery.includes('portfolio') || lowerQuery.includes('site')) {
+      searchResults.push({
+        type: "contact",
+        title: "Website",
+        subtitle: PERSONAL_INFO.contact.website || "https://rabinlc.dev",
+        content: "Personal website",
+        icon: "🌐"
+      });
+    }
+
+    // Search for bio/about related terms
+    if (lowerQuery.includes('bio') || lowerQuery.includes('about') || lowerQuery.includes('summary') || lowerQuery.includes('description')) {
+      searchResults.push({
+        type: "about",
+        title: "About Me",
+        subtitle: PERSONAL_INFO.shortBio,
+        content: "Personal biography",
+        icon: "👨‍💻"
+      });
+    }
+
+    // Search for availability terms
+    if (lowerQuery.includes('available') || lowerQuery.includes('hire') || lowerQuery.includes('work') || lowerQuery.includes('freelance')) {
+      searchResults.push({
+        type: "availability",
+        title: "Availability",
+        subtitle: "Available for new projects",
+        content: "Currently accepting new opportunities",
+        icon: "✅"
+      });
+    }
+
     setResults(searchResults.slice(0, 8)); // Limit to 8 results
     setSelectedIndex(0);
   }, [query]);
