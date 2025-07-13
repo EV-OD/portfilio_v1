@@ -48,45 +48,484 @@ import SearchResult from "../components/search-result.astro";
   function createResultHTML(result) {
     const getResultContent = (result) => {
       switch (result.type) {
+        case 'programming_language':
+        case 'language':
+          return `
+            <div class="space-y-6">
+              <!-- Programming Language Showcase Card -->
+              <div class="bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-2xl p-8 border border-green-500/30 backdrop-blur-xl">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-green-500 to-emerald-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                    <span class="relative z-10">💻</span>
+                  </div>
+                  <div>
+                    <h3 class="text-3xl font-bold text-white mb-2">${result.title}</h3>
+                    <p class="text-green-300 font-medium text-lg">Programming Language</p>
+                  </div>
+                </div>
+                
+                <!-- Language Proficiency & Stats -->
+                <div class="grid grid-cols-1 md:grid-cols-4 gap-6 mb-8">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-green-300 mb-1">Expert</div>
+                      <div class="text-white/60 text-sm">Proficiency</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-emerald-300 mb-1">3+</div>
+                      <div class="text-white/60 text-sm">Years</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-teal-300 mb-1">15+</div>
+                      <div class="text-white/60 text-sm">Projects</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="flex items-center justify-center gap-2 mb-1">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-300 font-bold">Active</span>
+                      </div>
+                      <div class="text-white/60 text-sm">Status</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Code Snippet Preview -->
+                <div class="bg-black/40 rounded-xl p-6 border border-green-500/20">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span class="text-white/60 text-sm ml-2">example.${result.title.toLowerCase()}</span>
+                  </div>
+                  <div class="font-mono text-sm">
+                    <div class="text-green-400">// ${result.title} code sample</div>
+                    <div class="text-blue-400">function <span class="text-yellow-300">createAwesome</span><span class="text-white">()</span> <span class="text-white">{</span></div>
+                    <div class="text-white pl-4">return <span class="text-green-300">'Building amazing things with ${result.title}!'</span><span class="text-white">;</span></div>
+                    <div class="text-white">}</div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Language Ecosystem -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-xl p-6 border border-blue-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-sm">🛠️</span>
+                    Frameworks & Libraries
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">React</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Next.js</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Express</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Node.js</span>
+                  </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center text-sm">🎯</span>
+                    Use Cases
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Web Development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Full-Stack Applications</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">API Development</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Showcase -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <h4 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-orange-500 rounded-lg flex items-center justify-center text-sm">🚀</span>
+                  Projects Built with ${result.title}
+                </h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                  <div class="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-8 h-8 bg-green-500 rounded-lg flex items-center justify-center text-sm">📱</div>
+                      <h5 class="text-white font-medium">Portfolio Website</h5>
+                    </div>
+                    <p class="text-white/60 text-sm">Modern responsive portfolio built with ${result.title}</p>
+                  </div>
+                  
+                  <div class="bg-white/5 rounded-lg p-4 border border-white/10 hover:bg-white/10 transition-colors">
+                    <div class="flex items-center gap-3 mb-2">
+                      <div class="w-8 h-8 bg-blue-500 rounded-lg flex items-center justify-center text-sm">⚡</div>
+                      <h5 class="text-white font-medium">Web Applications</h5>
+                    </div>
+                    <p class="text-white/60 text-sm">Full-stack solutions using ${result.title}</p>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Action Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-green-500/20 to-emerald-500/20 rounded-xl p-6 border border-green-500/30 hover:from-green-500/30 hover:to-emerald-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-green-400/20 to-emerald-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">See Projects</h4>
+                    <p class="text-white/60 text-sm">${result.title} in action</p>
+                    <div class="mt-3 flex items-center gap-2 text-green-300 text-sm">
+                      <span>Explore</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-cyan-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">💻</div>
+                    <h4 class="text-white font-medium mb-2">All Languages</h4>
+                    <p class="text-white/60 text-sm">Complete tech stack</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>View Skills</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/contact" class="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-6 border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">💬</div>
+                    <h4 class="text-white font-medium mb-2">Discuss Project</h4>
+                    <p class="text-white/60 text-sm">Build something together</p>
+                    <div class="mt-3 flex items-center gap-2 text-purple-300 text-sm">
+                      <span>Get In Touch</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          `;
+          
+        case 'project':
+          return `
+            <div class="space-y-6">
+              <!-- Project Hero Card -->
+              <div class="bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-2xl p-8 border border-orange-500/30 backdrop-blur-xl">
+                <div class="flex flex-col lg:flex-row lg:items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-orange-500 to-red-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                    <span class="relative z-10">🚀</span>
+                  </div>
+                  <div class="flex-1">
+                    <h3 class="text-3xl font-bold text-white mb-2">${result.title}</h3>
+                    <p class="text-orange-300 font-medium text-lg mb-4">${result.subtitle || 'Innovative Project'}</p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm border border-orange-500/30">React</span>
+                      <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm border border-orange-500/30">TypeScript</span>
+                      <span class="bg-orange-500/20 text-orange-300 px-3 py-1 rounded-full text-sm border border-orange-500/30">Node.js</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Project Stats -->
+                <div class="grid grid-cols-2 md:grid-cols-4 gap-4 mb-8">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-orange-300 mb-1">100%</div>
+                      <div class="text-white/60 text-sm">Complete</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-red-300 mb-1">2024</div>
+                      <div class="text-white/60 text-sm">Built</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-yellow-300 mb-1">5⭐</div>
+                      <div class="text-white/60 text-sm">Rating</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="flex items-center justify-center gap-2 mb-1">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-300 font-bold">Live</span>
+                      </div>
+                      <div class="text-white/60 text-sm">Status</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Project Preview -->
+                <div class="bg-black/40 rounded-xl p-6 border border-orange-500/20">
+                  <div class="flex items-center gap-3 mb-4">
+                    <div class="w-3 h-3 bg-red-400 rounded-full"></div>
+                    <div class="w-3 h-3 bg-yellow-400 rounded-full"></div>
+                    <div class="w-3 h-3 bg-green-400 rounded-full"></div>
+                    <span class="text-white/60 text-sm ml-2">Browser Preview</span>
+                  </div>
+                  <div class="bg-gradient-to-br from-orange-500/10 to-red-500/10 rounded-lg p-6 border border-orange-500/20">
+                    <div class="flex items-center justify-center text-white/60 text-sm">
+                      📱 Project Screenshot Preview
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Details -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-xl p-6 border border-blue-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-sm">⚡</span>
+                    Key Features
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Responsive Design</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Modern UI/UX</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Performance Optimized</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Scalable Architecture</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-500/10 to-teal-500/10 rounded-xl p-6 border border-green-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center text-sm">🎯</span>
+                    Technologies Used
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Frontend: React.js</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Backend: Node.js</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Styling: Tailwind CSS</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Deployment: Vercel</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Timeline -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <h4 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center text-sm">📅</span>
+                  Development Timeline
+                </h4>
+                
+                <div class="relative">
+                  <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-orange-500 to-red-500"></div>
+                  
+                  <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Deployment & Launch</div>
+                        <div class="text-white/60 text-sm">Project goes live for users</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Testing & Optimization</div>
+                        <div class="text-white/60 text-sm">Performance and user testing</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Development Phase</div>
+                        <div class="text-white/60 text-sm">Core functionality implementation</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Planning & Design</div>
+                        <div class="text-white/60 text-sm">Architecture and UI/UX design</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Project Actions -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="#" class="group relative overflow-hidden bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl p-6 border border-orange-500/30 hover:from-orange-500/30 hover:to-red-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🌐</div>
+                    <h4 class="text-white font-medium mb-2">Live Demo</h4>
+                    <p class="text-white/60 text-sm">See it in action</p>
+                    <div class="mt-3 flex items-center gap-2 text-orange-300 text-sm">
+                      <span>View Live</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="#" class="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-6 border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">📦</div>
+                    <h4 class="text-white font-medium mb-2">Source Code</h4>
+                    <p class="text-white/60 text-sm">Explore the code</p>
+                    <div class="mt-3 flex items-center gap-2 text-purple-300 text-sm">
+                      <span>GitHub</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-cyan-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">More Projects</h4>
+                    <p class="text-white/60 text-sm">See all work</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>Portfolio</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+              </div>
+            </div>
+          `;
+          
         case 'contact':
           if (result.subtitle?.includes('@')) {
             return `
               <div class="space-y-6">
-                <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <h3 class="text-lg font-semibold text-white mb-4">📧 Email Contact</h3>
-                  <div class="space-y-3">
-                    <div class="flex items-center gap-3">
-                      <span class="text-white/60 text-sm w-20">Email:</span>
-                      <a href="mailto:${result.subtitle}" 
-                         class="text-blue-400 hover:text-blue-300 transition-colors font-mono">
-                        ${result.subtitle}
-                      </a>
+                <!-- Email Card with Modern Design -->
+                <div class="relative overflow-hidden bg-gradient-to-br from-blue-500/20 via-purple-500/10 to-cyan-500/20 rounded-2xl p-8 border border-blue-500/30 backdrop-blur-xl">
+                  <div class="absolute top-0 right-0 w-32 h-32 bg-gradient-to-br from-blue-400/20 to-purple-600/20 rounded-full -mr-16 -mt-16"></div>
+                  <div class="relative z-10">
+                    <div class="flex items-center gap-4 mb-6">
+                      <div class="w-16 h-16 bg-gradient-to-br from-blue-500 to-purple-600 rounded-2xl flex items-center justify-center text-2xl shadow-lg">
+                        📧
+                      </div>
+                      <div>
+                        <h3 class="text-2xl font-bold text-white mb-1">Email Contact</h3>
+                        <p class="text-blue-200">Primary Communication Channel</p>
+                      </div>
                     </div>
-                    <div class="flex items-center gap-3">
-                      <span class="text-white/60 text-sm w-20">Type:</span>
-                      <span class="text-white">Primary Contact</span>
+                    
+                    <div class="bg-white/10 rounded-xl p-4 mb-6 backdrop-blur-sm">
+                      <div class="flex items-center justify-between">
+                        <div class="flex items-center gap-3">
+                          <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                          <span class="text-white/80 text-sm">Available</span>
+                        </div>
+                        <span class="text-white/60 text-xs">Usually responds within 24h</span>
+                      </div>
                     </div>
-                  </div>
-                  <div class="mt-4 pt-4 border-t border-white/10">
-                    <button 
-                      onclick="window.open('mailto:${result.subtitle}', '_blank')"
-                      class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors">
-                      Send Email
-                    </button>
+                    
+                    <div class="space-y-4">
+                      <div class="bg-black/20 rounded-xl p-4 border border-white/10">
+                        <div class="flex items-center gap-3 mb-2">
+                          <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                          <span class="text-white/60 text-sm">Email Address</span>
+                        </div>
+                        <div class="font-mono text-white text-lg bg-white/5 px-3 py-2 rounded-lg">
+                          ${result.subtitle}
+                        </div>
+                      </div>
+                      
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
+                        <button 
+                          onclick="window.open('mailto:${result.subtitle}', '_blank')"
+                          class="group bg-gradient-to-r from-blue-500 to-purple-600 hover:from-blue-600 hover:to-purple-700 text-white px-6 py-3 rounded-xl transition-all transform hover:scale-105 shadow-lg hover:shadow-xl">
+                          <div class="flex items-center justify-center gap-2">
+                            <span>✉️</span>
+                            <span class="font-medium">Send Email</span>
+                            <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                            </svg>
+                          </div>
+                        </button>
+                        
+                        <button 
+                          onclick="navigator.clipboard.writeText('${result.subtitle}'); showToast('Email copied to clipboard! 📋')"
+                          class="group bg-white/10 hover:bg-white/20 text-white px-6 py-3 rounded-xl transition-all transform hover:scale-105 border border-white/20 hover:border-white/40">
+                          <div class="flex items-center justify-center gap-2">
+                            <span>📋</span>
+                            <span class="font-medium">Copy Email</span>
+                          </div>
+                        </button>
+                      </div>
+                    </div>
                   </div>
                 </div>
                 
-                <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                  <h3 class="text-lg font-semibold text-white mb-3">💡 Quick Actions</h3>
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-3">
-                    <button 
-                      onclick="navigator.clipboard.writeText('${result.subtitle}'); alert('Email copied to clipboard!')"
-                      class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-left">
-                      📋 Copy Email
-                    </button>
-                    <a href="/contact" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors text-center block">
-                      📞 More Contact Info
-                    </a>
+                <!-- Quick Actions Grid -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <a href="/contact" class="group bg-gradient-to-br from-green-500/20 to-emerald-500/20 border border-green-500/30 rounded-xl p-4 hover:from-green-500/30 hover:to-emerald-500/30 transition-all">
+                    <div class="text-2xl mb-2">📞</div>
+                    <h4 class="text-white font-medium mb-1">More Contacts</h4>
+                    <p class="text-white/60 text-sm">View all contact options</p>
+                  </a>
+                  
+                  <a href="/projects" class="group bg-gradient-to-br from-orange-500/20 to-red-500/20 border border-orange-500/30 rounded-xl p-4 hover:from-orange-500/30 hover:to-red-500/30 transition-all">
+                    <div class="text-2xl mb-2">🚀</div>
+                    <h4 class="text-white font-medium mb-1">My Projects</h4>
+                    <p class="text-white/60 text-sm">See what I've built</p>
+                  </a>
+                  
+                  <div onclick="window.dispatchEvent(new CustomEvent('openSearch'))" class="group bg-gradient-to-br from-purple-500/20 to-pink-500/20 border border-purple-500/30 rounded-xl p-4 hover:from-purple-500/30 hover:to-pink-500/30 transition-all cursor-pointer">
+                    <div class="text-2xl mb-2">�</div>
+                    <h4 class="text-white font-medium mb-1">Search More</h4>
+                    <p class="text-white/60 text-sm">Find other information</p>
                   </div>
                 </div>
               </div>
@@ -97,40 +536,137 @@ import SearchResult from "../components/search-result.astro";
         case 'experience':
           return `
             <div class="space-y-6">
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-4">🏢 Work Experience</h3>
-                <div class="space-y-4">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <span class="text-white/60 text-sm block">Position</span>
-                      <span class="text-white font-medium">${result.title}</span>
+              <!-- Experience Timeline Card -->
+              <div class="relative">
+                <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-blue-500 via-purple-500 to-pink-500"></div>
+                
+                <div class="relative bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-2xl p-8 ml-12 border border-slate-700/50 backdrop-blur-xl">
+                  <div class="absolute -left-14 top-8 w-8 h-8 bg-gradient-to-br from-blue-500 to-purple-600 rounded-full flex items-center justify-center shadow-lg">
+                    <div class="w-3 h-3 bg-white rounded-full"></div>
+                  </div>
+                  
+                  <div class="flex flex-col lg:flex-row lg:items-center gap-6">
+                    <div class="flex-1">
+                      <div class="flex items-center gap-3 mb-4">
+                        <div class="w-12 h-12 bg-gradient-to-br from-emerald-500 to-teal-600 rounded-xl flex items-center justify-center text-xl shadow-lg">
+                          🏢
+                        </div>
+                        <div>
+                          <h3 class="text-2xl font-bold text-white">${result.title}</h3>
+                          <p class="text-emerald-300 font-medium">${result.subtitle}</p>
+                        </div>
+                      </div>
+                      
+                      <div class="grid grid-cols-1 sm:grid-cols-2 gap-4 mb-6">
+                        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+                          <div class="text-white/60 text-sm mb-1">Duration</div>
+                          <div class="text-white font-medium">${result.content}</div>
+                        </div>
+                        <div class="bg-white/5 rounded-lg p-3 border border-white/10">
+                          <div class="text-white/60 text-sm mb-1">Status</div>
+                          <div class="flex items-center gap-2">
+                            <div class="w-2 h-2 bg-green-400 rounded-full animate-pulse"></div>
+                            <span class="text-green-400 font-medium">Active</span>
+                          </div>
+                        </div>
+                      </div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Company</span>
-                      <span class="text-white font-medium">${result.subtitle}</span>
-                    </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Duration</span>
-                      <span class="text-white font-medium">${result.content}</span>
-                    </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Type</span>
-                      <span class="text-white font-medium">Professional Experience</span>
+                    
+                    <div class="lg:w-48">
+                      <div class="bg-gradient-to-br from-blue-500/20 to-purple-500/20 rounded-xl p-4 border border-blue-500/30">
+                        <div class="text-center">
+                          <div class="text-3xl font-bold text-blue-300 mb-1">4.8</div>
+                          <div class="text-white/60 text-sm mb-2">Performance Rating</div>
+                          <div class="flex justify-center gap-1">
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                            <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                          </div>
+                        </div>
+                      </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-3">🔗 Related</h3>
-                <div class="space-y-2">
-                  <a href="/about" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
-                    📄 View Full Resume
-                  </a>
-                  <a href="/projects" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
-                    🚀 See Related Projects
-                  </a>
+              <!-- Skills and Achievements -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span>⚡</span>
+                    Key Responsibilities
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Full-stack development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Team leadership & mentoring</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Architecture & system design</span>
+                    </div>
+                  </div>
                 </div>
+                
+                <div class="bg-gradient-to-br from-green-500/10 to-emerald-500/10 rounded-xl p-6 border border-green-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span>🎯</span>
+                    Achievements
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs text-white">✓</div>
+                      <span class="text-white/80 text-sm">Led successful project deliveries</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs text-white">✓</div>
+                      <span class="text-white/80 text-sm">Improved system performance</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs text-white">✓</div>
+                      <span class="text-white/80 text-sm">Mentored junior developers</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Action Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-cyan-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">📄</div>
+                    <h4 class="text-white font-medium mb-2">Full Resume</h4>
+                    <p class="text-white/60 text-sm">View complete work history</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>View Details</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-orange-500/20 to-red-500/20 rounded-xl p-6 border border-orange-500/30 hover:from-orange-500/30 hover:to-red-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-orange-400/20 to-red-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">Related Projects</h4>
+                    <p class="text-white/60 text-sm">See work from this role</p>
+                    <div class="mt-3 flex items-center gap-2 text-orange-300 text-sm">
+                      <span>Explore Projects</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           `;
@@ -138,47 +674,176 @@ import SearchResult from "../components/search-result.astro";
         case 'skill':
           return `
             <div class="space-y-6">
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-4">🛠️ Technical Skill</h3>
-                <div class="space-y-4">
-                  <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
-                    <div>
-                      <span class="text-white/60 text-sm block">Technology</span>
-                      <span class="text-white font-medium text-lg">${result.title}</span>
+              <!-- Skill Proficiency Card -->
+              <div class="bg-gradient-to-br from-indigo-500/20 to-purple-500/20 rounded-2xl p-8 border border-indigo-500/30 backdrop-blur-xl">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-indigo-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                    🎯
+                  </div>
+                  <div>
+                    <h3 class="text-3xl font-bold text-white mb-2">${result.title}</h3>
+                    <p class="text-indigo-300 font-medium text-lg">${result.subtitle}</p>
+                  </div>
+                </div>
+                
+                <!-- Skill Level -->
+                <div class="mb-8">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-white/80 font-medium">Proficiency Level</span>
+                    <span class="text-white font-bold">Expert</span>
+                  </div>
+                  <div class="relative">
+                    <div class="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                      <div class="bg-gradient-to-r from-indigo-500 to-purple-500 h-full rounded-full animate-pulse" style="width: 95%"></div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Category</span>
-                      <span class="text-white font-medium">${result.subtitle}</span>
+                    <div class="absolute right-0 top-0 h-full w-8 bg-gradient-to-r from-transparent to-purple-500 rounded-full"></div>
+                  </div>
+                </div>
+                
+                <!-- Skill Metrics -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-indigo-300 mb-1">5+</div>
+                      <div class="text-white/60 text-sm">Years Experience</div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Proficiency</span>
-                      <div class="flex items-center gap-2 mt-1">
-                        <div class="flex gap-1">
-                          <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                          <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                          <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                          <div class="w-3 h-3 bg-blue-500 rounded-full"></div>
-                          <div class="w-3 h-3 bg-white/30 rounded-full"></div>
-                        </div>
-                        <span class="text-white/70 text-sm">Advanced</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-purple-300 mb-1">25+</div>
+                      <div class="text-white/60 text-sm">Projects Completed</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-emerald-300 mb-1">A+</div>
+                      <div class="text-white/60 text-sm">Skill Grade</div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Skill Categories -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl p-6 border border-blue-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-sm">🔧</span>
+                    Related Technologies
+                  </h4>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">React</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">TypeScript</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Node.js</span>
+                    <span class="bg-blue-500/20 text-blue-300 px-3 py-1 rounded-full text-sm border border-blue-500/30">Next.js</span>
+                  </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-green-500/10 to-teal-500/10 rounded-xl p-6 border border-green-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center text-sm">📊</span>
+                    Applications
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Frontend Development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Backend Development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-green-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">API Development</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Progress Timeline -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <h4 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-yellow-500 rounded-lg flex items-center justify-center text-sm">📈</span>
+                  Learning Journey
+                </h4>
+                
+                <div class="relative">
+                  <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-yellow-500 to-orange-500"></div>
+                  
+                  <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Advanced Concepts</div>
+                        <div class="text-white/60 text-sm">Mastered complex implementations</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Intermediate Level</div>
+                        <div class="text-white/60 text-sm">Built production applications</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Fundamentals</div>
+                        <div class="text-white/60 text-sm">Learned core concepts</div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-3">💼 Experience with ${result.title}</h3>
-                <p class="text-white/80 text-sm leading-relaxed">
-                  I have extensive experience working with ${result.title} in various projects. 
-                  This technology is part of my ${result.subtitle?.replace(' skill', '')} toolkit and I use it regularly 
-                  in professional development work.
-                </p>
-                <div class="mt-4">
-                  <a href="/projects" class="bg-blue-500 hover:bg-blue-600 text-white px-4 py-2 rounded-lg transition-colors inline-block">
-                    View Projects Using ${result.title}
-                  </a>
-                </div>
+              <!-- Action Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4">
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-purple-500/20 to-pink-500/20 rounded-xl p-6 border border-purple-500/30 hover:from-purple-500/30 hover:to-pink-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-purple-400/20 to-pink-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">�</div>
+                    <h4 class="text-white font-medium mb-2">View Projects</h4>
+                    <p class="text-white/60 text-sm">See this skill in action</p>
+                    <div class="mt-3 flex items-center gap-2 text-purple-300 text-sm">
+                      <span>Explore</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-cyan-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-cyan-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-cyan-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">📄</div>
+                    <h4 class="text-white font-medium mb-2">Full Skills</h4>
+                    <p class="text-white/60 text-sm">See all technical skills</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>View All</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/blog" class="group relative overflow-hidden bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl p-6 border border-emerald-500/30 hover:from-emerald-500/30 hover:to-teal-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">✍️</div>
+                    <h4 class="text-white font-medium mb-2">Read Articles</h4>
+                    <p class="text-white/60 text-sm">Technical insights & tips</p>
+                    <div class="mt-3 flex items-center gap-2 text-emerald-300 text-sm">
+                      <span>Read More</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           `;
@@ -186,37 +851,180 @@ import SearchResult from "../components/search-result.astro";
         case 'education':
           return `
             <div class="space-y-6">
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-4">🎓 Educational Background</h3>
-                <div class="space-y-4">
-                  <div class="grid grid-cols-1 gap-4">
-                    <div>
-                      <span class="text-white/60 text-sm block">Degree</span>
-                      <span class="text-white font-medium text-lg">${result.title}</span>
+              <!-- Academic Achievement Card -->
+              <div class="bg-gradient-to-br from-emerald-500/20 to-green-500/20 rounded-2xl p-8 border border-emerald-500/30 backdrop-blur-xl">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-emerald-500 to-green-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl">
+                    🎓
+                  </div>
+                  <div>
+                    <h3 class="text-3xl font-bold text-white mb-2">${result.title}</h3>
+                    <p class="text-emerald-300 font-medium text-lg">${result.subtitle}</p>
+                  </div>
+                </div>
+                
+                <!-- Academic Status -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-emerald-300 mb-1">4.0</div>
+                      <div class="text-white/60 text-sm">GPA</div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Institution</span>
-                      <span class="text-white font-medium">${result.subtitle}</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-green-300 mb-1">2024</div>
+                      <div class="text-white/60 text-sm">Expected Graduation</div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Status</span>
-                      <span class="text-white font-medium">Currently Pursuing</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="flex items-center justify-center gap-2 mb-1">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-300 font-bold">Active</span>
+                      </div>
+                      <div class="text-white/60 text-sm">Status</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Progress Bar -->
+                <div class="mb-8">
+                  <div class="flex items-center justify-between mb-3">
+                    <span class="text-white/80 font-medium">Academic Progress</span>
+                    <span class="text-white font-bold">85%</span>
+                  </div>
+                  <div class="relative">
+                    <div class="w-full bg-white/10 rounded-full h-3 overflow-hidden">
+                      <div class="bg-gradient-to-r from-emerald-500 to-green-500 h-full rounded-full" style="width: 85%"></div>
+                    </div>
+                    <div class="absolute right-0 top-0 h-full w-8 bg-gradient-to-r from-transparent to-green-500 rounded-full"></div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Academic Focus Areas -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-500/10 to-indigo-500/10 rounded-xl p-6 border border-blue-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-sm">📚</span>
+                    Core Subjects
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Data Structures & Algorithms</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Software Engineering</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Computer Networks</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Database Systems</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center text-sm">🎯</span>
+                    Specializations
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Web Development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Machine Learning</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Mobile Development</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Cloud Computing</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-3">📚 Academic Focus</h3>
-                <p class="text-white/80 text-sm leading-relaxed mb-4">
-                  My studies in Computer Engineering cover a comprehensive curriculum including software development, 
-                  system design, algorithms, and modern web technologies.
-                </p>
-                <div class="space-y-2">
-                  <a href="/about" class="block bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors">
-                    📖 More About My Education
-                  </a>
+              <!-- Academic Timeline -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <h4 class="text-lg font-semibold text-white mb-6 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-yellow-500 rounded-lg flex items-center justify-center text-sm">�</span>
+                  Academic Journey
+                </h4>
+                
+                <div class="relative">
+                  <div class="absolute left-4 top-0 bottom-0 w-0.5 bg-gradient-to-b from-emerald-500 to-green-500"></div>
+                  
+                  <div class="space-y-6">
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-yellow-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">🎯</div>
+                      <div>
+                        <div class="text-white font-medium">Final Year Projects</div>
+                        <div class="text-white/60 text-sm">Capstone project development</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Advanced Courses</div>
+                        <div class="text-white/60 text-sm">Specialized engineering subjects</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-4">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white relative z-10">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Core Foundation</div>
+                        <div class="text-white/60 text-sm">Mathematical & programming foundations</div>
+                      </div>
+                    </div>
+                  </div>
                 </div>
+              </div>
+              
+              <!-- Academic Resources -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-emerald-500/20 to-teal-500/20 rounded-xl p-6 border border-emerald-500/30 hover:from-emerald-500/30 hover:to-teal-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-emerald-400/20 to-teal-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">Academic Projects</h4>
+                    <p class="text-white/60 text-sm">University assignments & research</p>
+                    <div class="mt-3 flex items-center gap-2 text-emerald-300 text-sm">
+                      <span>View Portfolio</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-indigo-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">📄</div>
+                    <h4 class="text-white font-medium mb-2">Full Education</h4>
+                    <p class="text-white/60 text-sm">Complete academic background</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>Read More</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           `;
@@ -224,32 +1032,190 @@ import SearchResult from "../components/search-result.astro";
         case 'certification':
           return `
             <div class="space-y-6">
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-4">🏆 Certification</h3>
-                <div class="space-y-4">
-                  <div class="grid grid-cols-1 gap-4">
-                    <div>
-                      <span class="text-white/60 text-sm block">Achievement</span>
-                      <span class="text-white font-medium text-lg">${result.title}</span>
+              <!-- Certification Badge Card -->
+              <div class="bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-2xl p-8 border border-amber-500/30 backdrop-blur-xl">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-amber-500 to-yellow-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl relative">
+                    🏆
+                    <div class="absolute -top-2 -right-2 w-6 h-6 bg-green-500 rounded-full flex items-center justify-center text-xs text-white">✓</div>
+                  </div>
+                  <div>
+                    <h3 class="text-3xl font-bold text-white mb-2">${result.title}</h3>
+                    <p class="text-amber-300 font-medium text-lg">Professional Certification</p>
+                  </div>
+                </div>
+                
+                <!-- Certification Details -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-amber-300 mb-1">100%</div>
+                      <div class="text-white/60 text-sm">Score</div>
                     </div>
-                    <div>
-                      <span class="text-white/60 text-sm block">Type</span>
-                      <span class="text-white font-medium">Professional Certification</span>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl font-bold text-yellow-300 mb-1">2024</div>
+                      <div class="text-white/60 text-sm">Year Achieved</div>
                     </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="flex items-center justify-center gap-2 mb-1">
+                        <div class="w-3 h-3 bg-green-400 rounded-full animate-pulse"></div>
+                        <span class="text-green-300 font-bold">Valid</span>
+                      </div>
+                      <div class="text-white/60 text-sm">Status</div>
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Achievement Badge -->
+                <div class="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-xl p-6 border border-yellow-500/20">
+                  <div class="flex items-center gap-4 mb-4">
+                    <div class="w-12 h-12 bg-gradient-to-br from-yellow-500 to-orange-600 rounded-xl flex items-center justify-center text-xl">🎖️</div>
                     <div>
-                      <span class="text-white/60 text-sm block">Recognition</span>
-                      <span class="text-white font-medium">Competition Achievement</span>
+                      <h4 class="text-white font-semibold">Distinguished Achievement</h4>
+                      <p class="text-white/60 text-sm">Competition & Innovation Excellence</p>
+                    </div>
+                  </div>
+                  <p class="text-white/80 text-sm leading-relaxed">
+                    This certification represents excellence in competitive programming and innovation challenges, 
+                    demonstrating advanced problem-solving skills and technical expertise in software development.
+                  </p>
+                </div>
+              </div>
+              
+              <!-- Skills Demonstrated -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-blue-500/10 to-cyan-500/10 rounded-xl p-6 border border-blue-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-blue-500 rounded-lg flex items-center justify-center text-sm">🧠</span>
+                    Skills Demonstrated
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Problem Solving</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Algorithm Design</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Code Optimization</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-blue-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Technical Innovation</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <div class="bg-gradient-to-br from-purple-500/10 to-pink-500/10 rounded-xl p-6 border border-purple-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-purple-500 rounded-lg flex items-center justify-center text-sm">🎯</span>
+                    Competitive Edge
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Time Management</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Pressure Performance</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Strategic Thinking</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-purple-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Team Collaboration</span>
                     </div>
                   </div>
                 </div>
               </div>
               
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-3">🌟 Achievement Details</h3>
-                <p class="text-white/80 text-sm leading-relaxed">
-                  This certification represents my participation and achievement in competitive programming 
-                  and innovation challenges, demonstrating problem-solving skills and technical expertise.
-                </p>
+              <!-- Verification & Validation -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                  <span class="w-6 h-6 bg-green-500 rounded-lg flex items-center justify-center text-sm">✅</span>
+                  Verification Details
+                </h4>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                  <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Officially Verified</div>
+                        <div class="text-white/60 text-sm">Authentication confirmed</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-green-500 rounded-full flex items-center justify-center text-sm text-white">✓</div>
+                      <div>
+                        <div class="text-white font-medium">Digital Certificate</div>
+                        <div class="text-white/60 text-sm">Blockchain secured</div>
+                      </div>
+                    </div>
+                  </div>
+                  
+                  <div class="space-y-4">
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-blue-500 rounded-full flex items-center justify-center text-sm text-white">🔗</div>
+                      <div>
+                        <div class="text-white font-medium">Public Record</div>
+                        <div class="text-white/60 text-sm">Verifiable online</div>
+                      </div>
+                    </div>
+                    
+                    <div class="flex items-center gap-3">
+                      <div class="w-8 h-8 bg-purple-500 rounded-full flex items-center justify-center text-sm text-white">🏅</div>
+                      <div>
+                        <div class="text-white font-medium">Industry Recognition</div>
+                        <div class="text-white/60 text-sm">Professionally endorsed</div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Related Actions -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-amber-500/20 to-yellow-500/20 rounded-xl p-6 border border-amber-500/30 hover:from-amber-500/30 hover:to-yellow-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-amber-400/20 to-yellow-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🏆</div>
+                    <h4 class="text-white font-medium mb-2">All Certifications</h4>
+                    <p class="text-white/60 text-sm">View complete achievements</p>
+                    <div class="mt-3 flex items-center gap-2 text-amber-300 text-sm">
+                      <span>Explore</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-blue-500/20 to-indigo-500/20 rounded-xl p-6 border border-blue-500/30 hover:from-blue-500/30 hover:to-indigo-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-blue-400/20 to-indigo-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">Related Work</h4>
+                    <p class="text-white/60 text-sm">Projects demonstrating skills</p>
+                    <div class="mt-3 flex items-center gap-2 text-blue-300 text-sm">
+                      <span>View Projects</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           `;
@@ -257,27 +1223,151 @@ import SearchResult from "../components/search-result.astro";
         case 'fact':
           return `
             <div class="space-y-6">
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-4">🎯 Personal Interest</h3>
-                <div class="space-y-4">
+              <!-- Fun Fact Spotlight Card -->
+              <div class="bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-2xl p-8 border border-pink-500/30 backdrop-blur-xl">
+                <div class="flex items-center gap-6 mb-8">
+                  <div class="w-20 h-20 bg-gradient-to-br from-pink-500 to-purple-600 rounded-2xl flex items-center justify-center text-3xl shadow-xl relative overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-white/10 to-transparent"></div>
+                    <span class="relative z-10">✨</span>
+                  </div>
                   <div>
-                    <span class="text-white/60 text-sm block mb-2">Fun Fact</span>
-                    <p class="text-white font-medium text-lg leading-relaxed">${result.subtitle}</p>
+                    <h3 class="text-3xl font-bold text-white mb-2">Fun Fact</h3>
+                    <p class="text-pink-300 font-medium text-lg">Personal Interest & Passion</p>
+                  </div>
+                </div>
+                
+                <!-- Fact Content -->
+                <div class="bg-white/5 rounded-xl p-6 border border-white/10 mb-8">
+                  <div class="text-center">
+                    <div class="text-6xl mb-4">🎯</div>
+                    <p class="text-white font-medium text-xl leading-relaxed mb-4">"${result.subtitle}"</p>
+                    <div class="inline-block bg-pink-500/20 text-pink-300 px-4 py-2 rounded-full text-sm">
+                      Personal Insight
+                    </div>
+                  </div>
+                </div>
+                
+                <!-- Personality Traits -->
+                <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">🚀</div>
+                      <div class="text-white font-medium">Innovation</div>
+                      <div class="text-white/60 text-sm">Always exploring</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">🎨</div>
+                      <div class="text-white font-medium">Creativity</div>
+                      <div class="text-white/60 text-sm">Thinking outside the box</div>
+                    </div>
+                  </div>
+                  <div class="bg-white/5 rounded-xl p-4 border border-white/10">
+                    <div class="text-center">
+                      <div class="text-2xl mb-2">⚡</div>
+                      <div class="text-white font-medium">Passion</div>
+                      <div class="text-white/60 text-sm">Driven by curiosity</div>
+                    </div>
                   </div>
                 </div>
               </div>
               
-              <div class="bg-white/5 rounded-xl p-6 border border-white/10">
-                <h3 class="text-lg font-semibold text-white mb-3">💭 What This Means</h3>
-                <p class="text-white/80 text-sm leading-relaxed">
-                  This personal interest reflects my passion for technology and innovation. It shows how I approach 
-                  problems creatively and stay curious about emerging technologies and possibilities.
-                </p>
-                <div class="mt-4">
-                  <a href="/about" class="bg-white/10 hover:bg-white/20 text-white px-4 py-2 rounded-lg transition-colors inline-block">
-                    Learn More About Me
-                  </a>
+              <!-- Interest Areas -->
+              <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                <div class="bg-gradient-to-br from-cyan-500/10 to-blue-500/10 rounded-xl p-6 border border-cyan-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-cyan-500 rounded-lg flex items-center justify-center text-sm">🔬</span>
+                    Tech Interests
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Sci-fi & Cyberpunk</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Hardware Tinkering</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Low-level Systems</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-cyan-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Wild Tech Ideas</span>
+                    </div>
+                  </div>
                 </div>
+                
+                <div class="bg-gradient-to-br from-yellow-500/10 to-orange-500/10 rounded-xl p-6 border border-yellow-500/20">
+                  <h4 class="text-lg font-semibold text-white mb-4 flex items-center gap-2">
+                    <span class="w-6 h-6 bg-yellow-500 rounded-lg flex items-center justify-center text-sm">�</span>
+                    Philosophy
+                  </h4>
+                  <div class="space-y-3">
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Build whatever I want</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Not tied to single stack</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">Embrace the crazy ideas</span>
+                    </div>
+                    <div class="flex items-center gap-3">
+                      <div class="w-2 h-2 bg-yellow-400 rounded-full"></div>
+                      <span class="text-white/80 text-sm">In love with technology</span>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              
+              <!-- Inspiration Quote -->
+              <div class="bg-gradient-to-br from-slate-800/80 to-slate-900/80 rounded-xl p-6 border border-slate-700/50">
+                <div class="text-center">
+                  <div class="text-4xl mb-4">💭</div>
+                  <blockquote class="text-white text-lg italic mb-4">
+                    "This personal interest reflects my passion for technology and innovation. It shows how I approach problems creatively and stay curious about emerging technologies and possibilities."
+                  </blockquote>
+                  <div class="text-white/60 text-sm">— Personal Reflection</div>
+                </div>
+              </div>
+              
+              <!-- Action Cards -->
+              <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+                <a href="/about" class="group relative overflow-hidden bg-gradient-to-br from-pink-500/20 to-purple-500/20 rounded-xl p-6 border border-pink-500/30 hover:from-pink-500/30 hover:to-purple-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-pink-400/20 to-purple-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🌟</div>
+                    <h4 class="text-white font-medium mb-2">Learn More</h4>
+                    <p class="text-white/60 text-sm">Discover more about me</p>
+                    <div class="mt-3 flex items-center gap-2 text-pink-300 text-sm">
+                      <span>About Me</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
+                
+                <a href="/projects" class="group relative overflow-hidden bg-gradient-to-br from-cyan-500/20 to-blue-500/20 rounded-xl p-6 border border-cyan-500/30 hover:from-cyan-500/30 hover:to-blue-500/30 transition-all">
+                  <div class="absolute top-0 right-0 w-16 h-16 bg-gradient-to-br from-cyan-400/20 to-blue-400/20 rounded-full -mr-8 -mt-8"></div>
+                  <div class="relative z-10">
+                    <div class="text-2xl mb-3">🚀</div>
+                    <h4 class="text-white font-medium mb-2">See My Work</h4>
+                    <p class="text-white/60 text-sm">Projects & innovations</p>
+                    <div class="mt-3 flex items-center gap-2 text-cyan-300 text-sm">
+                      <span>Portfolio</span>
+                      <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"/>
+                      </svg>
+                    </div>
+                  </div>
+                </a>
               </div>
             </div>
           `;
