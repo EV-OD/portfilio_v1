@@ -8,6 +8,7 @@ import react from '@astrojs/react';
 export default defineConfig({
   site: 'https://ev-od.github.io',
   base: '/portfilio_v1',
+  output: 'static',
   trailingSlash: 'ignore',
   build: {
     format: 'directory'
