@@ -1,6 +1,7 @@
 // @ts-check
 import { defineConfig, fontProviders } from 'astro/config';
 
+
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
@@ -10,6 +11,7 @@ export default defineConfig({
   base: '/portfilio_v1',
   output: 'static',
   trailingSlash: 'ignore',
+
   build: {
     format: 'directory'
   },
