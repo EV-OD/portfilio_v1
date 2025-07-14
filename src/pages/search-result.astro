@@ -3,17 +3,26 @@ import InfoLayout from "../layouts/InfoLayout.astro";
 ---
 
 <InfoLayout title="Search Results" description="Search results from portfolio">
-  <div id="search-results-container">
-    <!-- Default content when no result is available -->
-    <div id="no-result" class="text-center py-12">
-      <div class="text-6xl mb-4">🔍</div>
-      <h2 class="text-2xl font-bold text-zinc-100 mb-3">No Search Result</h2>
-      <p class="text-zinc-400 mb-6">No search result found. Try searching for something first.</p>
-      <button 
-        onclick="window.dispatchEvent(new CustomEvent('openSearch'))"
-        class="bg-zinc-700 hover:bg-zinc-600 text-zinc-100 px-6 py-3 rounded-lg transition-colors border border-zinc-600">
-        Start Searching
-      </button>
+  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-zinc-900 to-black">
+    <div id="search-results-container" class="max-w-4xl mx-auto px-6 py-12">
+      <!-- Default content when no result is available -->
+      <div id="no-result" class="text-center py-16">
+        <div class="bg-white/5 backdrop-blur-2xl rounded-3xl p-12 border border-white/10 shadow-2xl ring-1 ring-black/5 max-w-lg mx-auto">
+          <div class="w-20 h-20 bg-white/8 backdrop-blur-md rounded-2xl flex items-center justify-center text-4xl mx-auto mb-6 border border-white/15 shadow-lg">
+            🔍
+          </div>
+          <h2 class="text-3xl font-light text-white/95 mb-4 tracking-tight">No Search Result</h2>
+          <p class="text-white/60 mb-8 text-lg font-normal leading-relaxed">No search result found. Try searching for something first.</p>
+          <button 
+            onclick="window.dispatchEvent(new CustomEvent('openSearch'))"
+            class="group bg-white/10 backdrop-blur-md hover:bg-white/15 text-white/90 px-8 py-4 rounded-2xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105">
+            <div class="flex items-center gap-3">
+              <span class="text-lg">🔍</span>
+              <span class="font-medium">Start Searching</span>
+            </div>
+          </button>
+        </div>
+      </div>
     </div>
   </div>
 </InfoLayout>
