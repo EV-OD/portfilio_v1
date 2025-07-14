@@ -33,7 +33,9 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
   // Listen for custom open search event (for InfoLayout)
   useEffect(() => {
     const handleOpenSearch = () => {
+      console.log('Search component received openSearch event, propIsOpen:', propIsOpen);
       if (propIsOpen === undefined) {
+        console.log('Setting internal search open to true');
         setInternalIsOpen(true);
       }
     };
