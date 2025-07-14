@@ -3,8 +3,19 @@ import InfoLayout from "../layouts/InfoLayout.astro";
 ---
 
 <InfoLayout title="Search Results" description="Search results from portfolio">
-  <div class="min-h-screen bg-gradient-to-br from-slate-900 via-zinc-900 to-black">
-    <div id="search-results-container" class="max-w-6xl mx-auto px-4 py-6">
+  <div class="min-h-screen  backdrop-blur-3xl relative" style="
+    background-color: transparent;
+    backdrop-filter: none;
+">
+    <!-- Glassy overlay with low saturation -->
+    <div class="absolute inset-0  backdrop-blur-sm" style="
+    background: transparent;
+    backdrop-filter: invert(1);
+"></div>
+    <div class="relative z-10">
+    <div id="search-results-container" class="max-w-6xl mx-auto px-4 py-6" style="
+    background: transparent;
+">
       <!-- Default content when no result is available -->
       <div id="no-result" class="text-center py-8">
         <div class="bg-white/5 backdrop-blur-2xl rounded-2xl p-8 border border-white/10 shadow-xl max-w-md mx-auto">
@@ -23,6 +34,7 @@ import InfoLayout from "../layouts/InfoLayout.astro";
           </button>
         </div>
       </div>
+    </div>
     </div>
   </div>
 </InfoLayout>
