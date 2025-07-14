@@ -20,7 +20,7 @@ export const RESULT_TYPES = {
 const PROGRAMMING_LANGUAGES = {
   'python': {
     name: 'Python',
-    icon: '🐍',
+    icon: '🐍', // Using Python's snake emoji as it's the most recognizable
     description: 'Versatile programming language for web development, data science, and automation',
     category: 'Backend Development',
     libraries: [

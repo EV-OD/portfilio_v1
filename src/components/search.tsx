@@ -1,6 +1,7 @@
 import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { searchGenerator } from "../lib/searchArchitecture.js";
+import TechIcon from "./TechIcon.tsx";
 
 interface SearchResult {
   type: string;
@@ -229,7 +230,11 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                     onClick={() => handleResultClick(result)}
                   >
                     <div className="flex-shrink-0 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20">
-                      <span className="text-lg">{result.icon}</span>
+                      {result.type === 'programming_language' ? (
+                        <TechIcon technology={result.title} className="w-6 h-6" />
+                      ) : (
+                        <span className="text-lg">{result.icon}</span>
+                      )}
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-medium text-white truncate">{result.title}</div>
