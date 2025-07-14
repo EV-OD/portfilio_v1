@@ -57,6 +57,44 @@ export const PERSONAL_INFO = {
     backend: ["Node.js", "Python"],
     other: ["Website Administration", "CRM systems"]
   },
+
+  projects: [
+    {
+      title: "Portfolio Website",
+      description: "Modern portfolio website with glassmorphic design",
+      technologies: ["TypeScript", "React.js", "Astro", "Tailwind CSS"],
+      category: "Web Development",
+      status: "Completed"
+    },
+    {
+      title: "E-commerce Platform",
+      description: "Full-stack e-commerce solution with payment integration",
+      technologies: ["Next.js", "Node.js", "JavaScript", "MongoDB"],
+      category: "Web Development",
+      status: "In Progress"
+    },
+    {
+      title: "Task Management App",
+      description: "Real-time collaborative task management application",
+      technologies: ["React.js", "Node.js", "TypeScript", "Socket.io"],
+      category: "Web Application",
+      status: "Completed"
+    },
+    {
+      title: "Data Analytics Dashboard",
+      description: "Interactive dashboard for data visualization and analytics",
+      technologies: ["Python", "Django", "JavaScript", "Chart.js"],
+      category: "Data Science",
+      status: "Completed"
+    },
+    {
+      title: "Mobile App Backend",
+      description: "RESTful API backend for mobile application",
+      technologies: ["Node.js", "Express.js", "MongoDB", "TypeScript"],
+      category: "Backend Development",
+      status: "Completed"
+    }
+  ],
   
   education: {
     degree: "Bachelor of Computer Engineering",

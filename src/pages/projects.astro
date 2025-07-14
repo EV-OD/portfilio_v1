@@ -2,42 +2,81 @@
 import { Image } from 'astro:assets';
 import H1 from "../components/h1.astro";
 import InfoLayout from "../layouts/InfoLayout.astro";
-import ACGenerator from "../assets/ac-generator.jpg";
-import FluidPropulsion from "../assets/fluid-propulsion.jpg";
-import ElectricMotor from "../assets/electro-magnetic-motor.jpg";
+import { PERSONAL_INFO } from "../constants.ts";
 
-const projects = [
-     {
-          title: "AC Generator",
-          description: "Transform mechanical energy into alternating current, powering the modern electric grid",
-          image: ACGenerator
-     },
-     {
-          title: "Fluid Propulsion",
-          description: "Bladeless turbine using fluid dynamics for efficient, low-friction propulsion.",
-          image: FluidPropulsion
-     },
-     {
-          title: "Electro-Magnetic Motor",
-          description: "Harness alternating current to produce smooth, efficient rotary motion.",
-          image: ElectricMotor
-     }];
+// Placeholder images for now - you can add real project images later
+const defaultProjectImage = "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80";
+const projectImages = {
+  "Portfolio Website": "https://images.unsplash.com/photo-1517180102446-f3ece451e9d8?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80",
+  "E-commerce Platform": "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80", 
+  "Task Management App": "https://images.unsplash.com/photo-1611224923853-80b023f02d71?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80",
+  "Data Analytics Dashboard": "https://images.unsplash.com/photo-1551288049-bebda4e38f71?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80",
+  "Mobile App Backend": "https://images.unsplash.com/photo-1558494949-ef010cbdcc31?w=600&h=800&fit=crop&crop=entropy&auto=format&q=80"
+};
+
+const projects = PERSONAL_INFO.projects;
 ---
 
 <InfoLayout>
      <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh">
           <H1> Projects </H1>
+          
+          <div class="mt-8 mb-12 max-w-3xl">
+               <p class="text-zinc-400 text-lg leading-relaxed">
+                    A collection of projects I've built using various technologies including React.js, TypeScript, Node.js, Python, and more. Each project showcases different aspects of full-stack development and modern web technologies.
+               </p>
+          </div>
 
-          <ul class="mt-4 sm:mt-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-16 sm:gap-8">
+          <ul class="mt-4 sm:mt-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                {projects.map((project) => (
-                    <li>
-                         <Image src={project.image} alt={project.title} class="aspect-[1/1.33] object-center object-cover rounded-lg shadow-lg mb-4 sm:mb-0 sm:mr-4" />
-                         <div class="p-1 sm:p-2">
-                              <h2 class="text-base text-zinc-100">{project.title}</h2>
-                              <p class="text-sm text-zinc-400 text-balance">{project.description}</p>
+                    <li class="group">
+                         <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:scale-105 hover:bg-zinc-900/70">
+                              <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900">
+                                   <img 
+                                        src={projectImages[project.title] || defaultProjectImage} 
+                                        alt={project.title} 
+                                        class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-500" 
+                                   />
+                              </div>
+                              <div class="p-6">
+                                   <div class="flex items-start justify-between mb-3">
+                                        <h2 class="text-xl font-semibold text-zinc-100 group-hover:text-white transition-colors">{project.title}</h2>
+                                        <span class="text-xs px-3 py-1 bg-zinc-800/60 rounded-full text-zinc-300 border border-zinc-700/50">{project.status}</span>
+                                   </div>
+                                   <p class="text-zinc-400 text-sm mb-4 leading-relaxed">{project.description}</p>
+                                   
+                                   <div class="space-y-3">
+                                        <div class="text-xs text-zinc-500 uppercase tracking-wide font-medium">Category</div>
+                                        <div class="text-sm text-zinc-300">{project.category}</div>
+                                        
+                                        <div class="text-xs text-zinc-500 uppercase tracking-wide font-medium">Technologies</div>
+                                        <div class="flex flex-wrap gap-2">
+                                             {project.technologies.map(tech => (
+                                                  <span class="text-xs px-2 py-1 bg-zinc-800/60 rounded-lg text-zinc-300 border border-zinc-700/50 hover:bg-zinc-700/60 transition-colors">
+                                                       {tech}
+                                                  </span>
+                                             ))}
+                                        </div>
+                                   </div>
+                              </div>
                          </div>
                     </li>
                ))}
           </ul>
+          
+          <div class="mt-16 text-center">
+               <div class="bg-zinc-900/30 backdrop-blur-sm rounded-2xl p-8 border border-zinc-800/50 max-w-2xl mx-auto">
+                    <h3 class="text-2xl font-light text-zinc-100 mb-4">Interested in Working Together?</h3>
+                    <p class="text-zinc-400 mb-6">I'm always open to discussing new opportunities and interesting projects.</p>
+                    <div class="flex flex-col sm:flex-row gap-4 justify-center">
+                         <a href="/contact" class="bg-white/10 backdrop-blur-md hover:bg-white/15 text-white px-6 py-3 rounded-xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105">
+                              Get In Touch
+                         </a>
+                         <a href="/about" class="bg-zinc-800/60 hover:bg-zinc-700/60 text-zinc-300 px-6 py-3 rounded-xl transition-all duration-200 border border-zinc-700/50 hover:border-zinc-600/50">
+                              Learn More About Me
+                         </a>
+                    </div>
+               </div>
+          </div>
      </div>
 </InfoLayout>

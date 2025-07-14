@@ -8,6 +8,8 @@ interface SearchResult {
   subtitle?: string;
   content: string;
   icon: string;
+  technologies?: string[];
+  category?: string;
 }
 
 interface SearchProps {
@@ -148,6 +150,97 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
         }
       });
     });
+
+    // Search in projects
+    PERSONAL_INFO.projects.forEach((project) => {
+      if (
+        project.title.toLowerCase().includes(lowerQuery) ||
+        project.description.toLowerCase().includes(lowerQuery) ||
+        project.category.toLowerCase().includes(lowerQuery) ||
+        project.technologies.some(tech => tech.toLowerCase().includes(lowerQuery))
+      ) {
+        searchResults.push({
+          type: "project",
+          title: project.title,
+          subtitle: project.description,
+          content: project.technologies.join(", "),
+          icon: "🚀"
+        });
+      }
+    });
+
+    // Search for programming languages and show related projects
+    const programmingLanguages = [
+      "javascript", "typescript", "python", "react", "node", "next", "astro",
+      "tailwind", "mongodb", "express", "django", "socket", "chart"
+    ];
+    
+    programmingLanguages.forEach((lang) => {
+      if (lowerQuery.includes(lang)) {
+        // Find projects that use this language
+        const relatedProjects = PERSONAL_INFO.projects.filter(project => 
+          project.technologies.some(tech => 
+            tech.toLowerCase().includes(lang)
+          )
+        );
+        
+        if (relatedProjects.length > 0) {
+          // Get appropriate icon for the programming language
+          const languageIcons: Record<string, string> = {
+            'python': '🐍',
+            'javascript': '⚡',
+            'typescript': '📘',
+            'react': '⚛️',
+            'node': '🟢',
+            'next': '▲',
+            'astro': '🚀',
+            'tailwind': '🎨',
+            'mongodb': '🍃',
+            'express': '🚂',
+            'django': '🎯',
+            'socket': '🔌',
+            'chart': '📊'
+          };
+          
+          // Add a single programming language result
+          searchResults.push({
+            type: "programming_language",
+            title: lang.charAt(0).toUpperCase() + lang.slice(1),
+            subtitle: `Programming Language`,
+            content: `Found ${relatedProjects.length} project${relatedProjects.length > 1 ? 's' : ''} using ${lang}`,
+            icon: languageIcons[lang] || "💻",
+            technologies: [lang]
+          });
+          
+          // Also add individual project results
+          relatedProjects.forEach((project) => {
+            searchResults.push({
+              type: "project",
+              title: project.title,
+              subtitle: `${project.category} • ${project.status}`,
+              content: project.technologies.join(", "),
+              icon: "🚀",
+              technologies: [...project.technologies],
+              category: project.category
+            });
+          });
+        }
+      }
+    });
+
+    // Search for general programming terms
+    if (lowerQuery.includes('programming') || lowerQuery.includes('coding') || lowerQuery.includes('development')) {
+      // Show popular projects
+      PERSONAL_INFO.projects.slice(0, 3).forEach((project) => {
+        searchResults.push({
+          type: "project",
+          title: project.title,
+          subtitle: project.description,
+          content: project.technologies.join(", "),
+          icon: "🚀"
+        });
+      });
+    }
 
     // Search in education
     if (
