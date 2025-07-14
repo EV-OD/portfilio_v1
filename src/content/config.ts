@@ -15,7 +15,7 @@ const articles = defineCollection({
         originalLink: z.string().url(),
         isDraft: z.boolean().default(false),
         updatedDate: z.coerce.date().optional(),
-        author: z.string().default('Retro Rocket Team'),
+        author: z.string().default('Rabin Lamichhane'),
         relatedArticles: z.array(reference('articles')).optional(),
     }),
 });

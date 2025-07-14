@@ -3,7 +3,7 @@ isDraft: false
 title: Make Something Heavy
 snippet: We're creating more than ever, but it weighs nothing.
 slug: make-something-heavy
-author: Anu Atluru 
+author: Rabin Lamichhane 
 category: Craft
 readingDuration: 1
 pubDate: 2025 3 9

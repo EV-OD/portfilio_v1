@@ -50,8 +50,8 @@ src/
 
 1. Clone the repository:
 ```bash
-git clone https://github.com/iann-mathaiya/nikola-tesla.git
-cd nikola-tesla
+git clone https://github.com/iann-mathaiya/rabin-lamichhane-portfolio.git
+cd rabin-lamichhane-portfolio
 ```
 
 2. Install dependencies:

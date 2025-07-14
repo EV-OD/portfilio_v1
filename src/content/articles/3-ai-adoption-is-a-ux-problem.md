@@ -3,7 +3,7 @@ isDraft: false
 title: AI adoption is a UX problem
 snippet: We have plenty of intelligence. The problem is making it usable
 slug: ai-adoption-is-a-ux-problem
-author: Nan Yu
+author: Rabin Lamichhane
 category: AI
 readingDuration: 1
 pubDate: 2025 4 10
