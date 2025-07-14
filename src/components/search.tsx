@@ -303,20 +303,20 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
         onClick={onClose}
       >
         {/* Backdrop */}
-        <div className="absolute inset-0 bg-black/50 backdrop-blur-sm" />
+        <div className="absolute inset-0 bg-black/30 backdrop-blur-md" />
         
         {/* Search Modal */}
         <motion.div
           initial={{ opacity: 0, scale: 0.95, y: -10 }}
           animate={{ opacity: 1, scale: 1, y: 0 }}
           exit={{ opacity: 0, scale: 0.95, y: -10 }}
-          className="relative w-full max-w-2xl bg-zinc-800/90 backdrop-blur-xl border border-zinc-700/50 rounded-xl shadow-2xl overflow-hidden"
+          className="relative w-full max-w-2xl bg-white/5 backdrop-blur-2xl border border-white/10 rounded-2xl shadow-2xl overflow-hidden"
           onClick={(e) => e.stopPropagation()}
         >
           {/* Search Input */}
-          <div className="flex items-center gap-3 p-4 border-b border-zinc-700/50">
+          <div className="flex items-center gap-3 p-4 border-b border-white/10 bg-white/5">
             <svg
-              className="w-5 h-5 text-zinc-400"
+              className="w-5 h-5 text-zinc-300"
               fill="none"
               stroke="currentColor"
               viewBox="0 0 24 24"
@@ -334,36 +334,36 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search my profile, skills, experience..."
-              className="flex-1 bg-transparent text-white placeholder-zinc-400 outline-none text-lg"
+              className="flex-1 bg-transparent text-white placeholder-zinc-300 outline-none text-lg"
             />
-            <div className="text-xs text-zinc-400 bg-zinc-700/50 px-2 py-1 rounded">
+            <div className="text-xs text-zinc-300 bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">
               ESC
             </div>
           </div>
 
           {/* Search Results */}
-          <div ref={resultsRef} className="max-h-96 overflow-y-auto">
+          <div ref={resultsRef} className="max-h-96 overflow-y-auto bg-black/20 backdrop-blur-sm">
             {query.trim() === "" ? (
-              <div className="p-8 text-center text-zinc-400">
+              <div className="p-8 text-center text-zinc-300">
                 <div className="text-4xl mb-3">🔍</div>
                 <div className="text-lg mb-2">Search my profile</div>
                 <div className="text-sm">Try searching for skills, experience, projects, or contact info</div>
                 <div className="mt-4 flex flex-wrap gap-2 justify-center text-xs">
-                  <span className="bg-zinc-700/50 px-2 py-1 rounded">React</span>
-                  <span className="bg-zinc-700/50 px-2 py-1 rounded">Developer</span>
-                  <span className="bg-zinc-700/50 px-2 py-1 rounded">Nepal</span>
-                  <span className="bg-zinc-700/50 px-2 py-1 rounded">JavaScript</span>
+                  <span className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">React</span>
+                  <span className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">Developer</span>
+                  <span className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">Nepal</span>
+                  <span className="bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">JavaScript</span>
                 </div>
               </div>
             ) : results.length === 0 ? (
-              <div className="p-8 text-center text-zinc-400">
-                <div className="text-4xl mb-2">�</div>
+              <div className="p-8 text-center text-zinc-300">
+                <div className="text-4xl mb-2">🔍</div>
                 <div>No results found for "{query}"</div>
                 <div className="text-sm mt-2">Try searching for skills, experience, or contact info</div>
               </div>
             ) : (
               <div className="p-2">
-                <div className="text-xs text-zinc-500 px-3 py-2 border-b border-zinc-700/30 mb-2">
+                <div className="text-xs text-zinc-400 px-3 py-2 border-b border-white/10 mb-2">
                   {results.length} result{results.length !== 1 ? 's' : ''} found
                 </div>
                 {results.map((result, index) => (
@@ -375,8 +375,8 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                     onClick={() => handleResultClick(result)}
                     className={`flex items-center gap-3 p-3 rounded-lg cursor-pointer transition-all ${
                       index === selectedIndex
-                        ? "bg-blue-500/20 text-blue-300 border border-blue-500/30"
-                        : "hover:bg-zinc-700/50 text-zinc-300"
+                        ? "bg-blue-500/20 backdrop-blur-sm text-blue-300 border border-blue-500/30"
+                        : "hover:bg-white/10 hover:backdrop-blur-sm text-zinc-300 hover:border hover:border-white/20"
                     }`}
                   >
                     <div className="text-2xl flex-shrink-0">{result.icon}</div>
@@ -388,7 +388,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                         </div>
                       )}
                     </div>
-                    <div className="text-xs text-zinc-500 flex-shrink-0 bg-zinc-800/50 px-2 py-1 rounded">
+                    <div className="text-xs text-zinc-400 flex-shrink-0 bg-white/10 backdrop-blur-sm px-2 py-1 rounded border border-white/20">
                       {result.content}
                     </div>
                   </motion.div>
@@ -399,15 +399,15 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
 
           {/* Footer */}
           {results.length > 0 && (
-            <div className="p-3 border-t border-zinc-700/50 text-xs text-zinc-400 flex items-center justify-between">
+            <div className="p-3 border-t border-white/10 text-xs text-zinc-300 flex items-center justify-between bg-white/5 backdrop-blur-sm">
               <div className="flex items-center gap-4">
                 <div className="flex items-center gap-1">
-                  <div className="bg-zinc-600 px-1.5 py-0.5 rounded text-xs">↑</div>
-                  <div className="bg-zinc-600 px-1.5 py-0.5 rounded text-xs">↓</div>
+                  <div className="bg-white/10 backdrop-blur-sm px-1.5 py-0.5 rounded text-xs border border-white/20">↑</div>
+                  <div className="bg-white/10 backdrop-blur-sm px-1.5 py-0.5 rounded text-xs border border-white/20">↓</div>
                   <span>Navigate</span>
                 </div>
                 <div className="flex items-center gap-1">
-                  <div className="bg-zinc-600 px-1.5 py-0.5 rounded text-xs">↵</div>
+                  <div className="bg-white/10 backdrop-blur-sm px-1.5 py-0.5 rounded text-xs border border-white/20">↵</div>
                   <span>Select</span>
                 </div>
               </div>
