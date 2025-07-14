@@ -1,8 +1,144 @@
 import { PERSONAL_INFO } from '../constants.ts';
 
 /**
- * Search Architecture - Modular system for generating structured search results
+ * Search Architecture - Modular system for generating structured search results with fuzzy search
  */
+
+// Fuzzy Search Helper Functions
+class FuzzySearch {
+  /**
+   * Calculate Levenshtein distance between two strings
+   */
+  static levenshteinDistance(str1, str2) {
+    const matrix = [];
+    
+    for (let i = 0; i <= str2.length; i++) {
+      matrix[i] = [i];
+    }
+    
+    for (let j = 0; j <= str1.length; j++) {
+      matrix[0][j] = j;
+    }
+    
+    for (let i = 1; i <= str2.length; i++) {
+      for (let j = 1; j <= str1.length; j++) {
+        if (str2.charAt(i - 1) === str1.charAt(j - 1)) {
+          matrix[i][j] = matrix[i - 1][j - 1];
+        } else {
+          matrix[i][j] = Math.min(
+            matrix[i - 1][j - 1] + 1,
+            matrix[i][j - 1] + 1,
+            matrix[i - 1][j] + 1
+          );
+        }
+      }
+    }
+    
+    return matrix[str2.length][str1.length];
+  }
+  
+  /**
+   * Calculate fuzzy match score (0-1, higher is better)
+   */
+  static fuzzyScore(query, target) {
+    const queryLower = query.toLowerCase();
+    const targetLower = target.toLowerCase();
+    
+    // Exact match gets highest score
+    if (queryLower === targetLower) return 1.0;
+    
+    // Starts with query gets high score
+    if (targetLower.startsWith(queryLower)) return 0.9;
+    
+    // Contains query gets medium-high score
+    if (targetLower.includes(queryLower)) return 0.8;
+    
+    // Fuzzy matching based on Levenshtein distance
+    const distance = this.levenshteinDistance(queryLower, targetLower);
+    const maxLength = Math.max(queryLower.length, targetLower.length);
+    const similarity = 1 - (distance / maxLength);
+    
+    // Only return if similarity is above threshold (lowered for better project matching)
+    return similarity > 0.5 ? similarity * 0.7 : 0;
+  }
+  
+  /**
+   * Check if query fuzzy matches target
+   */
+  static fuzzyMatch(query, target, threshold = 0.6) {
+    return this.fuzzyScore(query, target) >= threshold;
+  }
+}
+
+// Enhanced search terms mapping for fuzzy search
+const SEARCH_ALIASES = {
+  // Programming language aliases
+  'py': 'python',
+  'pyt': 'python',
+  'pyth': 'python',
+  'pytho': 'python',
+  'js': 'javascript',
+  'node': 'nodejs',
+  'ts': 'typescript',
+  'react': 'reactjs',
+  
+  // Contact aliases
+  'mail': 'contact',
+  'email': 'contact',
+  'reach': 'contact',
+  'touch': 'contact',
+  'phone': 'contact',
+  'linkedin': 'contact',
+  'github': 'contact',
+  
+  // Skill aliases
+  'frontend': 'front-end',
+  'backend': 'back-end',
+  'fullstack': 'full-stack',
+  'web': 'web development',
+  'mobile': 'mobile development',
+  
+  // Experience aliases
+  'work': 'experience',
+  'job': 'experience',
+  'career': 'experience',
+  'employment': 'experience',
+  
+  // Education aliases
+  'study': 'education',
+  'degree': 'education',
+  'university': 'education',
+  'college': 'education',
+  'school': 'education',
+  
+  // Project aliases
+  'project': 'projects',
+  'proj': 'projects',
+  'work': 'projects',
+  'portfolio': 'portfolio website',
+  'ecommerce': 'e-commerce platform',
+  'task': 'task management app',
+  'management': 'task management app',
+  'dashboard': 'data analytics dashboard',
+  'analytics': 'data analytics dashboard',
+  'data': 'data analytics dashboard',
+  'api': 'mobile app backend',
+  'backend': 'mobile app backend',
+  'mobile': 'mobile app backend',
+  'app': 'mobile app backend',
+  
+  // Common project-related terms
+  'website': 'portfolio website',
+  'shop': 'e-commerce platform',
+  'store': 'e-commerce platform',
+  'todo': 'task management app',
+  'chat': 'task management app',
+  'realtime': 'task management app',
+  'graph': 'data analytics dashboard',
+  'chart': 'data analytics dashboard',
+  'rest': 'mobile app backend',
+  'restful': 'mobile app backend'
+};
 
 // Result Type Definitions
 export const RESULT_TYPES = {
@@ -122,62 +258,429 @@ export class SearchResultGenerator {
   }
 
   /**
-   * Main search function that returns structured results
+   * Main search function that returns structured results with fuzzy search
    */
   search(query) {
-    const lowerQuery = query.toLowerCase().trim();
+    if (!query || query.trim().length === 0) return [];
+
+    let processedQuery = query.toLowerCase().trim();
     const results = [];
-    const seenTypes = new Set(); // Prevent duplicates
+    const seenTypes = new Set();
 
-    // Search for programming languages
-    const programmingResult = this.searchProgrammingLanguages(lowerQuery);
-    if (programmingResult && !seenTypes.has(`${programmingResult.type}_${programmingResult.data.name}`)) {
-      results.push(programmingResult);
-      seenTypes.add(`${programmingResult.type}_${programmingResult.data.name}`);
+    // Apply search aliases for fuzzy matching
+    const expandedQueries = this.expandQuery(processedQuery);
+    
+    // Search with each expanded query
+    expandedQueries.forEach(expandedQuery => {
+      // Search for programming languages with fuzzy matching
+      const langResult = this.searchProgrammingLanguagesFuzzy(expandedQuery);
+      if (langResult && !seenTypes.has(`${langResult.type}_${langResult.data.name}`)) {
+        results.push(langResult);
+        seenTypes.add(`${langResult.type}_${langResult.data.name}`);
+      }
+
+      // Search for skills with fuzzy matching
+      const skillResults = this.searchSkillsFuzzy(expandedQuery);
+      skillResults.forEach(skill => {
+        const key = `${skill.type}_${skill.data.name}`;
+        if (!seenTypes.has(key)) {
+          results.push(skill);
+          seenTypes.add(key);
+        }
+      });
+
+      // Search for projects with fuzzy matching
+      const projectResults = this.searchProjectsFuzzy(expandedQuery);
+      projectResults.forEach(project => {
+        const key = `${project.type}_${project.data.title}`;
+        if (!seenTypes.has(key)) {
+          results.push(project);
+          seenTypes.add(key);
+        }
+      });
+
+      // Search for experiences with fuzzy matching
+      const experienceResults = this.searchExperiencesFuzzy(expandedQuery);
+      experienceResults.forEach(exp => {
+        const key = `${exp.type}_${exp.data.title}_${exp.data.company}`;
+        if (!seenTypes.has(key)) {
+          results.push(exp);
+          seenTypes.add(key);
+        }
+      });
+
+      // Search for contact info with fuzzy matching
+      const contactResult = this.searchContactFuzzy(expandedQuery);
+      if (contactResult && !seenTypes.has(`${contactResult.type}_contact`)) {
+        results.push(contactResult);
+        seenTypes.add(`${contactResult.type}_contact`);
+      }
+
+      // Search for education with fuzzy matching
+      const educationResult = this.searchEducationFuzzy(expandedQuery);
+      if (educationResult && !seenTypes.has(`${educationResult.type}_education`)) {
+        results.push(educationResult);
+        seenTypes.add(`${educationResult.type}_education`);
+      }
+
+      // Search for certifications with fuzzy matching
+      const certResults = this.searchCertificationsFuzzy(expandedQuery);
+      certResults.forEach(cert => {
+        const key = `${cert.type}_${cert.data.name}`;
+        if (!seenTypes.has(key)) {
+          results.push(cert);
+          seenTypes.add(key);
+        }
+      });
+
+      // Search for fun facts with fuzzy matching
+      const factResults = this.searchFactsFuzzy(expandedQuery);
+      factResults.forEach(fact => {
+        const key = `${fact.type}_${fact.data.name}`;
+        if (!seenTypes.has(key)) {
+          results.push(fact);
+          seenTypes.add(key);
+        }
+      });
+    });
+
+    // Sort by fuzzy score and priority
+    return results.sort((a, b) => {
+      const scoreA = a.fuzzyScore || 0;
+      const scoreB = b.fuzzyScore || 0;
+      
+      if (scoreA !== scoreB) {
+        return scoreB - scoreA; // Higher score first
+      }
+      
+      return a.priority - b.priority; // Lower priority number first
+    });
+  }
+
+  /**
+   * Expand query with aliases and variations
+   */
+  expandQuery(query) {
+    const queries = [query];
+    
+    // Add direct aliases
+    if (SEARCH_ALIASES[query]) {
+      queries.push(SEARCH_ALIASES[query]);
     }
-
-    // Search for skills (only if not already found as programming language)
-    const skillResults = this.searchSkills(lowerQuery);
-    skillResults.forEach(skill => {
-      const key = `${skill.type}_${skill.data.name}`;
-      if (!seenTypes.has(key)) {
-        results.push(skill);
-        seenTypes.add(key);
+    
+    // Add partial matches for common terms
+    Object.keys(SEARCH_ALIASES).forEach(alias => {
+      if (FuzzySearch.fuzzyMatch(query, alias, 0.7)) {
+        queries.push(SEARCH_ALIASES[alias]);
       }
     });
-
-    // Search for projects
-    const projectResults = this.searchProjects(lowerQuery);
-    projectResults.forEach(project => {
-      const key = `${project.type}_${project.data.title}`;
-      if (!seenTypes.has(key)) {
-        results.push(project);
-        seenTypes.add(key);
+    
+    // Add fuzzy matches for programming languages
+    Object.keys(PROGRAMMING_LANGUAGES).forEach(lang => {
+      if (FuzzySearch.fuzzyMatch(query, lang, 0.6)) {
+        queries.push(lang);
       }
     });
+    
+    // Add fuzzy matches for project titles and keywords
+    this.personalInfo.projects.forEach(project => {
+      const titleWords = project.title.toLowerCase().split(' ');
+      const descWords = project.description.toLowerCase().split(' ');
+      const allWords = [...titleWords, ...descWords];
+      
+      // Check if query matches any significant words in project
+      allWords.forEach(word => {
+        if (word.length > 3 && FuzzySearch.fuzzyMatch(query, word, 0.7)) {
+          queries.push(project.title.toLowerCase());
+        }
+      });
+      
+      // Check direct fuzzy match with project title
+      if (FuzzySearch.fuzzyMatch(query, project.title.toLowerCase(), 0.6)) {
+        queries.push(project.title.toLowerCase());
+      }
+    });
+    
+    // Special handling for generic "project" searches
+    if (['project', 'projects', 'proj', 'work', 'portfolio'].includes(query.toLowerCase())) {
+      queries.push('show_all_projects');
+    }
+    
+    return [...new Set(queries)]; // Remove duplicates
+  }
 
-    // Search for experiences
-    const experienceResults = this.searchExperiences(lowerQuery);
-    experienceResults.forEach(exp => results.push(exp));
+  /**
+   * Enhanced fuzzy search methods
+   */
+  
+  /**
+   * Search for programming languages with fuzzy matching
+   */
+  searchProgrammingLanguagesFuzzy(query) {
+    for (const [key, langData] of Object.entries(PROGRAMMING_LANGUAGES)) {
+      const score = Math.max(
+        FuzzySearch.fuzzyScore(query, key),
+        FuzzySearch.fuzzyScore(query, langData.name.toLowerCase())
+      );
+      
+      if (score > 0) {
+        const relatedProjects = this.getRelatedProjects(langData.name);
+        
+        return {
+          type: RESULT_TYPES.PROGRAMMING_LANGUAGE,
+          priority: 1,
+          fuzzyScore: score,
+          data: {
+            ...langData,
+            relatedProjects,
+            query: query
+          }
+        };
+      }
+    }
+    return null;
+  }
 
-    // Search for contact info
-    const contactResult = this.searchContact(lowerQuery);
-    if (contactResult) results.push(contactResult);
+  /**
+   * Search for skills with fuzzy matching
+   */
+  searchSkillsFuzzy(query) {
+    const results = [];
+    const allSkills = [
+      ...this.personalInfo.skills.frontend,
+      ...this.personalInfo.skills.backend,
+      ...this.personalInfo.skills.other
+    ];
 
-    // Search for education
-    const educationResult = this.searchEducation(lowerQuery);
-    if (educationResult) results.push(educationResult);
-
-    // Search for certifications
-    const certResults = this.searchCertifications(lowerQuery);
-    certResults.forEach(cert => results.push(cert));
-
-    // Search for fun facts
-    const factResults = this.searchFacts(lowerQuery);
-    factResults.forEach(fact => results.push(fact));
+    allSkills.forEach(skill => {
+      const score = FuzzySearch.fuzzyScore(query, skill.toLowerCase());
+      
+      if (score > 0) {
+        // Skip if this is already covered by programming languages
+        const isProgLang = Object.values(PROGRAMMING_LANGUAGES).some(lang => 
+          lang.name.toLowerCase() === skill.toLowerCase()
+        );
+        
+        if (!isProgLang) {
+          results.push({
+            type: RESULT_TYPES.SKILL,
+            priority: 2,
+            fuzzyScore: score,
+            data: {
+              name: skill,
+              category: this.getSkillCategory(skill),
+              description: `Professional skill in ${skill}`,
+              icon: this.getSkillIcon(skill),
+              relatedProjects: this.getRelatedProjects(skill)
+            }
+          });
+        }
+      }
+    });
 
     return results;
   }
+
+  /**
+   * Search for projects with fuzzy matching
+   */
+  searchProjectsFuzzy(query) {
+    const results = [];
+    
+    // Special case: if someone searches for "project", "projects", or generic terms, show all projects
+    if (query === 'show_all_projects' || ['project', 'projects', 'proj', 'work', 'portfolio'].includes(query)) {
+      this.personalInfo.projects.forEach((project, index) => {
+        results.push({
+          type: RESULT_TYPES.PROJECT,
+          priority: 3,
+          fuzzyScore: 0.95 - (index * 0.1), // Slightly lower score for each subsequent project
+          data: {
+            ...project,
+            icon: '🚀',
+            matchedTechnologies: project.technologies
+          }
+        });
+      });
+      return results;
+    }
+    
+    this.personalInfo.projects.forEach(project => {
+      const titleScore = FuzzySearch.fuzzyScore(query, project.title.toLowerCase());
+      const descScore = FuzzySearch.fuzzyScore(query, project.description.toLowerCase());
+      const categoryScore = FuzzySearch.fuzzyScore(query, project.category.toLowerCase());
+      
+      // Enhanced technology matching
+      const techScores = project.technologies.map(tech => 
+        FuzzySearch.fuzzyScore(query, tech.toLowerCase())
+      );
+      const maxTechScore = Math.max(0, ...techScores);
+      
+      // Check for keyword matches in title and description
+      const titleWords = project.title.toLowerCase().split(' ');
+      const descWords = project.description.toLowerCase().split(' ');
+      const keywordScores = [...titleWords, ...descWords].map(word =>
+        word.length > 2 ? FuzzySearch.fuzzyScore(query, word) : 0
+      );
+      const maxKeywordScore = Math.max(0, ...keywordScores);
+      
+      const maxScore = Math.max(titleScore, descScore, categoryScore, maxTechScore, maxKeywordScore);
+
+      if (maxScore > 0) {
+        results.push({
+          type: RESULT_TYPES.PROJECT,
+          priority: 3,
+          fuzzyScore: maxScore,
+          data: {
+            ...project,
+            icon: '🚀',
+            matchedTechnologies: project.technologies.filter((tech, index) =>
+              techScores[index] > 0.5
+            )
+          }
+        });
+      }
+    });
+
+    return results;
+  }
+
+  /**
+   * Search for experiences with fuzzy matching
+   */
+  searchExperiencesFuzzy(query) {
+    const results = [];
+    
+    this.personalInfo.experience.forEach(exp => {
+      const titleScore = FuzzySearch.fuzzyScore(query, exp.title.toLowerCase());
+      const companyScore = FuzzySearch.fuzzyScore(query, exp.company.toLowerCase());
+      const maxScore = Math.max(titleScore, companyScore);
+
+      if (maxScore > 0) {
+        results.push({
+          type: RESULT_TYPES.EXPERIENCE,
+          priority: 4,
+          fuzzyScore: maxScore,
+          data: {
+            ...exp,
+            icon: '💼',
+            description: `${exp.title} at ${exp.company}`
+          }
+        });
+      }
+    });
+
+    return results;
+  }
+
+  /**
+   * Search for contact information with fuzzy matching
+   */
+  searchContactFuzzy(query) {
+    const contactTerms = ['contact', 'email', 'phone', 'linkedin', 'github', 'website', 'mail', 'reach', 'touch'];
+    
+    const scores = contactTerms.map(term => FuzzySearch.fuzzyScore(query, term));
+    const maxScore = Math.max(...scores);
+    
+    if (maxScore > 0) {
+      return {
+        type: RESULT_TYPES.CONTACT,
+        priority: 5,
+        fuzzyScore: maxScore,
+        data: {
+          name: 'Contact Information',
+          icon: '📧',
+          description: 'Get in touch with me',
+          contact: this.personalInfo.contact,
+          location: this.personalInfo.location
+        }
+      };
+    }
+    return null;
+  }
+
+  /**
+   * Search for education with fuzzy matching
+   */
+  searchEducationFuzzy(query) {
+    const educationTerms = ['education', 'degree', 'university', 'college', 'computer engineering', 'study', 'school'];
+    
+    const scores = educationTerms.map(term => FuzzySearch.fuzzyScore(query, term));
+    const maxScore = Math.max(...scores);
+    
+    if (maxScore > 0) {
+      return {
+        type: RESULT_TYPES.EDUCATION,
+        priority: 6,
+        fuzzyScore: maxScore,
+        data: {
+          name: 'Education',
+          icon: '🎓',
+          description: this.personalInfo.education.degree,
+          institution: this.personalInfo.education.institution,
+          degree: this.personalInfo.education.degree
+        }
+      };
+    }
+    return null;
+  }
+
+  /**
+   * Search for certifications with fuzzy matching
+   */
+  searchCertificationsFuzzy(query) {
+    const results = [];
+    
+    this.personalInfo.certifications.forEach(cert => {
+      const score = FuzzySearch.fuzzyScore(query, cert.toLowerCase());
+      
+      if (score > 0) {
+        results.push({
+          type: RESULT_TYPES.CERTIFICATION,
+          priority: 7,
+          fuzzyScore: score,
+          data: {
+            name: cert,
+            icon: '🏆',
+            description: `Certified in ${cert}`,
+            category: 'Professional Certification'
+          }
+        });
+      }
+    });
+
+    return results;
+  }
+
+  /**
+   * Search for fun facts with fuzzy matching
+   */
+  searchFactsFuzzy(query) {
+    const results = [];
+    
+    this.personalInfo.funFacts.forEach((fact, index) => {
+      const score = FuzzySearch.fuzzyScore(query, fact.toLowerCase());
+      
+      if (score > 0) {
+        results.push({
+          type: RESULT_TYPES.FACT,
+          priority: 8,
+          fuzzyScore: score,
+          data: {
+            name: `Fun Fact #${index + 1}`,
+            icon: '🎯',
+            description: fact,
+            category: 'Personal Interest'
+          }
+        });
+      }
+    });
+
+    return results;
+  }
+
+  /**
+   * Legacy search methods (kept for backward compatibility)
+   */
 
   /**
    * Search for programming languages with comprehensive data

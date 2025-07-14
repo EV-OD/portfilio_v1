@@ -183,7 +183,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
         initial={{ opacity: 0 }}
         animate={{ opacity: 1 }}
         exit={{ opacity: 0 }}
-        className="fixed inset-0 z-50 bg-black/30 backdrop-blur-sm flex items-start justify-center pt-20 px-4"
+        className="fixed inset-0 z-50 bg-black/30 backdrop-blur-md flex items-start justify-center pt-20 px-4"
         onClick={onClose}
       >
         <motion.div
@@ -224,8 +224,8 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                     transition={{ delay: index * 0.05 }}
                     className={`relative flex items-center gap-3 p-3 rounded-xl cursor-pointer transition-all duration-200 ${
                       index === selectedIndex
-                        ? "bg-white/20 backdrop-blur-sm border border-white/30"
-                        : "hover:bg-white/10 backdrop-blur-sm"
+                        ? "bg-slate-700/50 backdrop-blur-sm border border-white/30"
+                        : "hover:bg-white/10"
                     }`}
                     onClick={() => handleResultClick(result)}
                   >

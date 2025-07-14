@@ -86,12 +86,12 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
       return;
     }
 
-    // Use the new search architecture
+    // Use the new search architecture with fuzzy search
     const architectureResults = searchGenerator.search(query);
     
     // Convert to the component's expected format
+    // Note: Results are already sorted by fuzzy score and priority in the search architecture
     const searchResults: SearchResult[] = architectureResults
-      .sort((a, b) => a.priority - b.priority) // Sort by priority
       .map(result => {
         const data = result.data as any; // Use any to handle flexible data structure
         
@@ -122,7 +122,9 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               type: result.type,
               title: data.title,
               subtitle: `${data.category} • ${data.status}`,
-              content: data.technologies?.join(', ') || '',
+              content: data.matchedTechnologies?.length > 0 
+                ? `Matched: ${data.matchedTechnologies.join(', ')}` 
+                : data.technologies?.join(', ') || '',
               icon: '🚀',
               technologies: data.technologies || [],
               category: data.category
