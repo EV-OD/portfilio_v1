@@ -41,13 +41,25 @@ const pathname = Astro.url.pathname;
 								<svg class="w-4 h-4 text-white/60" fill="none" stroke="currentColor" viewBox="0 0 24 24">
 									<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 15l-3-3m0 0l3-3m-3 3h12a9 9 0 11-9-9m-9 9a9 9 0 019-9"/>
 								</svg>
-								<span class="text-white/80 text-sm font-mono flex-1">
-									{pathname === "/" && "portfolio://rabin-lamichhane/home"}
-									{pathname === "/projects" && "portfolio://rabin-lamichhane/projects"}
-									{pathname === "/about" && "portfolio://rabin-lamichhane/about"}
-									{pathname === "/contact" && "portfolio://rabin-lamichhane/contact"}
-									{pathname === "/search-result" && "portfolio://rabin-lamichhane/search-results"}
-									{pathname.startsWith("/blog") && "portfolio://rabin-lamichhane/blog"}
+								<span class="text-white/80 text-sm font-mono flex-1 truncate">
+									{/* Mobile URLs (shorter) */}
+									<span class="sm:hidden">
+										{pathname === "/" && "portfolio://~/home"}
+										{pathname === "/projects" && "portfolio://~/projects"}
+										{pathname === "/about" && "portfolio://~/about"}
+										{pathname === "/contact" && "portfolio://~/contact"}
+										{pathname === "/search-result" && "portfolio://~/search"}
+										{pathname.startsWith("/blog") && "portfolio://~/blog"}
+									</span>
+									{/* Desktop URLs (full) */}
+									<span class="hidden sm:inline">
+										{pathname === "/" && "portfolio://rabin-lamichhane/home"}
+										{pathname === "/projects" && "portfolio://rabin-lamichhane/projects"}
+										{pathname === "/about" && "portfolio://rabin-lamichhane/about"}
+										{pathname === "/contact" && "portfolio://rabin-lamichhane/contact"}
+										{pathname === "/search-result" && "portfolio://rabin-lamichhane/search-results"}
+										{pathname.startsWith("/blog") && "portfolio://rabin-lamichhane/blog"}
+									</span>
 								</span>
 								
 								<!-- Search Button -->
@@ -66,16 +78,12 @@ const pathname = Astro.url.pathname;
 								</button>
 							</div>
 						</div>
-						
-						<div class="text-right">
-							<span class="text-white/50 text-xs">Portfolio</span>
-						</div>
 					</div>
 
 					<!-- Window Content with Finder-style Layout -->
 					<div class="flex-1 flex overflow-hidden">
-						<!-- Sidebar -->
-						<div class="w-64 bg-white/5 border-r border-white/10 p-4 flex flex-col overflow-hidden">
+						<!-- Desktop Sidebar -->
+						<div class="hidden lg:flex w-64 bg-white/5 border-r border-white/10 p-4 flex-col overflow-hidden">
 							<!-- Logo/Avatar Section -->
 							<div class="mb-6 text-center flex-shrink-0">
 								<div class="w-16 h-16 bg-gradient-to-br from-blue-400 to-purple-600 rounded-xl mx-auto mb-3 flex items-center justify-center shadow-lg">
@@ -141,8 +149,71 @@ const pathname = Astro.url.pathname;
 
 						<!-- Main Content Area -->
 						<div class="flex-1 overflow-y-auto custom-scrollbar">
-							<div class="p-6 sm:p-8">
+							<div class="p-6 sm:p-8 content-with-mobile-nav">
 								<slot />
+							</div>
+						</div>
+					</div>
+
+					<!-- Mobile Navigation Sheet -->
+					<div class="lg:hidden fixed bottom-6 left-1/2 transform -translate-x-1/2 z-50 mobile-nav-sheet">
+						<div class="bg-white/10 backdrop-blur-xl border border-white/20 rounded-2xl shadow-2xl p-3">
+							<div class="flex items-center gap-3">
+								<!-- Home -->
+								<a href="/" class={`mobile-nav-item p-3 rounded-xl transition-all duration-200 ${
+									pathname === "/" 
+										? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20" 
+										: "text-white/70 hover:text-white hover:bg-white/20"
+								}`} title="Home">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M10.707 2.293a1 1 0 00-1.414 0l-7 7a1 1 0 001.414 1.414L4 10.414V17a1 1 0 001 1h2a1 1 0 001-1v-2a1 1 0 011-1h2a1 1 0 011 1v2a1 1 0 001 1h2a1 1 0 001-1v-6.586l.293.293a1 1 0 001.414-1.414l-7-7z"/>
+									</svg>
+								</a>
+								
+								<!-- Projects -->
+								<a href="/projects" class={`mobile-nav-item p-3 rounded-xl transition-all duration-200 ${
+									pathname === "/projects" 
+										? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20" 
+										: "text-white/70 hover:text-white hover:bg-white/20"
+								}`} title="Projects">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M2 6a2 2 0 012-2h12a2 2 0 012 2v8a2 2 0 01-2 2H4a2 2 0 01-2-2V6zM4 8v6h12V8H4z"/>
+									</svg>
+								</a>
+								
+								<!-- About -->
+								<a href="/about" class={`mobile-nav-item p-3 rounded-xl transition-all duration-200 ${
+									pathname === "/about" 
+										? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20" 
+										: "text-white/70 hover:text-white hover:bg-white/20"
+								}`} title="About">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+										<path fill-rule="evenodd" d="M10 9a3 3 0 100-6 3 3 0 000 6zm-7 9a7 7 0 1114 0H3z" clip-rule="evenodd"/>
+									</svg>
+								</a>
+								
+								<!-- Contact -->
+								<a href="/contact" class={`mobile-nav-item p-3 rounded-xl transition-all duration-200 ${
+									pathname === "/contact" 
+										? "bg-blue-500/30 text-blue-200 shadow-lg shadow-blue-500/20" 
+										: "text-white/70 hover:text-white hover:bg-white/20"
+								}`} title="Contact">
+									<svg class="w-5 h-5" fill="currentColor" viewBox="0 0 20 20">
+										<path d="M2.003 5.884L10 9.882l7.997-3.998A2 2 0 0016 4H4a2 2 0 00-1.997 1.884z"/>
+										<path d="M18 8.118l-8 4-8-4V14a2 2 0 002 2h12a2 2 0 002-2V8.118z"/>
+									</svg>
+								</a>
+
+								<!-- Search -->
+								<button 
+									id="mobile-search-btn"
+									class="mobile-nav-item p-3 rounded-xl transition-all duration-200 text-white/70 hover:text-white hover:bg-white/20"
+									title="Search"
+								>
+									<svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+										<path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+									</svg>
+								</button>
 							</div>
 						</div>
 					</div>
@@ -170,8 +241,14 @@ const pathname = Astro.url.pathname;
 	// Handle search button click
 	document.addEventListener('DOMContentLoaded', () => {
 		const searchBtn = document.getElementById('search-btn');
+		const mobileSearchBtn = document.getElementById('mobile-search-btn');
+		
 		if (searchBtn) {
 			searchBtn.addEventListener('click', openSearch);
+		}
+		
+		if (mobileSearchBtn) {
+			mobileSearchBtn.addEventListener('click', openSearch);
 		}
 	});
 
