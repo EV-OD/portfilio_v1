@@ -1,36 +1,135 @@
 ---
 import H1 from "../components/h1.astro";
 import InfoLayout from "../layouts/InfoLayout.astro";
+import { PERSONAL_INFO } from "../constants.ts";
 ---
 
 <InfoLayout>
-     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between gap-32">
+     <div class="p-4 sm:pt-8 sm:px-12 pb-20 min-h-dvh flex flex-col justify-between gap-16">
           <div class="space-y-4 sm:space-y-12">
-               <H1> Get to know Nikola </H1>
+               <H1> Get to know {PERSONAL_INFO.name.split(' ')[0]} </H1>
 
-               <p class="text-xl xl:text-2xl text-zinc-500 text-balance">
-                    <a href="https://en.wikipedia.org/wiki/Nikola_Tesla" target="_blank" class="underline underline-offset-4 decoration-zinc-400 hover:text-zinc-50 hover:decoration-zinc-200">
-                         Nikola Tesla
-                    </a>
-                    (1856-1943) was a Serbian-American inventor, engineer, and futurist
-                    best known for his pioneering work in electricity and electromagnetism.
-                    His innovations laid the foundation for modern alternating current
-                    (AC) power systems and many technologies still in use today.
-               </p>
+               <div class="space-y-6">
+                    <p class="text-xl xl:text-2xl text-zinc-300 text-balance">
+                         {PERSONAL_INFO.summary}
+                    </p>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-2 gap-6 mt-8">
+                         <div class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                              <h3 class="text-lg font-semibold text-white mb-3">Personal Info</h3>
+                              <div class="space-y-2 text-zinc-300">
+                                   <p><span class="text-zinc-400">Name:</span> {PERSONAL_INFO.name}</p>
+                                   <p><span class="text-zinc-400">Title:</span> {PERSONAL_INFO.title}</p>
+                                   <p><span class="text-zinc-400">Location:</span> {PERSONAL_INFO.location}</p>
+                                   <p><span class="text-zinc-400">Email:</span> 
+                                        <a href={`mailto:${PERSONAL_INFO.contact.email}`} 
+                                           class="text-blue-400 hover:text-blue-300 ml-2">
+                                             {PERSONAL_INFO.contact.email}
+                                        </a>
+                                   </p>
+                              </div>
+                         </div>
+                         
+                         <div class="bg-white/5 backdrop-blur-md rounded-xl p-6 border border-white/10">
+                              <h3 class="text-lg font-semibold text-white mb-3">Education</h3>
+                              <div class="space-y-2 text-zinc-300">
+                                   <p class="font-medium">{PERSONAL_INFO.education.degree}</p>
+                                   <p class="text-zinc-400">{PERSONAL_INFO.education.institution}</p>
+                                   <p class="text-sm text-zinc-500">{PERSONAL_INFO.education.status}</p>
+                              </div>
+                         </div>
+                    </div>
+               </div>
           </div>
 
-          <div class="space-y-2 text-base sm:text-lg">
-               <h2 class="px-4 text-zinc-400 underline underline-offset-4 decoration-zinc-500">Achievements</h2>
+          <div class="space-y-8">
+               <!-- Skills Section -->
+               <div class="space-y-4">
+                    <h2 class="text-xl font-semibold text-zinc-300 underline underline-offset-4 decoration-zinc-500">
+                         Technical Skills
+                    </h2>
+                    
+                    <div class="grid grid-cols-1 md:grid-cols-3 gap-4">
+                         <div class="bg-white/5 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                              <h3 class="text-white font-medium mb-2">Frontend</h3>
+                              <div class="flex flex-wrap gap-2">
+                                   {PERSONAL_INFO.skills.frontend.map(skill => (
+                                        <span class="text-xs px-2 py-1 bg-blue-500/20 rounded-md text-blue-300 border border-blue-500/30">
+                                             {skill}
+                                        </span>
+                                   ))}
+                              </div>
+                         </div>
+                         
+                         <div class="bg-white/5 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                              <h3 class="text-white font-medium mb-2">Backend</h3>
+                              <div class="flex flex-wrap gap-2">
+                                   {PERSONAL_INFO.skills.backend.map(skill => (
+                                        <span class="text-xs px-2 py-1 bg-green-500/20 rounded-md text-green-300 border border-green-500/30">
+                                             {skill}
+                                        </span>
+                                   ))}
+                              </div>
+                         </div>
+                         
+                         <div class="bg-white/5 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                              <h3 class="text-white font-medium mb-2">Other</h3>
+                              <div class="flex flex-wrap gap-2">
+                                   {PERSONAL_INFO.skills.other.map(skill => (
+                                        <span class="text-xs px-2 py-1 bg-purple-500/20 rounded-md text-purple-300 border border-purple-500/30">
+                                             {skill}
+                                        </span>
+                                   ))}
+                              </div>
+                         </div>
+                    </div>
+               </div>
 
-               <ul class="px-4 text-zinc-400 list-disc list-outside">
-                    <li>Alternating Current (AC) System</li>
-                    <li>Tesla Coil</li>
-                    <li>Induction Motor</li>
-                    <li>Wireless Transmission</li>
-                    <li>Radio and Remote Control</li>
-                    <li>Hydroelectric Power at Niagara Falls</li>
-                    <li>X-Ray Imaging</li>
-               </ul>
+               <!-- Experience Section -->
+               <div class="space-y-4">
+                    <h2 class="text-xl font-semibold text-zinc-300 underline underline-offset-4 decoration-zinc-500">
+                         Experience
+                    </h2>
+                    
+                    <div class="space-y-3">
+                         {PERSONAL_INFO.experience.map(exp => (
+                              <div class="bg-white/5 backdrop-blur-md rounded-lg p-4 border border-white/10">
+                                   <h3 class="text-white font-medium">{exp.title}</h3>
+                                   <p class="text-zinc-400">{exp.company}</p>
+                                   {exp.duration && <p class="text-sm text-zinc-500">{exp.duration}</p>}
+                              </div>
+                         ))}
+                    </div>
+               </div>
+
+               <!-- Certifications & Fun Facts -->
+               <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                    <div class="space-y-3">
+                         <h2 class="text-lg font-semibold text-zinc-300 underline underline-offset-4 decoration-zinc-500">
+                              Certifications
+                         </h2>
+                         <div class="space-y-2">
+                              {PERSONAL_INFO.certifications.map(cert => (
+                                   <div class="bg-white/5 backdrop-blur-md rounded-lg p-3 border border-white/10">
+                                        <p class="text-zinc-300">{cert}</p>
+                                   </div>
+                              ))}
+                         </div>
+                    </div>
+                    
+                    <div class="space-y-3">
+                         <h2 class="text-lg font-semibold text-zinc-300 underline underline-offset-4 decoration-zinc-500">
+                              Fun Facts
+                         </h2>
+                         <div class="space-y-2">
+                              {PERSONAL_INFO.funFacts.map(fact => (
+                                   <div class="bg-white/5 backdrop-blur-md rounded-lg p-3 border border-white/10">
+                                        <p class="text-zinc-300">• {fact}</p>
+                                   </div>
+                              ))}
+                         </div>
+                    </div>
+               </div>
           </div>
      </div>
 </InfoLayout>

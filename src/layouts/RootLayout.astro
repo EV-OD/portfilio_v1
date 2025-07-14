@@ -3,11 +3,12 @@ import "../styles/global.css";
 import { Font } from "astro:assets";
 import { ClientRouter } from 'astro:transitions';
 import LoadingIndicator from "astro-loading-indicator/component"
+import { PERSONAL_INFO } from "../constants.ts";
 
 const { title, description } = Astro.props;
 
-const defaultTitle = "Nikola Tesla";
-const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electrical engineer, mechanical engineer, and futurist who is best known for his contributions to the design of the modern alternating current (AC) electricity supply system.";
+const defaultTitle = `${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`;
+const defaultDescription = PERSONAL_INFO.summary;
 ---
 
 <!doctype html>
@@ -20,19 +21,19 @@ const defaultDescription = "Nikola Tesla was a Serbian-American inventor, electr
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
 
-		<meta property="og:url" content="https://nikola.fluidinterfaces.com/" />
+		<meta property="og:url" content={PERSONAL_INFO.contact.website} />
 		<meta property="og:type" content="website" />
-		<meta property="og:title" content={defaultTitle} />
-		<meta property="og:description" content={defaultDescription} />
-		<meta property="og:image" content="/social-image.jpg" />
+		<meta property="og:title" content={title ?? defaultTitle} />
+		<meta property="og:description" content={description ?? defaultDescription} />
+		<meta property="og:image" content="/social-image.png" />
 
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
-		<meta property="twitter:domain" content="nikola.fluidinterfaces.com" />
-		<meta property="twitter:url" content="https://nikola.fluidinterfaces.com/" />
-		<meta name="twitter:title" content={defaultTitle} />
-		<meta name="twitter:description" content={defaultDescription} />
-		<meta name="twitter:image" content="/social-image.jpg" />
+		<meta property="twitter:domain" content="lamichhanerabin.com.np" />
+		<meta property="twitter:url" content={PERSONAL_INFO.contact.website} />
+		<meta name="twitter:title" content={title ?? defaultTitle} />
+		<meta name="twitter:description" content={description ?? defaultDescription} />
+		<meta name="twitter:image" content="/social-image.png" />
 
 		<Font cssVariable="--font-geist" preload />
 		<ClientRouter />

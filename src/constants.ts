@@ -1,30 +1,21 @@
 export const PERSONAL_INFO = {
   name: "Rabin Lamichhane",
-  title: "Computer Engineer & Full-Stack Developer",
-  shortBio: "I might sound a little crazy but I'm someone who has fallen in love with tech. I don't tie myself to a single tech stack — I build whatever the f#ck I want to build.",
-  location: "Bharatpur, Nepal",
-  
+  title: "Programmer, Developer & Web Enthusiast",
+  shortBio: "I might sound a little crazy but I am someone who has fallen in love with tech. I build whatever the f#ck I want to build.",
+  location: "Lalitpur, Nepal",
+
   contact: {
     email: "evod599@gmail.com",
-    linkedin: "https://www.linkedin.com/in/rabinlc01",
-    phone: "+977-9800000000", // You can update with real number
-    website: "https://rabinlc.dev",
-    github: "https://github.com/rabinlc",
+    alternateEmail: "rabin@ieee.org",
+    linkedin: "https://www.linkedin.com/in/rabinlc01/",
+    phone: "", // you can fill this later if you want
+    website: "https://lamichhanerabin.com.np",
+    github: "https://github.com/EV-OD",
   },
-  
-  summary: "As a full-stack web developer with proficiency in Python, JavaScript, Node.js, TypeScript, and frameworks like Next.js and React.js, I have extensive experience building responsive websites that meet client needs. Currently pursuing my Bachelor's in Computer Engineering at Pulchowk Campus, I am driven by a passion to leverage my skills for innovation and quality solutions.",
-  
+
+  summary: "I might sound a little crazy, but I’m someone who’s fallen in love with tech in all its forms. I’m proficient in web development, have built my own microprocessor designs, and even created a digital logic simulator from scratch. Whether it’s coding interactive 3D experiences or low-level hardware projects, I build whatever the f#ck I want to build.",
+
   experience: [
-    {
-      title: "Developer",
-      company: "Sevenx Innovations",
-      duration: "July 2024 – Present (1 year 1 month)"
-    },
-    {
-      title: "Chief Executive Officer",
-      company: "Sevenx Innovations", 
-      duration: "November 2024 – Present (9 months)"
-    },
     {
       title: "Web Developer",
       company: "Self-employed",
@@ -41,71 +32,58 @@ export const PERSONAL_INFO = {
       duration: "January 2025 – Present (7 months)"
     },
     {
-      title: "Developer",
-      company: "seven x innovation",
-      duration: "March 2024 – Present (1 year 5 months)"
-    },
-    {
       title: "President",
       company: "Developers",
       duration: "September 2023 – Present (1 year 11 months)"
     }
   ],
-  
+
   skills: {
-    frontend: ["React.js", "Next.js", "JavaScript", "TypeScript"],
+    frontend: ["React", "JavaScript", "Next.js", "Svelte", "Three.js", "HTML", "CSS"],
     backend: ["Node.js", "Python"],
-    other: ["Website Administration", "CRM systems"]
+    other: ["3D", "Digital Logic", "Verilog", "Chip Design", "C++/C", "Qt", "QML"]
   },
 
   projects: [
     {
-      title: "Portfolio Website",
-      description: "Modern portfolio website with glassmorphic design",
-      technologies: ["TypeScript", "React.js", "Astro", "Tailwind CSS"],
+      title: "Project One",
+      description: "Short description of what this project does.",
+      technologies: ["React", "JavaScript", "Next.js"],
       category: "Web Development",
-      status: "Completed"
+      status: "Completed",
+      imageUrl: "https://placehold.co/600x400"
     },
     {
-      title: "E-commerce Platform",
-      description: "Full-stack e-commerce solution with payment integration",
-      technologies: ["Next.js", "Node.js", "JavaScript", "MongoDB"],
-      category: "Web Development",
-      status: "In Progress"
-    },
-    {
-      title: "Task Management App",
-      description: "Real-time collaborative task management application",
-      technologies: ["React.js", "Node.js", "TypeScript", "Socket.io"],
-      category: "Web Application",
-      status: "Completed"
-    },
-    {
-      title: "Data Analytics Dashboard",
-      description: "Interactive dashboard for data visualization and analytics",
-      technologies: ["Python", "Django", "JavaScript", "Chart.js"],
-      category: "Data Science",
-      status: "Completed"
-    },
-    {
-      title: "Mobile App Backend",
-      description: "RESTful API backend for mobile application",
-      technologies: ["Node.js", "Express.js", "MongoDB", "TypeScript"],
+      title: "Project Two",
+      description: "Another project description goes here.",
+      technologies: ["Node.js", "Python"],
       category: "Backend Development",
-      status: "Completed"
+      status: "In Progress",
+      imageUrl: "https://placehold.co/600x400"
+    },
+    {
+      title: "Project Three",
+      description: "Yet another cool project.",
+      technologies: ["3D", "Digital Logic", "Verilog"],
+      category: "Hardware Design",
+      status: "Completed",
+      imageUrl: "https://placehold.co/600x400"
     }
   ],
-  
+
   education: {
-    degree: "Bachelor of Computer Engineering",
-    institution: "Tribhuvan University, IOE, Pulchowk Campus"
+    degree: "Bachelor of Engineering (Computer)",
+    institution: "Tribhuvan University, IOE, Pulchowk Campus",
+    status: "Ongoing"
   },
-  
+
   certifications: ["NASA International Space Apps Challenge"],
-  
+
   funFacts: [
-    "Big fan of sci-fi and cyberpunk themes",
-    "Love tinkering with hardware, low-level systems, and trying wild tech ideas"
+    "I love reading manhwa",
+    "Making 3D designs",
+    "Love tinkering with hardware",
+    "Cycling"
   ]
 } as const;
 
