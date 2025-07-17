@@ -5,6 +5,7 @@ import WarpBackground from "../components/warp-background";
 import AvailableForWork from "../components/available.astro";
 import Search from "../components/search";
 import profileImage from "../assets/me.jpg";
+import GlassEffect from "../components/GlassEffectV1.jsx";
 
 const { title, description } = Astro.props;
 
@@ -231,6 +232,7 @@ const pathname = Astro.url.pathname;
 
 	<!-- Search Component -->
 	<Search client:load />
+	<GlassEffect client:load />
 </RootLayout>
 
 <script>
