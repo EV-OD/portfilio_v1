@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.3.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.2.0...v2.3.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* remove unused '@astrojs/cloudflare' dependency from pnpm-lock.yaml ([9d5a26d](https://github.com-evod/EV-OD/portfilio_v1/commit/9d5a26d3d90a1277c5a730b3ec94b7d4f6291171))
+
 ## [2.2.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.1.0...v2.2.0) (2025-07-18)
 
 
