@@ -3,6 +3,12 @@ import CPU from "./assets/port_assets/4bit_cpu/img.jpeg"
 import Shaper from "./assets/port_assets/shaper/img.png"
 import Digisim from "./assets/port_assets/DigiSim/img.jpeg"
 import Celes from "./assets/port_assets/Celestial-Odyssey/img.png"
+import Acss from "./assets/port_assets/acss/img.jpeg"
+import Wcons from "./assets/port_assets/Custom-terminal/img.jpeg"
+import NyayaPrep from "./assets/port_assets/EntrancePrepWeb/img.png"
+import Graphzier from "./assets/port_assets/Graphzier/img.jpeg"
+import LicenseExam from "./assets/port_assets/license_exam/img.png"
+import PatternGen from "./assets/port_assets/pattern_generator/img.jpeg"
 
 
 export const PERSONAL_INFO = {
@@ -90,7 +96,70 @@ export const PERSONAL_INFO = {
       imageUrl: Celes.src,
       githubUrl: "https://github.com/clerisy47/Celestial-Odyssey"
     },
-
+    {
+      title: "Acss",
+      description: "Acss is a CSS Engine that allows you to write and compile ACSS code for styling your web projects. It supports if-else logic and browser runtime events, enabling dynamic and interactive styles.Syntax includes inline/external statehooks, CSS variables, calculations, and runtime event handling.",
+      technologies: ["Node.js", "HTML", "CSS", "JavaScript"],
+      category: "Engine & Library",
+      status: "Completed",
+      githubUrl: "https://github.com/EV-OD/acss",
+      imageUrl: Acss.src,
+      websiteUrl: "https://ev-od.github.io/acsspage/",
+    },
+    {
+      title: "Wcons - Custom Command-Line Interface",
+      description: "A customizable command-line interface (CLI) with extensible commands and modules. Features include a customizable prompt, extensible command system, nested commands/arguments, module system, built-in networking/system commands, and cross-platform support.",
+      technologies: ["Python"],
+      category: "CLI Tool",
+      status: "Completed",
+      githubUrl: "https://github.com/EV-OD/wcons",
+      imageUrl: Wcons.src
+    },
+    {
+      title: "NyayaPrep - BALLB MCQ Preparation",
+      description: "This is a Next.js application designed for BALLB (Bachelor of Arts, Bachelor of Laws) preparation classes, providing an MCQ system with features like real-time translation, user/admin roles, and subscription management.",
+      technologies: [
+        "Next.js",
+        "React",
+        "TypeScript",
+        "Tailwind CSS",
+        "Firebase",
+      ],
+      category: "Education Platform",
+      status: "Ongoing",
+      githubUrl: "https://github.com/EV-OD/nyayaprep",
+      imageUrl: NyayaPrep.src,
+      websiteUrl: "https://nyayaprep.vercel.app/",
+    },
+    {
+      title: "Nepal Driving License Exam Practice",
+      description: "A free and user-friendly web application to help users prepare for the official driving license exam in Nepal. Practice, learn, and succeed with real-style mock tests, detailed guides, and essential resources — all in one place.",
+      technologies: ["React", "Next.js", "TypeScript", "Tailwind CSS"],
+      category: "Education Platform",
+      status: "Ongoing",
+      imageUrl: LicenseExam.src,
+      githubUrl: "https://github.com/EV-OD/License-test",
+      websiteUrl: "https://license-test.vercel.app/",
+    },
+    {
+      title: "Graph Plotter in C",
+      description: "This is a simple Graph Plotter implemented in C that allows you to visualize mathematical functions on a graph. The plotter uses the Cairo graphics library to render the graph on the screen.",
+      technologies: ["C", "Cairo Graphics"],
+      category: "Graph Plotting Tool",
+      status: "Completed",
+      githubUrl: "https://github.com/bct2079/graphzier",
+      imageUrl: Graphzier.src,
+    },
+    {
+      title: "Pattern Generator",
+      description: "A web-based pattern generator that allows users to create and customize various patterns. It provides an intuitive interface for designing patterns using different shapes, colors, and styles.",
+      technologies: ["React", "TypeScript", "Tailwind CSS"],
+      category: "Web-based Pattern Generator",
+      status: "Completed",
+      imageUrl: PatternGen.src,
+      githubUrl: "https://github.com/EV-OD/react-pattern-generator",
+      websiteUrl: "https://react-pattern-generator.netlify.app/"
+    }
   ],
 
   education: {
