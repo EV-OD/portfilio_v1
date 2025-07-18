@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.5.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.4.0...v2.5.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* adjust scale reset timing in GlassEffect component ([811d4ec](https://github.com-evod/EV-OD/portfilio_v1/commit/811d4ec5972cc6d2457e0d2d86d06db2dc7a0cd6))
+
 ## [2.4.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.3.0...v2.4.0) (2025-07-18)
 
 
