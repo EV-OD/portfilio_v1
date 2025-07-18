@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.3](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.2...v0.0.3) (2025-07-18)
+
+
+### Features
+
+* add new project images and update project details in constants ([44e8bf2](https://github.com-evod/EV-OD/portfilio_v1/commit/44e8bf2a08afd1279336e179c41ad2eb69dfb609))
+* added liquid glass mouse ([a1b9208](https://github.com-evod/EV-OD/portfilio_v1/commit/a1b92084a53c789e361d6c88d03d29ea5b100859))
+* made a project popup ([4fa6243](https://github.com-evod/EV-OD/portfilio_v1/commit/4fa6243d37710de74c267eda2667fc0b75523574))
+
+
+### Bug Fixes
+
+* ensure project cards are full height and flexibly styled ([b8d36c9](https://github.com-evod/EV-OD/portfilio_v1/commit/b8d36c93c8a9d74465f5073b0dc94dfe9fdd2f7f))
+
 ### 0.0.2 (2025-07-17)
 
 
