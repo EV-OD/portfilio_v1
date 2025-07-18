@@ -2,10 +2,12 @@ import { useState, useEffect, useRef } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { searchGenerator } from "../lib/searchArchitecture.js";
 import TechIcon from "./TechIcon.tsx";
+import { FaProjectDiagram } from "react-icons/fa";
 
 interface SearchResult {
   type: string;
   title: string;
+  iconType: string;
   subtitle?: string;
   content: string;
   icon: string;
@@ -110,6 +112,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
           case 'programming_language':
             return {
               type: result.type,
+              iconType: data.name,
               title: data.name,
               subtitle: data.description,
               content: `${data.projectsCount || 0} projects • ${data.yearsOfExperience || 0} years experience`,
@@ -122,6 +125,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.name,
+              iconType: "skill",
               subtitle: data.category || 'Skill',
               content: data.description,
               icon: data.icon,
@@ -133,6 +137,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.title,
+              iconType: "project",
               subtitle: `${data.category} • ${data.status}`,
               content: data.technologies?.join(', ') || '',
               icon: data.icon,
@@ -149,6 +154,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.title,
+              iconType: "experience",
               subtitle: data.company,
               content: data.duration,
               icon: data.icon,
@@ -160,6 +166,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.name || 'Contact',
+              iconType: "contact",
               subtitle: data.email || data.description,
               content: data.location || 'Get in touch',
               icon: data.icon,
@@ -172,6 +179,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.name || 'Education',
+              iconType: "education",
               subtitle: data.institution || '',
               content: data.degree || data.description || '',
               icon: data.icon,
@@ -182,6 +190,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
             return {
               type: result.type,
               title: data.name || data.title || 'Unknown',
+              iconType: result.type,
               subtitle: data.description || data.subtitle || '',
               content: data.category || data.content || '',
               icon: data.icon || '📄',
@@ -260,11 +269,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                     onClick={() => handleResultClick(result)}
                   >
                     <div className="flex-shrink-0 w-10 h-10 bg-white/10 backdrop-blur-sm rounded-lg flex items-center justify-center border border-white/20">
-                      {result.type === 'programming_language' ? (
-                        <TechIcon technology={result.title} className="w-6 h-6" />
-                      ) : (
-                        <span className="text-lg">{result.icon}</span>
-                      )}
+                        <TechIcon technology={result.iconType} className="w-6 h-6" />
                     </div>
                     <div className="flex-1 min-w-0">
                       <div className="font-medium text-white truncate">{result.title}</div>

@@ -58,7 +58,8 @@ import {
   FaBriefcase,
   FaRocket,
   FaLightbulb,
-  FaHeart
+  FaHeart,
+  FaProjectDiagram
 } from 'react-icons/fa';
 
 // Technology icon mapping
@@ -142,7 +143,7 @@ const TechIcons = {
   fact: FaHeart,
   
   // Default fallback
-  Default: FaCode
+  Default: FaCode,
 };
 
 interface TechIconProps {

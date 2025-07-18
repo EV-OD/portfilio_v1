@@ -534,7 +534,7 @@ export class SearchResultGenerator {
           fuzzyScore: maxScore,
           data: {
             ...project,
-            icon: 'FaNodeJs',
+            icon: 'FaProjectDiagram',
             matchedTechnologies: project.technologies.filter((tech, index) =>
               techScores[index] > 0.5
             )
@@ -764,7 +764,7 @@ export class SearchResultGenerator {
           priority: 3,
           data: {
             ...project,
-            icon: 'FaNodeJs',
+            icon: 'FaProjectDiagram',
             matchedTechnologies: project.technologies.filter(tech =>
               tech.toLowerCase().includes(query) || query.includes(tech.toLowerCase())
             )

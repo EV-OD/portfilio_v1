@@ -98,7 +98,7 @@ export const PERSONAL_INFO = {
     {
       title: "Shaper",
       description: "Shaper is a web-based application designed for creating and manipulating geometry nodes. It provides an intuitive and interactive interface for users to design complex geometric shapes and structures directly in their web browser. Built using React and Three.js.",
-      technologies: ["React", "Three.js", "Node.js", "Python"],
+      technologies: ["React", "Three.js", "Node.js"],
       category: "Web-based 3D Geometry Editor",
       status: "Completed",
       imageUrl: Shaper.src,
