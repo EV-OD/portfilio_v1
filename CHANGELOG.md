@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [2.5.1](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.5.0...v2.5.1) (2025-07-18)
+
+
+### Features
+
+* enhance ProjectResult and search components with additional properties for improved project details ([c077b34](https://github.com-evod/EV-OD/portfilio_v1/commit/c077b34b3cd625a851278ce8d6efa0f1ff9f62c4))
+
+
+### Bug Fixes
+
+* add server configuration to allow access from all hosts ([b4b9759](https://github.com-evod/EV-OD/portfilio_v1/commit/b4b9759011e858f97193e174de28f481b414bfba))
+* update class names for layout consistency in GlassEffect and external-link components ([f1ee437](https://github.com-evod/EV-OD/portfilio_v1/commit/f1ee43707131046c2d930fd7602e627b2355a315))
+
 ## [2.5.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.4.0...v2.5.0) (2025-07-18)
 
 
