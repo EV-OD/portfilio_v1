@@ -215,47 +215,71 @@ export default function SearchResultDisplay({ projects = [], contact = {} }) {
       const github = contact.github || "";
       const linkedin = contact.linkedin || "";
       return (
-        <div className="space-y-4">
-          <div className="bg-white/8 backdrop-blur-md rounded-xl p-4 border border-white/15 shadow-lg">
-            <div className="text-xs text-white/50 mb-1 uppercase tracking-wide font-medium">Contact Information</div>
-            <div className="space-y-2">
-              <div className="flex items-center gap-2">
-                <span className="font-medium text-white/80">Email:</span>
-                <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(email, 'Email copied!')}>{email}</span>
-                <button onClick={() => openEmail(email)} className="ml-2 text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
-              </div>
-              {alternateEmail && (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-white/80">Alt Email:</span>
-                  <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(alternateEmail, 'Email copied!')}>{alternateEmail}</span>
-                  <button onClick={() => openEmail(alternateEmail)} className="ml-2 text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
+        <div className="flex justify-start">
+          <div className="bg-white/8 backdrop-blur-md rounded-2xl p-6 border border-white/15 shadow-xl w-full max-w-lg mr-auto">
+            <div className="text-xs text-white/60 mb-4 uppercase tracking-widest font-semibold">Contact Information</div>
+            <ul className="space-y-4">
+              <li className="flex items-start gap-4">
+                <span className="text-xl text-blue-300"><AiIcons.AiOutlineMail /></span>
+                <div>
+                  <div className="text-white/80 font-semibold">Email</div>
+                  <div className="flex items-center gap-2 mt-1">
+                    <span className="text-white/90 font-mono text-base bg-white/5 px-2 py-1 rounded border border-white/10 cursor-pointer" onClick={() => copyToClipboard(email, 'Email copied!')}>{email}</span>
+                    <button onClick={() => openEmail(email)} className="text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
+                  </div>
                 </div>
+              </li>
+              {alternateEmail && (
+                <li className="flex items-start gap-4">
+                  <span className="text-xl text-blue-300"><AiIcons.AiOutlineMail /></span>
+                  <div>
+                    <div className="text-white/80 font-semibold">Alternate Email</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-white/90 font-mono text-base bg-white/5 px-2 py-1 rounded border border-white/10 cursor-pointer" onClick={() => copyToClipboard(alternateEmail, 'Email copied!')}>{alternateEmail}</span>
+                      <button onClick={() => openEmail(alternateEmail)} className="text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
+                    </div>
+                  </div>
+                </li>
               )}
               {phone && (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-white/80">Phone:</span>
-                  <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(phone, 'Phone copied!')}>{phone}</span>
-                </div>
+                <li className="flex items-start gap-4">
+                  <span className="text-xl text-green-300"><AiIcons.AiOutlinePhone /></span>
+                  <div>
+                    <div className="text-white/80 font-semibold">Phone</div>
+                    <div className="flex items-center gap-2 mt-1">
+                      <span className="text-white/90 font-mono text-base bg-white/5 px-2 py-1 rounded border border-white/10 cursor-pointer" onClick={() => copyToClipboard(phone, 'Phone copied!')}>{phone}</span>
+                    </div>
+                  </div>
+                </li>
               )}
               {website && (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-white/80">Website:</span>
-                  <a href={website} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{website}</a>
-                </div>
+                <li className="flex items-start gap-4">
+                  <span className="text-xl text-yellow-300"><AiIcons.AiOutlineGlobal /></span>
+                  <div>
+                    <div className="text-white/80 font-semibold">Website</div>
+                    <a href={website} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 mt-1 inline-block">{website}</a>
+                  </div>
+                </li>
               )}
               {github && (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-white/80">GitHub:</span>
-                  <a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{github}</a>
-                </div>
+                <li className="flex items-start gap-4">
+                  <span className="text-xl text-gray-300"><FaIcons.FaGithub /></span>
+                  <div>
+                    <div className="text-white/80 font-semibold">GitHub</div>
+                    <a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 mt-1 inline-block">{github}</a>
+                  </div>
+                </li>
               )}
               {linkedin && (
-                <div className="flex items-center gap-2">
-                  <span className="font-medium text-white/80">LinkedIn:</span>
-                  <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{linkedin}</a>
-                </div>
+                <li className="flex items-start gap-4">
+                  <span className="text-xl text-blue-400"><FaIcons.FaLinkedin /></span>
+                  <div>
+                    <div className="text-white/80 font-semibold">LinkedIn</div>
+                    <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 mt-1 inline-block">{linkedin}</a>
+                  </div>
+                </li>
               )}
-            </div>
+            </ul>
           </div>
         </div>
       );
@@ -327,7 +351,7 @@ export default function SearchResultDisplay({ projects = [], contact = {} }) {
         </div>
       </div>
       {/* Main Content */}
-      <div className="max-w-6xl mx-auto px-4 py-6">
+      <div className="max-w-6xl px-4 py-6">
         <div className="rounded-2xl p-6">
           <div>
             {/* <div className="w-16 h-16 bg-white/8 backdrop-blur-md rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-white/15 shadow-lg">
