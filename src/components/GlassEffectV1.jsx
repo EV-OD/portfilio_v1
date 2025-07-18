@@ -62,7 +62,7 @@ export default function GlassEffect() {
         transition:
           "transform 0.35s cubic-bezier(.4,0,.2,1), background 0.35s cubic-bezier(.4,0,.2,1), box-shadow 0.35s cubic-bezier(.4,0,.2,1)",
         background,
-        backdropFilter: "saturate(100%) hue-rotate(90deg) invert(100%)",
+        backdropFilter: "saturate(100%) hue-rotate(180deg) invert(100%)",
         // boxShadow,
       }}
     >
