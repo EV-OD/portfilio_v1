@@ -1,4 +1,5 @@
 ---
+import ProjectLinks from "./ProjectLinks.jsx";
 ---
 
 <div id="project-popup" class="fixed inset-0 bg-zinc-900/50 backdrop-blur-sm flex items-center justify-center z-50 opacity-0 pointer-events-none transition-opacity duration-300 p-4">
@@ -29,13 +30,15 @@
                         <div id="popup-technologies" class="flex flex-wrap gap-2"></div>
                     </div>
                 </div>
-                <div id="popup-links" class="flex gap-4 mt-6"></div>
+                <div id="popup-links-container"></div>
             </div>
         </div>
     </div>
 </div>
 
 <script>
+    import { renderProjectLinks } from '../utils/renderProjectLinks.jsx';
+
     const projectCards = document.querySelectorAll('.project-card');
     const projectPopup = document.getElementById('project-popup');
     const closePopupBtn = document.getElementById('close-popup');
@@ -46,7 +49,7 @@
     const popupDescription = document.getElementById('popup-description');
     const popupCategory = document.getElementById('popup-category');
     const popupTechnologies = document.getElementById('popup-technologies');
-    const popupLinks = document.getElementById('popup-links');
+    const popupLinksContainer = document.getElementById('popup-links-container');
 
     projectCards.forEach(card => {
         card.addEventListener('click', () => {
@@ -66,23 +69,7 @@
                 popupTechnologies.appendChild(span);
             });
 
-            popupLinks.innerHTML = '';
-            if (project.githubUrl) {
-                const githubLink = document.createElement('a');
-                githubLink.href = project.githubUrl;
-                githubLink.target = '_blank';
-                githubLink.className = 'bg-white/10 backdrop-blur-md hover:bg-white/15 text-white px-6 py-3 rounded-xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105';
-                githubLink.textContent = 'GitHub';
-                popupLinks.appendChild(githubLink);
-            }
-            if (project.liveUrl) {
-                const liveLink = document.createElement('a');
-                liveLink.href = project.liveUrl;
-                liveLink.target = '_blank';
-                liveLink.className = 'bg-zinc-800/60 hover:bg-zinc-700/60 text-zinc-300 px-6 py-3 rounded-xl transition-all duration-200 border border-zinc-700/50 hover:border-zinc-600/50';
-                liveLink.textContent = 'Live Demo';
-                popupLinks.appendChild(liveLink);
-            }
+            renderProjectLinks(project, popupLinksContainer);
 
             projectPopup.classList.remove('opacity-0', 'pointer-events-none');
             projectPopup.querySelector('div').classList.remove('scale-95');

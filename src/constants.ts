@@ -1,14 +1,38 @@
-import { pre } from "motion/react-client";
+import { image, pre } from "motion/react-client";
 import CPU from "./assets/port_assets/4bit_cpu/img.jpeg"
+import CPU1 from "./assets/port_assets/4bit_cpu/img1.jpeg"
+import CPU2 from "./assets/port_assets/4bit_cpu/img2.jpeg"
+
+
 import Shaper from "./assets/port_assets/shaper/img.png"
+import Shaper1 from "./assets/port_assets/shaper/img1.png"
+
+
 import Digisim from "./assets/port_assets/DigiSim/img.jpeg"
+import Digisim1 from "./assets/port_assets/DigiSim/img1.jpeg"
+
 import Celes from "./assets/port_assets/Celestial-Odyssey/img.png"
+
+
 import Acss from "./assets/port_assets/acss/img.jpeg"
+import Acss1 from "./assets/port_assets/acss/img1.jpeg"
+
 import Wcons from "./assets/port_assets/Custom-terminal/img.jpeg"
+import Wcons1 from "./assets/port_assets/Custom-terminal/img1.jpeg"
+
 import NyayaPrep from "./assets/port_assets/EntrancePrepWeb/img.png"
+import NyayaPrep1 from "./assets/port_assets/EntrancePrepWeb/img1.png"
+import NyayaPrep2 from "./assets/port_assets/EntrancePrepWeb/img2.png"
+import NyayaPrep3 from "./assets/port_assets/EntrancePrepWeb/img3.png"
+
 import Graphzier from "./assets/port_assets/Graphzier/img.jpeg"
+
+
 import LicenseExam from "./assets/port_assets/license_exam/img.png"
+import LicenseExam1 from "./assets/port_assets/license_exam/img1.png"
+
 import PatternGen from "./assets/port_assets/pattern_generator/img.jpeg"
+import PatternGen1 from "./assets/port_assets/pattern_generator/img1.jpeg"
 
 
 export const PERSONAL_INFO = {
@@ -66,6 +90,10 @@ export const PERSONAL_INFO = {
       status: "Completed",
       imageUrl: CPU.src,
       githubUrl: "https://github.com/EV-OD/4bit_computer",
+      imageGallery: [
+        CPU1.src,
+        CPU2.src
+      ]
     },
     {
       title: "Shaper",
@@ -75,7 +103,10 @@ export const PERSONAL_INFO = {
       status: "Completed",
       imageUrl: Shaper.src,
       githubUrl: "https://github.com/EV-OD/shaper",
-      previewLink: "https://ev-od.github.io/shaper/"
+      liveUrl: "https://ev-od.github.io/shaper/",
+      imageGallery: [
+        Shaper1.src
+      ]
     },
     {
       title: "Digisim - Digital Logic Simulator",
@@ -85,7 +116,10 @@ export const PERSONAL_INFO = {
       status: "Completed",
       imageUrl: Digisim.src,
       githubUrl: "https://github.com/EV-OD/Digital-Logic",
-      liveUrl: "https://ev-od.github.io/DigiSem-WebSite/"
+      website: "https://ev-od.github.io/DigiSem-WebSite/",
+      imageGallery: [
+        Digisim1.src
+      ]
     },
     {
       title: "Celestial Odyssey",
@@ -105,6 +139,9 @@ export const PERSONAL_INFO = {
       githubUrl: "https://github.com/EV-OD/acss",
       imageUrl: Acss.src,
       websiteUrl: "https://ev-od.github.io/acsspage/",
+      imageGallery: [
+        Acss1.src
+      ]
     },
     {
       title: "Wcons - Custom Command-Line Interface",
@@ -113,7 +150,10 @@ export const PERSONAL_INFO = {
       category: "CLI Tool",
       status: "Completed",
       githubUrl: "https://github.com/EV-OD/wcons",
-      imageUrl: Wcons.src
+      imageUrl: Wcons.src,
+      imageGallery: [
+        Wcons1.src
+      ]
     },
     {
       title: "NyayaPrep - BALLB MCQ Preparation",
@@ -130,6 +170,11 @@ export const PERSONAL_INFO = {
       githubUrl: "https://github.com/EV-OD/nyayaprep",
       imageUrl: NyayaPrep.src,
       websiteUrl: "https://nyayaprep.vercel.app/",
+      imageGallery: [
+        NyayaPrep1.src,
+        NyayaPrep2.src,
+        NyayaPrep3.src
+      ]
     },
     {
       title: "Nepal Driving License Exam Practice",
@@ -140,6 +185,9 @@ export const PERSONAL_INFO = {
       imageUrl: LicenseExam.src,
       githubUrl: "https://github.com/EV-OD/License-test",
       websiteUrl: "https://license-test.vercel.app/",
+      imageGallery: [
+        LicenseExam1.src
+      ]
     },
     {
       title: "Graph Plotter in C",
@@ -158,7 +206,10 @@ export const PERSONAL_INFO = {
       status: "Completed",
       imageUrl: PatternGen.src,
       githubUrl: "https://github.com/EV-OD/react-pattern-generator",
-      websiteUrl: "https://react-pattern-generator.netlify.app/"
+      websiteUrl: "https://react-pattern-generator.netlify.app/",
+      imageGallery: [
+        PatternGen1.src
+      ]
     }
   ],
 
