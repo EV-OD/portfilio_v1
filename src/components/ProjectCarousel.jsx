@@ -32,7 +32,7 @@ const ProjectCarousel = () => {
       <CarouselContent>
         {images.map((image, index) => (
           <CarouselItem key={index}>
-            <img src={image} alt={`${title} - image ${index + 1}`} className='rounded-xl object-cover w-full h-auto aspect-[4/3]' />
+            <img src={image} alt={`${title} - image ${index + 1}`} className='rounded-xl object-contain w-full h-auto aspect-[4/3]' />
           </CarouselItem>
         ))}
       </CarouselContent>
