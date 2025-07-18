@@ -158,7 +158,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               title: data.name || 'Contact',
               subtitle: data.email || data.description,
               content: data.location || 'Get in touch',
-              icon: data.icon || '📧',
+              icon: '📧',
               technologies: [],
               category: 'Contact'
             };

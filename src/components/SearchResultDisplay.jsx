@@ -1,4 +1,19 @@
 import React, { useEffect, useState } from "react";
+import * as FaIcons from 'react-icons/fa';
+import * as SiIcons from 'react-icons/si';
+import * as MdIcons from 'react-icons/md';
+import * as GiIcons from 'react-icons/gi';
+import * as AiIcons from 'react-icons/ai';
+// Helper: Map icon name string to icon component
+function getIconComponent(iconName, iconProps = {}) {
+  if (!iconName) return null;
+  if (iconName.startsWith('Fa') && FaIcons[iconName]) return React.createElement(FaIcons[iconName], iconProps);
+  if (iconName.startsWith('Si') && SiIcons[iconName]) return React.createElement(SiIcons[iconName], iconProps);
+  if (iconName.startsWith('Md') && MdIcons[iconName]) return React.createElement(MdIcons[iconName], iconProps);
+  if (iconName.startsWith('Gi') && GiIcons[iconName]) return React.createElement(GiIcons[iconName], iconProps);
+  if (iconName.startsWith('Ai') && AiIcons[iconName]) return React.createElement(AiIcons[iconName], iconProps);
+  return null;
+}
 
 // Helper: Toast notification
 function showToast(message) {
@@ -265,7 +280,9 @@ export default function SearchResultDisplay({ projects = [] }) {
       {/* Result Header */}
       <div className="mb-6 pb-4 border-b border-zinc-700">
         <div className="flex items-center gap-4 mb-3">
-          <div className="text-4xl text-zinc-100">{result.icon}</div>
+          <div className="text-4xl text-zinc-100">
+            {typeof result.icon === 'string' ? getIconComponent(result.icon, { size: 40 }) : result.icon}
+          </div>
           <div>
             <h1 className="text-2xl font-light text-white/95 mb-1 tracking-tight truncate">{result.title}</h1>
             {result.subtitle && <p className="text-white/60 text-sm font-normal truncate">{result.subtitle}</p>}
@@ -281,7 +298,7 @@ export default function SearchResultDisplay({ projects = [] }) {
         <div className="bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10 shadow-xl">
           <div className="text-center">
             <div className="w-16 h-16 bg-white/8 backdrop-blur-md rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-white/15 shadow-lg">
-              {result.icon}
+              {typeof result.icon === 'string' ? getIconComponent(result.icon, { size: 36 }) : result.icon}
             </div>
             <h2 className="text-xl font-light text-white/95 mb-2 tracking-tight">{result.title}</h2>
             {result.subtitle && <p className="text-white/60 mb-4 text-sm font-normal leading-relaxed">{result.subtitle}</p>}

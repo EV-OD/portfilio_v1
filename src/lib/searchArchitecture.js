@@ -158,7 +158,7 @@ export const RESULT_TYPES = {
 const PROGRAMMING_LANGUAGES = {
   'python': {
     name: 'Python',
-    icon: '🐍', // Using Python's snake emoji as it's the most recognizable
+    icon: 'FaPython',
     description: 'Versatile programming language for web development, data science, and automation',
     category: 'Backend Development',
     libraries: [
@@ -184,7 +184,7 @@ const PROGRAMMING_LANGUAGES = {
   },
   'javascript': {
     name: 'JavaScript',
-    icon: '⚡',
+    icon: 'SiJavascript',
     description: 'Dynamic programming language for web development and beyond',
     category: 'Frontend/Backend Development',
     libraries: [
@@ -207,7 +207,7 @@ const PROGRAMMING_LANGUAGES = {
   },
   'typescript': {
     name: 'TypeScript',
-    icon: '📘',
+    icon: 'SiTypescript',
     description: 'Typed superset of JavaScript for scalable applications',
     category: 'Frontend/Backend Development',
     libraries: [
@@ -228,7 +228,7 @@ const PROGRAMMING_LANGUAGES = {
   },
   'react': {
     name: 'React',
-    icon: '⚛️',
+    icon: 'SiReact',
     description: 'Component-based JavaScript library for building user interfaces',
     category: 'Frontend Development',
     libraries: [
@@ -498,7 +498,7 @@ export class SearchResultGenerator {
           fuzzyScore: 0.95 - (index * 0.1), // Slightly lower score for each subsequent project
           data: {
             ...project,
-            icon: '🚀',
+            icon: 'FaNodeJs',
             matchedTechnologies: project.technologies
           }
         });
@@ -534,7 +534,7 @@ export class SearchResultGenerator {
           fuzzyScore: maxScore,
           data: {
             ...project,
-            icon: '🚀',
+            icon: 'FaNodeJs',
             matchedTechnologies: project.technologies.filter((tech, index) =>
               techScores[index] > 0.5
             )
@@ -564,7 +564,7 @@ export class SearchResultGenerator {
           fuzzyScore: maxScore,
           data: {
             ...exp,
-            icon: '💼',
+            icon: 'FaTools',
             description: `${exp.title} at ${exp.company}`
           }
         });
@@ -590,7 +590,7 @@ export class SearchResultGenerator {
         fuzzyScore: maxScore,
         data: {
           name: 'Contact Information',
-          icon: '📧',
+          icon: 'MdEmail',
           description: 'Get in touch with me',
           contact: this.personalInfo.contact,
           location: this.personalInfo.location
@@ -616,7 +616,7 @@ export class SearchResultGenerator {
         fuzzyScore: maxScore,
         data: {
           name: 'Education',
-          icon: '🎓',
+          icon: 'GiGraduateCap',
           description: this.personalInfo.education.degree,
           institution: this.personalInfo.education.institution,
           degree: this.personalInfo.education.degree
@@ -642,7 +642,7 @@ export class SearchResultGenerator {
           fuzzyScore: score,
           data: {
             name: cert,
-            icon: '🏆',
+            icon: 'AiOutlineTrophy',
             description: `Certified in ${cert}`,
             category: 'Professional Certification'
           }
@@ -669,7 +669,7 @@ export class SearchResultGenerator {
           fuzzyScore: score,
           data: {
             name: `Fun Fact #${index + 1}`,
-            icon: '🎯',
+            icon: 'GiTargeting',
             description: fact,
             category: 'Personal Interest'
           }
@@ -764,7 +764,7 @@ export class SearchResultGenerator {
           priority: 3,
           data: {
             ...project,
-            icon: '🚀',
+            icon: 'FaNodeJs',
             matchedTechnologies: project.technologies.filter(tech =>
               tech.toLowerCase().includes(query) || query.includes(tech.toLowerCase())
             )
@@ -792,7 +792,7 @@ export class SearchResultGenerator {
           priority: 4,
           data: {
             ...exp,
-            icon: '💼',
+            icon: 'FaTools',
             description: `${exp.title} at ${exp.company}`
           }
         });
@@ -814,7 +814,7 @@ export class SearchResultGenerator {
         priority: 5,
         data: {
           name: 'Contact Information',
-          icon: '📧',
+          icon: 'MdEmail',
           description: 'Get in touch with me',
           contact: this.personalInfo.contact,
           location: this.personalInfo.location
@@ -836,7 +836,7 @@ export class SearchResultGenerator {
         priority: 6,
         data: {
           name: 'Education',
-          icon: '🎓',
+          icon: 'GiGraduateCap',
           description: this.personalInfo.education.degree,
           institution: this.personalInfo.education.institution,
           degree: this.personalInfo.education.degree
@@ -859,7 +859,7 @@ export class SearchResultGenerator {
           priority: 7,
           data: {
             name: cert,
-            icon: '🏆',
+            icon: 'AiOutlineTrophy',
             description: `Certified in ${cert}`,
             category: 'Professional Certification'
           }
@@ -883,7 +883,7 @@ export class SearchResultGenerator {
           priority: 8,
           data: {
             name: `Fun Fact #${index + 1}`,
-            icon: '🎯',
+            icon: 'GiTargeting',
             description: fact,
             category: 'Personal Interest'
           }
