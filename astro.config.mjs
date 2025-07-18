@@ -5,6 +5,8 @@ import { defineConfig, fontProviders } from 'astro/config';
 import tailwindcss from '@tailwindcss/vite';
 import react from '@astrojs/react';
 
+import cloudflare from '@astrojs/cloudflare';
+
 // https://astro.build/config
 export default defineConfig({
   site: 'https://lamichhanerabin.com.np',
@@ -14,6 +16,7 @@ export default defineConfig({
   build: {
     format: 'directory'
   },
+
   vite: {
     plugins: [tailwindcss()],
     resolve: {
@@ -32,5 +35,7 @@ export default defineConfig({
       cssVariable: "--font-geist",
       fallbacks: ["Inter", "sans-serif"],
     }]
-  }
+  },
+
+  adapter: cloudflare()
 });
