@@ -36,6 +36,4 @@ export default defineConfig({
       fallbacks: ["Inter", "sans-serif"],
     }]
   },
-
-  adapter: cloudflare()
 });
