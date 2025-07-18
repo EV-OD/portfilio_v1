@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.4.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.3.0...v2.4.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* remove unused cloudflare integration from astro.config ([cdbd0e4](https://github.com-evod/EV-OD/portfilio_v1/commit/cdbd0e44e79111f8d2c529bc6a87fe7e3400f9b3))
+
 ## [2.3.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.2.0...v2.3.0) (2025-07-18)
 
 
