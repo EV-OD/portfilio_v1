@@ -9,7 +9,8 @@ import GlassEffect from "../components/GlassEffectV1.jsx";
 
 const { title, description } = Astro.props;
 
-const pathname = Astro.url.pathname;
+const raw = Astro.url.pathname;
+const pathname = raw.endsWith('/') && raw !== '/' ? raw.slice(0, -1) : raw;
 ---
 
 <RootLayout title={title} description={description}>
