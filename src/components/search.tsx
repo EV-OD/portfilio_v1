@@ -11,6 +11,12 @@ interface SearchResult {
   icon: string;
   technologies?: string[];
   category?: string;
+  description?: string;
+  status?: string;
+  imageUrl?: string;
+  githubUrl?: string;
+  liveUrl?: string;
+  imageGallery?: string[];
 }
 
 interface SearchProps {
@@ -128,7 +134,13 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               content: data.technologies?.join(', ') || '',
               icon: '🚀',
               technologies: data.technologies || [],
-              category: data.category
+              category: data.category,
+              description: data.description,
+              status: data.status,
+              imageUrl: data.imageUrl,
+              githubUrl: data.githubUrl,
+              liveUrl: data.liveUrl,
+              imageGallery: data.imageGallery,
             };
           case 'experience':
             return {

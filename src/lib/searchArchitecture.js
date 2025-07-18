@@ -1,4 +1,6 @@
+import { FaNodeJs, FaPython, FaTools } from 'react-icons/fa';
 import { PERSONAL_INFO } from '../constants.ts';
+import { SiJavascript, SiNextdotjs, SiReact, SiTypescript } from 'react-icons/si';
 
 /**
  * Search Architecture - Modular system for generating structured search results with fuzzy search
@@ -912,14 +914,14 @@ export class SearchResultGenerator {
 
   getSkillIcon(skill) {
     const iconMap = {
-      'React.js': '⚛️',
-      'Next.js': '▲',
-      'JavaScript': '⚡',
-      'TypeScript': '📘',
-      'Node.js': '🟢',
-      'Python': '🐍'
+      'React.js': SiReact,
+      'Next.js': SiNextdotjs,
+      'JavaScript': SiJavascript,
+      'TypeScript': SiTypescript,
+      'Node.js': FaNodeJs,
+      'Python': FaPython
     };
-    return iconMap[skill] || '🔧';
+    return iconMap[skill] || FaTools;
   }
 }
 
