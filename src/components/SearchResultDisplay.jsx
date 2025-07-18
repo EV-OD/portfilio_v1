@@ -72,7 +72,7 @@ function getRelatedProjects(result, projects = []) {
 }
 
 // Main React Component
-export default function SearchResultDisplay({ projects = [] }) {
+export default function SearchResultDisplay({ projects = [], contact = {} }) {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
@@ -205,26 +205,57 @@ export default function SearchResultDisplay({ projects = [] }) {
       }
     }
     // Contact result
-    if (result.type === "contact" && result.subtitle?.includes("@")) {
+    if (result.type === "contact") {
+      // Import contact info from constants
+      // Fallback: try to get from result if not found
+      const email = contact.email || result.subtitle || "";
+      const alternateEmail = contact.alternateEmail || "";
+      const phone = contact.phone || "";
+      const website = contact.website || "";
+      const github = contact.github || "";
+      const linkedin = contact.linkedin || "";
       return (
         <div className="space-y-4">
           <div className="bg-white/8 backdrop-blur-md rounded-xl p-4 border border-white/15 shadow-lg">
-            <div className="text-xs text-white/50 mb-1 uppercase tracking-wide font-medium">Email Address</div>
-            <div className="text-white/90 font-mono text-sm bg-white/5 px-3 py-2 rounded-lg border border-white/10">{result.subtitle}</div>
-          </div>
-          <div className="grid grid-cols-1 gap-2">
-            <button onClick={() => openEmail(result.subtitle)} className="group bg-white/10 backdrop-blur-md hover:bg-white/15 text-white/90 px-4 py-3 rounded-xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm">✉️</span>
-                <span className="font-medium text-sm">Send Email</span>
+            <div className="text-xs text-white/50 mb-1 uppercase tracking-wide font-medium">Contact Information</div>
+            <div className="space-y-2">
+              <div className="flex items-center gap-2">
+                <span className="font-medium text-white/80">Email:</span>
+                <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(email, 'Email copied!')}>{email}</span>
+                <button onClick={() => openEmail(email)} className="ml-2 text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
               </div>
-            </button>
-            <button onClick={() => copyToClipboard(result.subtitle, "Email copied!")} className="group bg-white/8 backdrop-blur-md hover:bg-white/12 text-white/80 px-4 py-3 rounded-xl transition-all duration-200 border border-white/10 hover:border-white/20 shadow-lg hover:shadow-xl hover:scale-105">
-              <div className="flex items-center justify-center gap-2">
-                <span className="text-sm">📋</span>
-                <span className="font-medium text-sm">Copy Email</span>
-              </div>
-            </button>
+              {alternateEmail && (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-white/80">Alt Email:</span>
+                  <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(alternateEmail, 'Email copied!')}>{alternateEmail}</span>
+                  <button onClick={() => openEmail(alternateEmail)} className="ml-2 text-xs px-2 py-1 bg-white/10 rounded border border-white/10 text-white/70 hover:bg-white/15">Send</button>
+                </div>
+              )}
+              {phone && (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-white/80">Phone:</span>
+                  <span className="text-white/90 font-mono text-sm bg-white/5 px-2 py-1 rounded-lg border border-white/10 cursor-pointer" onClick={() => copyToClipboard(phone, 'Phone copied!')}>{phone}</span>
+                </div>
+              )}
+              {website && (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-white/80">Website:</span>
+                  <a href={website} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{website}</a>
+                </div>
+              )}
+              {github && (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-white/80">GitHub:</span>
+                  <a href={github} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{github}</a>
+                </div>
+              )}
+              {linkedin && (
+                <div className="flex items-center gap-2">
+                  <span className="font-medium text-white/80">LinkedIn:</span>
+                  <a href={linkedin} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400">{linkedin}</a>
+                </div>
+              )}
+            </div>
           </div>
         </div>
       );
@@ -297,9 +328,9 @@ export default function SearchResultDisplay({ projects = [] }) {
       </div>
       {/* Main Content */}
       <div className="max-w-6xl mx-auto px-4 py-6">
-        <div className="bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10 shadow-xl">
-          <div className="text-center">
-            <div className="w-16 h-16 bg-white/8 backdrop-blur-md rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-white/15 shadow-lg">
+        <div className="rounded-2xl p-6">
+          <div>
+            {/* <div className="w-16 h-16 bg-white/8 backdrop-blur-md rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-white/15 shadow-lg">
               {typeof result.icon === 'string' ? getIconComponent(result.icon, { size: 36 }) : result.icon}
             </div>
             <h2 className="text-xl font-light text-white/95 mb-2 tracking-tight">{result.title}</h2>
@@ -308,7 +339,7 @@ export default function SearchResultDisplay({ projects = [] }) {
               <p className="text-white/50 mb-6 text-sm font-normal">{result.content}</p>
             ) : (
               <p className="text-white/50 mb-6 text-sm font-normal">Information about {result.title}</p>
-            )}
+            )} */}
             {renderTypeSpecific()}
           </div>
         </div>
