@@ -2,6 +2,13 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.1.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.0.0...v2.1.0) (2025-07-18)
+
+
+### Bug Fixes
+
+* improve pathname handling in InfoLayout ([e13175e](https://github.com-evod/EV-OD/portfilio_v1/commit/e13175e927109062d35815d616d9d8b7c9531ae8))
+
 ## [2.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v1.0.0...v2.0.0) (2025-07-18)
 
 
