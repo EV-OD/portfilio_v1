@@ -1,47 +1,17 @@
+
 ---
 import InfoLayout from "../layouts/InfoLayout.astro";
+import SearchResultDisplay from "../components/SearchResultDisplay.jsx";
 ---
 
 <InfoLayout title="Search Results" description="Search results from portfolio">
-  <div class="min-h-screen  backdrop-blur-3xl relative" style="
-    background-color: transparent;
-    backdrop-filter: none;
-">
+  <div class="min-h-screen backdrop-blur-3xl relative bg-transparent">
     <!-- Glassy overlay with low saturation -->
-    <div class="absolute inset-0  backdrop-blur-sm" style="
-    background: transparent;
-    backdrop-filter: invert(1);
-"></div>
+    <div class="absolute inset-0 backdrop-blur-sm" style="background: transparent; backdrop-filter: invert(1);"></div>
     <div class="relative z-10">
-    <div id="search-results-container" class="max-w-6xl mx-auto px-4 py-6" style="
-    background: transparent;
-">
-      <!-- Default content when no result is available -->
-      <div id="no-result" class="text-center py-8">
-        <div class="bg-white/5 backdrop-blur-2xl rounded-2xl p-8 border border-white/10 shadow-xl max-w-md mx-auto">
-          <div class="w-16 h-16 bg-white/8 backdrop-blur-md rounded-xl flex items-center justify-center text-3xl mx-auto mb-4 border border-white/15 shadow-lg">
-            🔍
-          </div>
-          <h2 class="text-2xl font-light text-white/95 mb-3 tracking-tight">No Search Result</h2>
-          <p class="text-white/60 mb-6 text-base font-normal leading-relaxed">No search result found. Try searching for something first.</p>
-          <button 
-            onclick="window.dispatchEvent(new CustomEvent('openSearch'))"
-            class="group bg-white/10 backdrop-blur-md hover:bg-white/15 text-white/90 px-6 py-3 rounded-xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105">
-            <div class="flex items-center gap-2">
-              <span class="text-base">🔍</span>
-              <span class="font-medium">Start Searching</span>
-            </div>
-          </button>
-        </div>
+      <div class="max-w-6xl mx-auto px-4 py-6 bg-transparent">
+        <SearchResultDisplay client:load />
       </div>
-    </div>
     </div>
   </div>
 </InfoLayout>
-
-<script>
-  import { showToast, copyToClipboard, openEmail, loadSearchResult } from '../lib/searchResultHelpers.js';
-  
-  // Load the result when the page loads
-  document.addEventListener('DOMContentLoaded', loadSearchResult);
-</script>
