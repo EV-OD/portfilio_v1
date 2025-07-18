@@ -24,8 +24,8 @@ const projects = PERSONAL_INFO.projects;
 
           <ul class="mt-4 sm:mt-12 grid grid-cols-1 lg:grid-cols-2 xl:grid-cols-3 gap-8">
                {projects.map((project) => (
-                    <li class="group project-card" data-project={JSON.stringify(project)}>
-                         <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:scale-105 hover:bg-zinc-900/70 cursor-pointer">
+                    <li class="group project-card h-full" data-project={JSON.stringify(project)}>
+                         <div class="bg-zinc-900/50 backdrop-blur-sm rounded-2xl overflow-hidden border border-zinc-800/50 hover:border-zinc-700/50 transition-all duration-300 hover:scale-105 hover:bg-zinc-900/70 cursor-pointer h-full flex flex-col">
                               <div class="aspect-[4/3] overflow-hidden bg-gradient-to-br from-zinc-800 to-zinc-900">
                                    <img 
                                         src={project.imageUrl || defaultProjectImage} 
