@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { PERSONAL_INFO } from "../constants";
 import * as FaIcons from 'react-icons/fa';
 import * as SiIcons from 'react-icons/si';
 import * as MdIcons from 'react-icons/md';
@@ -76,17 +77,32 @@ export default function SearchResultDisplay({ projects = [], contact = {} }) {
   const [result, setResult] = useState(null);
 
   useEffect(() => {
+    // Try sessionStorage first
     const resultData = sessionStorage.getItem("searchResult");
-    console.log("Search Result:", resultData);
     if (resultData) {
       try {
         setResult(JSON.parse(resultData));
         sessionStorage.removeItem("searchResult");
+        return;
       } catch {
         showToast("Error loading search result");
       }
     }
-  }, []);
+    // If not found, try to get project by name from URL
+    const params = new URLSearchParams(window.location.search);
+    const projectName = params.get("name");
+    if (projectName) {
+      // Use PERSONAL_INFO.projects for lookup
+      const allProjects = projects.length ? projects : (PERSONAL_INFO.projects || []);
+      const found = allProjects.find(p => p.title.toLowerCase() === projectName.toLowerCase());
+      if (found) {
+        setResult({ ...found, type: "project" });
+        return;
+      }
+    }
+    // Optionally, show a default or error
+    setResult(null);
+  }, [projects]);
 
   if (!result) {
     return (
@@ -113,6 +129,53 @@ export default function SearchResultDisplay({ projects = [], contact = {} }) {
 
   // Modular UI for each result type
   function renderTypeSpecific() {
+    // Project result: show full details
+    if (result.type === "project") {
+      return (
+        <div className="space-y-6 text-left">
+          {result.imageUrl && (
+            <img src={result.imageUrl} alt={result.title} className="w-full max-w-md rounded-xl mb-4 border border-white/10 shadow-lg" />
+          )}
+          <div className="mb-2">
+            <div className="text-lg font-semibold text-white/90 mb-1">{result.title}</div>
+            {result.status && <span className="inline-block text-xs px-2 py-1 bg-white/10 rounded text-white/70 border border-white/10 mr-2">{result.status}</span>}
+            {result.category && <span className="inline-block text-xs px-2 py-1 bg-white/10 rounded text-white/70 border border-white/10">{result.category}</span>}
+          </div>
+          {result.description && <div className="text-white/70 mb-2 text-base leading-relaxed">{result.description}</div>}
+          {result.technologies && result.technologies.length > 0 && (
+            <div className="mb-2">
+              <div className="text-xs text-white/50 uppercase tracking-wide font-medium mb-1">Technologies Used</div>
+              <div className="flex flex-wrap gap-2">
+                {result.technologies.map(tech => (
+                  <span key={tech} className="text-xs px-2 py-1 bg-white/5 rounded-md text-white/80 border border-white/10">{tech}</span>
+                ))}
+              </div>
+            </div>
+          )}
+          <div className="flex flex-wrap gap-4 mt-2">
+            {result.githubUrl && (
+              <a href={result.githubUrl} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 text-sm font-medium">GitHub</a>
+            )}
+            {result.websiteUrl && (
+              <a href={result.websiteUrl} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 text-sm font-medium">Live Site</a>
+            )}
+            {result.liveUrl && (
+              <a href={result.liveUrl} target="_blank" rel="noopener noreferrer" className="text-blue-300 underline hover:text-blue-400 text-sm font-medium">Live Demo</a>
+            )}
+          </div>
+          {result.imageGallery && result.imageGallery.length > 0 && (
+            <div className="mt-4">
+              <div className="text-xs text-white/50 uppercase tracking-wide font-medium mb-1">Gallery</div>
+              <div className="flex flex-wrap gap-2">
+                {result.imageGallery.map((img, idx) => (
+                  <img key={idx} src={img} alt={result.title + " image " + (idx + 1)} className="w-28 h-20 object-cover rounded border border-white/10" />
+                ))}
+              </div>
+            </div>
+          )}
+        </div>
+      );
+    }
     // Programming Language (Python, JS, React, etc.)
     if (result.type === "programming_language") {
       const title = result.title.toLowerCase();
