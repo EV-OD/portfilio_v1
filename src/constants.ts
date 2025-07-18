@@ -35,6 +35,10 @@ import PatternGen from "./assets/port_assets/pattern_generator/img.jpeg"
 import PatternGen1 from "./assets/port_assets/pattern_generator/img1.jpeg"
 
 
+import VectormateJs1 from "./assets/port_assets/vector_mate_js/img.png"
+import VectormateJs from "./assets/port_assets/vector_mate_js/img1.png"
+import VectormateJs2 from "./assets/port_assets/vector_mate_js/img2.png"
+
 export const PERSONAL_INFO = {
   name: "Rabin Lamichhane",
   title: "Programmer, Developer & Web Enthusiast",
@@ -94,6 +98,20 @@ export const PERSONAL_INFO = {
         CPU1.src,
         CPU2.src
       ]
+    },
+    {
+      title: "VectorMate Js Version: A Modern Vector Editor",
+      description: "VectorMate is a powerful, web-based vector editor for creating and manipulating shapes with ease. Features include infinite canvas, pan/zoom navigation, customizable backgrounds, snapping, a full suite of shape tools, boolean operations, image/SVG import, advanced selection, properties/layers sidebar, and extensive keyboard shortcuts for efficient workflow.",
+      technologies: ["React", "TypeScript", "Canvas", "Tailwind CSS"],
+      category: "Web-based Vector Editor",
+      status: "Ongoing",
+      imageUrl: VectormateJs.src,
+      imageGallery: [
+        VectormateJs1.src,
+        VectormateJs2.src
+      ],
+      githubUrl: "https://github.com/EV-OD/vectormate_js_version",
+      liveUrl: "https://ev-od.github.io/vectormate_js_version/"
     },
     {
       title: "Shaper",
