@@ -34,4 +34,7 @@ export default defineConfig({
       fallbacks: ["Inter", "sans-serif"],
     }]
   },
+       server: {
+        host: '0.0.0.0'
+      }
 });
