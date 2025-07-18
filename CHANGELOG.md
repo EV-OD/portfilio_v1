@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [2.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v1.0.0...v2.0.0) (2025-07-18)
+
+
+### Features
+
+* replaced liquid glass features with inverted glass feature ([faec5f7](https://github.com-evod/EV-OD/portfilio_v1/commit/faec5f744665d3b93b3807fa12e751f8ed2f2aec))
+
+
+### Bug Fixes
+
+* update backdrop filter in GlassEffect for improved visual effect ([d80dc1a](https://github.com-evod/EV-OD/portfilio_v1/commit/d80dc1a4825256252561ae30e4efc957bc1fb2f8))
+
 ## [1.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.4...v1.0.0) (2025-07-18)
 
 
