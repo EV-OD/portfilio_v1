@@ -1,0 +1,109 @@
+---
+---
+
+<div id="project-popup"   class="fixed inset-0 z-50 flex items-center justify-center opacity-0 pointer-events-none transition-opacity duration-300"
+  style="
+    background: linear-gradient(120deg, rgba(87, 87, 91, 0.39) 0%, rgba(39, 39, 42, 0.29) 100%);
+    backdrop-filter: blur(64px) saturate(10) brightness(0.9);
+    -webkit-backdrop-filter: blur(64px) saturate(10) brightness(0.9);
+    border: 1.5px solid rgba(255,255,255,0.08);
+  ">
+    <div class="bg-zinc-900/50 backdrop-blur-3xl rounded-3xl p-8 max-w-3xl w-full mx-4 border border-zinc-800/50 transform scale-95 transition-all duration-300 relative">
+        <button id="close-popup" class="absolute top-4 right-4 text-zinc-400 hover:text-white text-2xl">&times;</button>
+        <div class="flex flex-col md:flex-row gap-6">
+            <div class="md:w-1/2">
+                <img 
+                    id="popup-image" 
+                    src="" 
+                    alt="Project Image" 
+                    class="rounded-xl object-cover w-full h-auto aspect-[4/3]"
+                />
+            </div>
+            <div class="md:w-1/2 flex flex-col justify-between">
+                <div>
+                    <h2 id="popup-title" class="text-3xl font-bold text-white mb-3"></h2>
+                    <span id="popup-status" class="text-xs px-3 py-1 bg-zinc-800/60 rounded-full text-zinc-300 border border-zinc-700/50 mb-4 inline-block"></span>
+                    <p id="popup-description" class="text-zinc-300 text-base leading-relaxed mb-4"></p>
+                    
+                    <div class="space-y-3 mb-4">
+                        <div class="text-xs text-zinc-500 uppercase tracking-wide font-medium">Category</div>
+                        <div id="popup-category" class="text-sm text-zinc-300"></div>
+                    </div>
+
+                    <div class="space-y-3">
+                        <div class="text-xs text-zinc-500 uppercase tracking-wide font-medium">Technologies</div>
+                        <div id="popup-technologies" class="flex flex-wrap gap-2"></div>
+                    </div>
+                </div>
+                <div id="popup-links" class="flex gap-4 mt-6"></div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const projectCards = document.querySelectorAll('.project-card');
+    const projectPopup = document.getElementById('project-popup');
+    const closePopupBtn = document.getElementById('close-popup');
+
+    const popupImage = document.getElementById('popup-image');
+    const popupTitle = document.getElementById('popup-title');
+    const popupStatus = document.getElementById('popup-status');
+    const popupDescription = document.getElementById('popup-description');
+    const popupCategory = document.getElementById('popup-category');
+    const popupTechnologies = document.getElementById('popup-technologies');
+    const popupLinks = document.getElementById('popup-links');
+
+    projectCards.forEach(card => {
+        card.addEventListener('click', () => {
+            const project = JSON.parse(card.dataset.project);
+            
+            popupImage.src = project.imageUrl;
+            popupTitle.textContent = project.title;
+            popupStatus.textContent = project.status;
+            popupDescription.textContent = project.description;
+            popupCategory.textContent = project.category;
+
+            popupTechnologies.innerHTML = '';
+            project.technologies.forEach(tech => {
+                const span = document.createElement('span');
+                span.className = 'text-xs px-2 py-1 bg-zinc-800/60 rounded-lg text-zinc-300 border border-zinc-700/50';
+                span.textContent = tech;
+                popupTechnologies.appendChild(span);
+            });
+
+            popupLinks.innerHTML = '';
+            if (project.githubUrl) {
+                const githubLink = document.createElement('a');
+                githubLink.href = project.githubUrl;
+                githubLink.target = '_blank';
+                githubLink.className = 'bg-white/10 backdrop-blur-md hover:bg-white/15 text-white px-6 py-3 rounded-xl transition-all duration-200 border border-white/15 hover:border-white/25 shadow-lg hover:shadow-xl hover:scale-105';
+                githubLink.textContent = 'GitHub';
+                popupLinks.appendChild(githubLink);
+            }
+            if (project.liveUrl) {
+                const liveLink = document.createElement('a');
+                liveLink.href = project.liveUrl;
+                liveLink.target = '_blank';
+                liveLink.className = 'bg-zinc-800/60 hover:bg-zinc-700/60 text-zinc-300 px-6 py-3 rounded-xl transition-all duration-200 border border-zinc-700/50 hover:border-zinc-600/50';
+                liveLink.textContent = 'Live Demo';
+                popupLinks.appendChild(liveLink);
+            }
+
+            projectPopup.classList.remove('opacity-0', 'pointer-events-none');
+            projectPopup.querySelector('div').classList.remove('scale-95');
+        });
+    });
+
+    closePopupBtn.addEventListener('click', () => {
+        projectPopup.classList.add('opacity-0', 'pointer-events-none');
+        projectPopup.querySelector('div').classList.add('scale-95');
+    });
+
+    projectPopup.addEventListener('click', (e) => {
+        if (e.target === projectPopup) {
+            projectPopup.classList.add('opacity-0', 'pointer-events-none');
+            projectPopup.querySelector('div').classList.add('scale-95');
+        }
+    });
+</script>

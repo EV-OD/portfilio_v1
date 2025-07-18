@@ -59,7 +59,7 @@ export const PERSONAL_INFO = {
       category: "Hardware Design & Simulation",
       status: "Completed",
       imageUrl: CPU.src,
-      link: "https://github.com/EV-OD/4bit_computer",
+      githubUrl: "https://github.com/EV-OD/4bit_computer",
     },
     {
       title: "Shaper",
@@ -68,7 +68,7 @@ export const PERSONAL_INFO = {
       category: "Web-based 3D Geometry Editor",
       status: "Completed",
       imageUrl: Shaper.src,
-      link: "https://github.com/EV-OD/shaper",
+      githubUrl: "https://github.com/EV-OD/shaper",
       previewLink: "https://ev-od.github.io/shaper/"
     },
     {
@@ -78,8 +78,8 @@ export const PERSONAL_INFO = {
       category: "Digital Logic Simulator",
       status: "Completed",
       imageUrl: Digisim.src,
-      link: "https://github.com/EV-OD/Digital-Logic",
-      website: "https://ev-od.github.io/DigiSem-WebSite/"
+      githubUrl: "https://github.com/EV-OD/Digital-Logic",
+      liveUrl: "https://ev-od.github.io/DigiSem-WebSite/"
     },
     {
       title: "Celestial Odyssey",
@@ -88,7 +88,7 @@ export const PERSONAL_INFO = {
       category: "Educational 3D Space Exploration",
       status: "Completed",
       imageUrl: Celes.src,
-      link: "https://github.com/clerisy47/Celestial-Odyssey"
+      githubUrl: "https://github.com/clerisy47/Celestial-Odyssey"
     },
 
   ],
