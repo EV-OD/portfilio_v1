@@ -2,6 +2,18 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [0.0.4](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.3...v0.0.4) (2025-07-18)
+
+
+### Features
+
+* Add ProjectLinks component and render utility for project URLs ([821b373](https://github.com-evod/EV-OD/portfilio_v1/commit/821b3730df5163e204c47ed385b942e1dbb3fe7c))
+
+
+### Bug Fixes
+
+* improve styling and layout of project popup component ([4ca017c](https://github.com-evod/EV-OD/portfilio_v1/commit/4ca017cf20790141bfea48314811eabf6d940866))
+
 ### [0.0.3](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.2...v0.0.3) (2025-07-18)
 
 
