@@ -424,10 +424,10 @@ export class SearchResultGenerator {
         FuzzySearch.fuzzyScore(query, key),
         FuzzySearch.fuzzyScore(query, langData.name.toLowerCase())
       );
-      
       if (score > 0) {
-        const relatedProjects = this.getRelatedProjects(langData.name);
-        
+        // Always populate relatedProjects as array of { title }
+        const relatedProjectsRaw = this.getRelatedProjects(langData.name);
+        const relatedProjects = relatedProjectsRaw.map(p => ({ title: p.title }));
         return {
           type: RESULT_TYPES.PROGRAMMING_LANGUAGE,
           priority: 1,
@@ -456,14 +456,15 @@ export class SearchResultGenerator {
 
     allSkills.forEach(skill => {
       const score = FuzzySearch.fuzzyScore(query, skill.toLowerCase());
-      
       if (score > 0) {
         // Skip if this is already covered by programming languages
         const isProgLang = Object.values(PROGRAMMING_LANGUAGES).some(lang => 
           lang.name.toLowerCase() === skill.toLowerCase()
         );
-        
         if (!isProgLang) {
+          // Always populate relatedProjects as array of { title }
+          const relatedProjectsRaw = this.getRelatedProjects(skill);
+          const relatedProjects = relatedProjectsRaw.map(p => ({ title: p.title }));
           results.push({
             type: RESULT_TYPES.SKILL,
             priority: 2,
@@ -473,13 +474,12 @@ export class SearchResultGenerator {
               category: this.getSkillCategory(skill),
               description: `Professional skill in ${skill}`,
               icon: this.getSkillIcon(skill),
-              relatedProjects: this.getRelatedProjects(skill)
+              relatedProjects
             }
           });
         }
       }
     });
-
     return results;
   }
 

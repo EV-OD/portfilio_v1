@@ -17,6 +17,9 @@ interface SearchResult {
   githubUrl?: string;
   liveUrl?: string;
   imageGallery?: string[];
+  relatedProjects?: { title: string }[];
+  email?: string;
+  location?: string;
 }
 
 interface SearchProps {
@@ -98,13 +101,11 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
     // Use the new search architecture
     const architectureResults = searchGenerator.search(query);
     
-    // Convert to the component's expected format
+    // Convert to the component's expected format, including related projects for programming_language and skill
     const searchResults: SearchResult[] = architectureResults
-      .sort((a, b) => a.priority - b.priority) // Sort by priority
+      .sort((a, b) => a.priority - b.priority)
       .map(result => {
-        const data = result.data as any; // Use any to handle flexible data structure
-        
-        // Handle different result types
+        const data = result.data as any;
         switch (result.type) {
           case 'programming_language':
             return {
@@ -114,7 +115,8 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               content: `${data.projectsCount || 0} projects • ${data.yearsOfExperience || 0} years experience`,
               icon: data.icon,
               technologies: data.libraries?.map((lib: any) => lib.name) || [],
-              category: data.category
+              category: data.category,
+              relatedProjects: data.relatedProjects || []
             };
           case 'skill':
             return {
@@ -124,7 +126,8 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               content: data.description,
               icon: data.icon,
               technologies: [],
-              category: data.category
+              category: data.category,
+              relatedProjects: data.relatedProjects || []
             };
           case 'project':
             return {
@@ -132,7 +135,7 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               title: data.title,
               subtitle: `${data.category} • ${data.status}`,
               content: data.technologies?.join(', ') || '',
-              icon: '🚀',
+              icon: data.icon,
               technologies: data.technologies || [],
               category: data.category,
               description: data.description,
@@ -148,9 +151,10 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               title: data.title,
               subtitle: data.company,
               content: data.duration,
-              icon: '💼',
-              technologies: [],
-              category: 'Experience'
+              icon: data.icon,
+              technologies: data.technologies || [],
+              category: 'Experience',
+              description: data.description
             };
           case 'contact':
             return {
@@ -158,9 +162,21 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
               title: data.name || 'Contact',
               subtitle: data.email || data.description,
               content: data.location || 'Get in touch',
-              icon: '📧',
+              icon: data.icon,
               technologies: [],
-              category: 'Contact'
+              category: 'Contact',
+              email: data.email,
+              location: data.location
+            };
+          case 'education':
+            return {
+              type: result.type,
+              title: data.name || 'Education',
+              subtitle: data.institution || '',
+              content: data.degree || data.description || '',
+              icon: data.icon,
+              technologies: [],
+              category: 'Education'
             };
           default:
             return {
@@ -256,6 +272,59 @@ export default function Search({ isOpen: propIsOpen, onClose: propOnClose }: Sea
                         <div className="text-sm text-white/70 truncate">{result.subtitle}</div>
                       )}
                       <div className="text-xs text-white/50 truncate">{result.content}</div>
+                      {/* Detailed info for each type */}
+                      {result.type === 'programming_language' && result.relatedProjects && result.relatedProjects.length > 0 && (
+                        <div className="mt-2">
+                          <div className="text-xs text-white/60 mb-1">Projects using {result.title}:</div>
+                          <ul className="flex flex-wrap gap-2">
+                            {result.relatedProjects.slice(0, 3).map((proj: any) => (
+                              <li key={proj.title} className="bg-white/10 px-2 py-1 rounded text-xs text-white/80 border border-white/15 truncate max-w-[120px]" title={proj.title}>{proj.title}</li>
+                            ))}
+                            {result.relatedProjects.length > 3 && (
+                              <li className="text-xs text-white/50">+{result.relatedProjects.length - 3} more</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                      {result.type === 'skill' && result.relatedProjects && result.relatedProjects.length > 0 && (
+                        <div className="mt-2">
+                          <div className="text-xs text-white/60 mb-1">Projects using {result.title}:</div>
+                          <ul className="flex flex-wrap gap-2">
+                            {result.relatedProjects.slice(0, 3).map((proj: any) => (
+                              <li key={proj.title} className="bg-white/10 px-2 py-1 rounded text-xs text-white/80 border border-white/15 truncate max-w-[120px]" title={proj.title}>{proj.title}</li>
+                            ))}
+                            {result.relatedProjects.length > 3 && (
+                              <li className="text-xs text-white/50">+{result.relatedProjects.length - 3} more</li>
+                            )}
+                          </ul>
+                        </div>
+                      )}
+                      {result.type === 'project' && (
+                        <>
+                          {result.description && <div className="text-xs text-white/60 mt-1 truncate">{result.description}</div>}
+                          <div className="flex gap-2 mt-1">
+                            {result.githubUrl && <a href={result.githubUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-blue-300 hover:underline">GitHub</a>}
+                            {result.liveUrl && <a href={result.liveUrl} target="_blank" rel="noopener noreferrer" className="text-xs text-green-300 hover:underline">Live</a>}
+                          </div>
+                        </>
+                      )}
+                      {result.type === 'experience' && (
+                        <>
+                          {result.description && <div className="text-xs text-white/60 mt-1 truncate">{result.description}</div>}
+                        </>
+                      )}
+                      {result.type === 'contact' && (
+                        <>
+                          {result.email && <div className="text-xs text-white/60 mt-1 truncate">Email: {result.email}</div>}
+                          {result.location && <div className="text-xs text-white/60 mt-1 truncate">Location: {result.location}</div>}
+                        </>
+                      )}
+                      {result.type === 'education' && (
+                        <>
+                          {result.content && <div className="text-xs text-white/60 mt-1 truncate">Degree: {result.content}</div>}
+                          {result.subtitle && <div className="text-xs text-white/60 mt-1 truncate">Institution: {result.subtitle}</div>}
+                        </>
+                      )}
                     </div>
                     <div className="flex-shrink-0">
                       <svg className="w-4 h-4 text-white/40" fill="none" viewBox="0 0 24 24" stroke="currentColor">

@@ -1,7 +1,7 @@
-
 ---
 import InfoLayout from "../layouts/InfoLayout.astro";
 import SearchResultDisplay from "../components/SearchResultDisplay.jsx";
+import { PERSONAL_INFO } from "../constants";
 ---
 
 <InfoLayout title="Search Results" description="Search results from portfolio">
@@ -10,7 +10,7 @@ import SearchResultDisplay from "../components/SearchResultDisplay.jsx";
     <div class="absolute inset-0 backdrop-blur-sm" style="background: transparent; backdrop-filter: invert(1);"></div>
     <div class="relative z-10">
       <div class="max-w-6xl mx-auto px-4 py-6 bg-transparent">
-        <SearchResultDisplay client:load />
+        <SearchResultDisplay client:load projects={PERSONAL_INFO.projects} />
       </div>
     </div>
   </div>

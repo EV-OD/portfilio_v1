@@ -77,6 +77,7 @@ export default function SearchResultDisplay({ projects = [] }) {
 
   useEffect(() => {
     const resultData = sessionStorage.getItem("searchResult");
+    console.log("Search Result:", resultData);
     if (resultData) {
       try {
         setResult(JSON.parse(resultData));
@@ -235,6 +236,7 @@ export default function SearchResultDisplay({ projects = [] }) {
   // Related projects section
   function renderRelatedProjects() {
     const relatedProjects = getRelatedProjects(result, projects);
+    console.log("Related Projects:", relatedProjects);
     if (!relatedProjects.length) return null;
     const sectionTitle = result.type === "programming_language"
       ? `Projects Using ${result.title}`
@@ -243,7 +245,7 @@ export default function SearchResultDisplay({ projects = [] }) {
       <div className="bg-white/5 backdrop-blur-2xl rounded-2xl p-6 border border-white/10 shadow-xl mt-8">
         <h3 className="text-lg font-light text-white/90 mb-4 tracking-tight">{sectionTitle}</h3>
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
-          {relatedProjects.slice(0, 4).map(project => (
+          {relatedProjects.map(project => (
             <div key={project.title} className="bg-white/8 backdrop-blur-md rounded-xl p-4 border border-white/15 shadow-lg hover:bg-white/10 transition-all duration-200 hover:scale-105">
               <div className="flex items-start justify-between mb-3">
                 <h4 className="text-base font-medium text-white/95 leading-tight">{project.title}</h4>
