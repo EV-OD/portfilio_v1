@@ -2,6 +2,20 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [1.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.4...v1.0.0) (2025-07-18)
+
+
+### Features
+
+* add ProjectCarousel component and integrate with ProjectPopup for dynamic image display ([6654a32](https://github.com-evod/EV-OD/portfilio_v1/commit/6654a32642d2ff8977cd0e2b0a09c6275be98a64))
+
+
+### Bug Fixes
+
+* enhance layout and structure of ProjectPopup for better usability ([99a72ea](https://github.com-evod/EV-OD/portfilio_v1/commit/99a72ead0906670161b163827c97efd0fb3c2f41))
+* remove location details from contact page for privacy ([8fd66cd](https://github.com-evod/EV-OD/portfilio_v1/commit/8fd66cd6edae1e6d312e58fbd168e7c7571dbd19))
+* update image display style in ProjectCarousel for better responsiveness ([a088e5d](https://github.com-evod/EV-OD/portfilio_v1/commit/a088e5d8a7e409f0b53116efc761704e479decf0))
+
 ### [0.0.4](https://github.com-evod/EV-OD/portfilio_v1/compare/v0.0.3...v0.0.4) (2025-07-18)
 
 
