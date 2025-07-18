@@ -26,10 +26,10 @@ export default function GlassEffect() {
       if (speed > 0.2) {
         setScale(1.7);
         clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => setScale(1), 120);
+        timeout.current = setTimeout(() => setScale(1.7), 120);
       } else {
         clearTimeout(timeout.current);
-        timeout.current = setTimeout(() => setScale(1), 120);
+        timeout.current = setTimeout(() => setScale(1.7), 120);
       }
 
       lastPos.current = { x, y, t: now };
@@ -51,7 +51,7 @@ export default function GlassEffect() {
   return (
     <div
       ref={ref}
-      className="glass"
+      className="glass hidden md:block"
       style={{
         position: "fixed",
         left: "50%",
