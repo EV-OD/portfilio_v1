@@ -2,6 +2,19 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.5.1...v3.0.0) (2025-07-18)
+
+
+### Features
+
+* add contact information handling in SearchResultDisplay component ([404211c](https://github.com-evod/EV-OD/portfilio_v1/commit/404211cf04347b0c32ac1eb68de2159a4c6acfad))
+* add FaProjectDiagram icon and update iconType in search results for better representation ([d2df2da](https://github.com-evod/EV-OD/portfilio_v1/commit/d2df2dadc570de8ff00a8103113e3c4da0f22ed8))
+* enhance search functionality by adding related projects and logging for debugging ([073bbeb](https://github.com-evod/EV-OD/portfilio_v1/commit/073bbebaf2d1ed8c0f8127d85bffc76e612adea7))
+* enhance SearchResultDisplay and search components with icon mapping for improved visual representation ([f65d569](https://github.com-evod/EV-OD/portfilio_v1/commit/f65d569a5bd5a89d16ac2d5175269bbd6ed41020))
+* enhance SearchResultDisplay to load project details from URL and sessionStorage ([b4a3ff9](https://github.com-evod/EV-OD/portfilio_v1/commit/b4a3ff976849ee5184bcca48b9bead40f4586ba8))
+* implement SearchResultDisplay component for dynamic search results rendering ([e029316](https://github.com-evod/EV-OD/portfilio_v1/commit/e029316640830d9360c2a53cd7ecadae5a8bb936))
+* redesign contact information section in SearchResultDisplay component for improved layout and accessibility ([7e84d51](https://github.com-evod/EV-OD/portfilio_v1/commit/7e84d510a8eefba2fdd65eb113b2edc33dd40034))
+
 ### [2.5.1](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.5.0...v2.5.1) (2025-07-18)
 
 
