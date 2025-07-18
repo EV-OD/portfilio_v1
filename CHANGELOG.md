@@ -2,6 +2,8 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.1.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v3.0.0...v3.1.0) (2025-07-18)
+
 ## [3.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.5.1...v3.0.0) (2025-07-18)
 
 
