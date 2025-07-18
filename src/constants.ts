@@ -1,3 +1,10 @@
+import { pre } from "motion/react-client";
+import CPU from "./assets/port_assets/4bit_cpu/img.jpeg"
+import Shaper from "./assets/port_assets/shaper/img.png"
+import Digisim from "./assets/port_assets/DigiSim/img.jpeg"
+import Celes from "./assets/port_assets/Celestial-Odyssey/img.png"
+
+
 export const PERSONAL_INFO = {
   name: "Rabin Lamichhane",
   title: "Programmer, Developer & Web Enthusiast",
@@ -13,7 +20,7 @@ export const PERSONAL_INFO = {
     github: "https://github.com/EV-OD",
   },
 
-  summary: "I might sound a little crazy, but I’m someone who’s fallen in love with tech in all its forms. I’m proficient in web development, have built my own microprocessor designs, and even created a digital logic simulator from scratch. Whether it’s coding interactive 3D experiences or low-level hardware projects, I build whatever the f#ck I want to build.",
+  summary: "I might sound a little crazy, but I’m someone who’s fallen in love with tech in all its forms. I’m proficient in web development, have built my own microprocessor designs (done using logisim-evolution), and even created a digital logic simulator from scratch. Whether it’s coding interactive 3D experiences or low-level hardware projects, I build whatever the f#ck I want to build.",
 
   experience: [
     {
@@ -46,29 +53,44 @@ export const PERSONAL_INFO = {
 
   projects: [
     {
-      title: "Project One",
-      description: "Short description of what this project does.",
-      technologies: ["React", "JavaScript", "Next.js"],
-      category: "Web Development",
+      title: "4Bit Microprocessor",
+      description: "This system is designed with minimalism and clarity in mind, ideal for education, simulations, or hobbyist CPU development. (Done using logisim-evolution)",
+      technologies: ["Logisim", "Logisim-Evolution", "Digital Logic"],
+      category: "Hardware Design & Simulation",
       status: "Completed",
-      imageUrl: "https://placehold.co/600x400"
+      imageUrl: CPU.src,
+      link: "https://github.com/EV-OD/4bit_computer",
     },
     {
-      title: "Project Two",
-      description: "Another project description goes here.",
-      technologies: ["Node.js", "Python"],
-      category: "Backend Development",
-      status: "In Progress",
-      imageUrl: "https://placehold.co/600x400"
+      title: "Shaper",
+      description: "Shaper is a web-based application designed for creating and manipulating geometry nodes. It provides an intuitive and interactive interface for users to design complex geometric shapes and structures directly in their web browser. Built using React and Three.js.",
+      technologies: ["React", "Three.js", "Node.js", "Python"],
+      category: "Web-based 3D Geometry Editor",
+      status: "Completed",
+      imageUrl: Shaper.src,
+      link: "https://github.com/EV-OD/shaper",
+      previewLink: "https://ev-od.github.io/shaper/"
     },
     {
-      title: "Project Three",
-      description: "Yet another cool project.",
-      technologies: ["3D", "Digital Logic", "Verilog"],
-      category: "Hardware Design",
+      title: "Digisim - Digital Logic Simulator",
+      description: "Digisim is a digital logic simulator developed using C++ and Gtkmm 4. It is designed for educational purposes, allowing users to design, simulate, and manage digital circuits. The application supports the creation and reuse of custom chips, facilitating the construction of complex circuits.",
+      technologies: ["C++", "Gtkmm 4"],
+      category: "Digital Logic Simulator",
       status: "Completed",
-      imageUrl: "https://placehold.co/600x400"
-    }
+      imageUrl: Digisim.src,
+      link: "https://github.com/EV-OD/Digital-Logic",
+      website: "https://ev-od.github.io/DigiSem-WebSite/"
+    },
+    {
+      title: "Celestial Odyssey",
+      description: "Celestial Odyssey is an interactive application designed to provide a thrilling and educational 3D exploration of the planets in our solar system. It blends education and entertainment, making it ideal for schools, science centers, and space enthusiasts. Key features include 3D planet tours, detailed planetary data, immersive sound effects, an interactive AI guide, and location-based exploration.",
+      technologies: ["React", "Three.js", "Node.js", "Python"],
+      category: "Educational 3D Space Exploration",
+      status: "Completed",
+      imageUrl: Celes.src,
+      link: "https://github.com/clerisy47/Celestial-Odyssey"
+    },
+
   ],
 
   education: {
