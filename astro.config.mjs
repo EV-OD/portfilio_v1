@@ -15,7 +15,12 @@ export default defineConfig({
     format: 'directory'
   },
   vite: {
-    plugins: [tailwindcss()]
+    plugins: [tailwindcss()],
+    resolve: {
+      alias: {
+        '@': '/src'
+      }
+    }
   },
 
   integrations: [react()],
