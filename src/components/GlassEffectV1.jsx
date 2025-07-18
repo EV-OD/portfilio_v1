@@ -51,7 +51,7 @@ export default function GlassEffect() {
   return (
     <div
       ref={ref}
-      className="glass hidden md:block"
+      className="glass hidden md:grid"
       style={{
         position: "fixed",
         left: "50%",
