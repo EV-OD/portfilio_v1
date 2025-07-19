@@ -9,6 +9,13 @@ const { title, description } = Astro.props;
 
 const defaultTitle = `${PERSONAL_INFO.name} - ${PERSONAL_INFO.title}`;
 const defaultDescription = PERSONAL_INFO.summary;
+
+const keywords = [
+  ...PERSONAL_INFO.skills.frontend,
+  ...PERSONAL_INFO.skills.backend,
+  ...PERSONAL_INFO.skills.other,
+  PERSONAL_INFO.title
+].join(', ');
 ---
 
 <!doctype html>
@@ -21,6 +28,23 @@ const defaultDescription = PERSONAL_INFO.summary;
 		<title>{title ?? defaultTitle}</title>
 		<meta name="description" content={description ?? defaultDescription} />
 
+		<meta name="keywords" content={keywords} />
+		<meta name="author" content={PERSONAL_INFO.name} />
+		<link rel="canonical" href={PERSONAL_INFO.contact.website + Astro.url.pathname} />
+
+		<script type="application/ld+json">
+		{
+		  "@context": "https://schema.org",
+		  "@type": "Person",
+		  "name": "{PERSONAL_INFO.name}",
+		  "url": "{PERSONAL_INFO.contact.website}",
+		  "sameAs": [
+		    "{PERSONAL_INFO.contact.linkedin}",
+		    "{PERSONAL_INFO.contact.github}"
+		  ],
+		}
+		</script>
+
 		<meta property="og:url" content={PERSONAL_INFO.contact.website} />
 		<meta property="og:type" content="website" />
 		<meta property="og:title" content={title ?? defaultTitle} />
@@ -30,7 +54,7 @@ const defaultDescription = PERSONAL_INFO.summary;
 		<!-- Twitter Meta Tags -->
 		<meta name="twitter:card" content="summary_large_image" />
 		<meta property="twitter:domain" content="lamichhanerabin.com.np" />
-		<meta property="twitter:url" content={PERSONAL_INFO.contact.website} />
+		<meta property="twitter:url" content={"https://x.com/RabinLc164"} />
 		<meta name="twitter:title" content={title ?? defaultTitle} />
 		<meta name="twitter:description" content={description ?? defaultDescription} />
 		<meta name="twitter:image" content="/social-image.png" />
