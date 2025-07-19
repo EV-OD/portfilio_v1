@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+## [3.2.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v3.1.0...v3.2.0) (2025-07-19)
+
+
+### Features
+
+* add sitemap integration and enhance SEO metadata in RootLayout ([078dc71](https://github.com-evod/EV-OD/portfilio_v1/commit/078dc7198f6750637a7e95511b4984f662fa9384))
+* added favicon ([b14537d](https://github.com-evod/EV-OD/portfilio_v1/commit/b14537d964d1de16af96f61db902ef794883f6aa))
+
 ## [3.1.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v3.0.0...v3.1.0) (2025-07-18)
 
 ## [3.0.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v2.5.1...v3.0.0) (2025-07-18)
