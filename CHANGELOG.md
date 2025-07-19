@@ -2,6 +2,14 @@
 
 All notable changes to this project will be documented in this file. See [standard-version](https://github.com/conventional-changelog/standard-version) for commit guidelines.
 
+### [3.2.1](https://github.com-evod/EV-OD/portfilio_v1/compare/v3.2.0...v3.2.1) (2025-07-19)
+
+
+### Bug Fixes
+
+* update availability indicator colors to green ([195cd64](https://github.com-evod/EV-OD/portfilio_v1/commit/195cd643e2ca231c154bb72b1c255e8d4ea9508f))
+* update personal bio to remove inappropriate language ([d06b78e](https://github.com-evod/EV-OD/portfilio_v1/commit/d06b78ec76b9882c916eddd6ba7d6ddc32465994))
+
 ## [3.2.0](https://github.com-evod/EV-OD/portfilio_v1/compare/v3.1.0...v3.2.0) (2025-07-19)
 
 
