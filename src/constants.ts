@@ -42,7 +42,7 @@ import VectormateJs2 from "./assets/port_assets/vector_mate_js/img2.png"
 export const PERSONAL_INFO = {
   name: "Rabin Lamichhane",
   title: "Programmer, Developer & Web Enthusiast",
-  shortBio: "I might sound a little crazy but I am someone who has fallen in love with tech. I build whatever the f#ck I want to build.",
+  shortBio: "I might sound a little crazy but I am someone who has fallen in love with tech. I build whatever I want to build.",
   location: "Lalitpur, Nepal",
 
   contact: {
@@ -54,7 +54,7 @@ export const PERSONAL_INFO = {
     github: "https://github.com/EV-OD",
   },
 
-  summary: "I might sound a little crazy, but I’m someone who’s fallen in love with tech in all its forms. I’m proficient in web development, have built my own microprocessor designs (done using logisim-evolution), and even created a digital logic simulator from scratch. Whether it’s coding interactive 3D experiences or low-level hardware projects, I build whatever the f#ck I want to build.",
+  summary: "I might sound a little crazy, but I’m someone who’s fallen in love with tech in all its forms. I’m proficient in web development, have built my own microprocessor designs (done using logisim-evolution), and even created a digital logic simulator from scratch. Whether it’s coding interactive 3D experiences or low-level hardware projects, I build whatever I want to build.",
 
   experience: [
     {
